@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 713, y: 492}
   m_MaxSize: {x: 18008, y: 14042}
   vertical: 0
-  controlID: 49
+  controlID: 629
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -51,7 +51,7 @@ MonoBehaviour:
     y: 395
     width: 492
     height: 335
-  m_MaximizeOnPlay: 1
+  m_MaximizeOnPlay: 0
   m_Gizmos: 0
   m_Stats: 0
   m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoom: 0
     m_UniformScale: 1
     m_UpDirection: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 342}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 50
+  controlID: 630
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 492}
   m_MaxSize: {x: 10004, y: 14042}
   vertical: 1
-  controlID: 72
+  controlID: 652
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -326,10 +326,10 @@ MonoBehaviour:
     width: 411
     height: 273
   m_TreeViewState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 1afaffff
-    m_LastClickedID: -1510
-    m_ExpandedIDs: a6fbffff000000001e3d0000
+    scrollPos: {x: 0, y: 48}
+    m_SelectedIDs: 48fbffff
+    m_LastClickedID: -1208
+    m_ExpandedIDs: a6fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -370,8 +370,8 @@ MonoBehaviour:
     y: 294
     width: 415
     height: 363
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 234, y: 271}
+  m_MaxSize: {x: 10004, y: 10021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -422,13 +422,13 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts
   m_LastFoldersGridSize: 96
-  m_LastProjectPath: /Users/brycecallender/Downloads/RTS-master/Unity RTS
+  m_LastProjectPath: /Users/brycecallender/Desktop/RTS/Unity RTS
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: b0290000
     m_LastClickedID: 10672
-    m_ExpandedIDs: 00000000a62800003c2d000018320000e43200002c3500005e3700006c370000683a00007a3a0000484800004a48000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000a62800003c2d000018320000e43200002c3500005e3700006c3700006a3a00007c3a00004a4800004c48000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -456,7 +456,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000a62800003c2d000018320000e43200002c3500005e3700006c370000683a00007a3a0000484800004a480000
+    m_ExpandedIDs: 00000000a62800003c2d000018320000e43200002c3500005e3700006c3700006a3a00007c3a00004a4800004c48000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -481,8 +481,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1afaffff
-    m_LastClickedInstanceID: -1510
+    m_SelectedInstanceIDs: 48fbffff
+    m_LastClickedInstanceID: -1208
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000a825000020250000ee2400001c250000d426000000000000
     m_RenameOverlay:
@@ -508,7 +508,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 314.0039}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 96
   m_DirectoriesAreaWidth: 154
 --- !u!114 &12
@@ -590,7 +590,7 @@ MonoBehaviour:
     y: 94
     width: 369
     height: 636
-  m_ScrollPosition: {x: 0, y: 242.95508}
+  m_ScrollPosition: {x: 0, y: 505.95508}
   m_InspectorMode: 0
   m_PreviewResizer:
     m_CachedPref: -160

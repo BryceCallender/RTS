@@ -35,7 +35,7 @@ public class UnitSelected : MonoBehaviour
 
 				// This "diameter" only works correctly for relatively circular or square objects
 				float diameter = bigBounds.size.z;
-				diameter *= 1.25f;
+				diameter *= 1.10f;
 
                 selectionIndicator.SetActive(true);
 

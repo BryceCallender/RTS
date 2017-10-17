@@ -25,6 +25,8 @@ public class Tank : UnitStats
     private float distance;
     private UnitSelected unitSelected;
 
+    private bool enemyHasBeenSelected = false;
+
     private void Start()
     {
         turrentPosition = transform.Find("turret");
@@ -44,9 +46,10 @@ public class Tank : UnitStats
 
     public override void Fire()
     {
-        if(unitSelected.selected)
+        if(unitSelected.selected || enemyHasBeenSelected)
         {
 			LockOn();
+            enemyHasBeenSelected = true;
             if(nearestEnemy != null)
             {
 				fireCoolDown -= Time.deltaTime;
@@ -61,6 +64,10 @@ public class Tank : UnitStats
 					//projectile.GetComponent<HyperbitProjectileScript>().HitEnemy(nearestEnemy.transform.position);
 				}
 			}
+            else
+            {
+                enemyHasBeenSelected = false;   
+            }
         }
     }
 
@@ -102,7 +109,7 @@ public class Tank : UnitStats
                 {
                     nearestEnemy = hitInfo.transform.gameObject;
                 }
-                else if (hitInfo.collider.gameObject.name == "RTSTerrain") 
+                else if(hitInfo.collider.gameObject.name == "RTSTerrain") 
                 {
                     nearestEnemy = null;
                 }

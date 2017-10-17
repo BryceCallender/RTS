@@ -34,8 +34,9 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+    //When something enters the collider take damage to the unit!
     private void OnCollisionEnter(Collision collision)
     {
-        
+        //int damage = collision.gameObject. ;   
     }
 }

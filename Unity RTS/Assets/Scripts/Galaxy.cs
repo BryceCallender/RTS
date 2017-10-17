@@ -26,6 +26,8 @@ public class Galaxy : UnitStats
     private Vector3 position;
     private NavMeshAgent agent;
 
+    private bool enemyHasBeenSelected = false;
+
     private void Start()
     {
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
@@ -68,9 +70,10 @@ public class Galaxy : UnitStats
 
     public override void Fire()
     {
-        if (this.gameObject.GetComponent<UnitSelected>().selected)
+        if (this.gameObject.GetComponent<UnitSelected>().selected || enemyHasBeenSelected)
         {
             LockOn();
+            enemyHasBeenSelected = true;
             if (nearestEnemy != null)
             {
                 GameObject turretToFire = turrets[RandomizeTurretSelection()];
@@ -83,6 +86,10 @@ public class Galaxy : UnitStats
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
+            }
+            else
+            {
+                enemyHasBeenSelected = false;  
             }
         }
     }
