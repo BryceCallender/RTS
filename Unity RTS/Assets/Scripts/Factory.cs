@@ -20,6 +20,7 @@ public class Factory : MonoBehaviour, IPointerEnterHandler
     public Sprite galaxy;
 
     private Queue<GameObject> unitQueue;
+    private List<GameObject> nextInQueue;
     private List<Sprite> unitSpriteList;
 
     static GameController gameController;
@@ -38,6 +39,7 @@ public class Factory : MonoBehaviour, IPointerEnterHandler
         health = 100;
         gameController = FindObjectOfType<GameController>();
         unitQueue = new Queue<GameObject>();
+        nextInQueue = new List<GameObject>();
         unitSpriteList = new List<Sprite>();
         factoryPanel = GameObject.Find("FactoryPanel");
         unitStats = GameObject.Find("UnitStats").GetComponent<Text>();
@@ -54,7 +56,6 @@ public class Factory : MonoBehaviour, IPointerEnterHandler
         //Call to see if we clicked the building or not to see if we can even 
         //make units or not 
         ClickedBuilding();
-
 
         if(unitQueue.Count > 0)
         {
