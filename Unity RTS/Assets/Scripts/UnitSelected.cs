@@ -55,6 +55,7 @@ public class UnitSelected : MonoBehaviour
                 {
                     Debug.Log("Removed one");
                     mouse.DeselectShiftedUnit(hitInfo.transform.gameObject);
+                    //TODO::fix these 3 getcomponents to make it easier on the complier
                     hitInfo.transform.gameObject.GetComponent<UnitSelected>().selected = false;
                     hitInfo.transform.gameObject.GetComponent<UnitSelected>().added = false;
                     hitInfo.transform.gameObject.GetComponent<UnitSelected>().selectionIndicator.SetActive(false);

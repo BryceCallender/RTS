@@ -44,14 +44,12 @@ public class Mouse : MonoBehaviour
                 //unitsOnScreen.Clear();
                 DeselectAllUnits();
                 mouseDownPosition = hitInfo.point;
-                Debug.Log("Mouse down " + hitInfo.point);
                 timeLeftBeforeDragBox = timeToMakeDragBox;
                 if(!IsDragging)
                 {
                     timeLeftBeforeDragBox -= Time.deltaTime;
                     if (timeLeftBeforeDragBox <= 0)
                     {
-                        Debug.Log("User is dragging");
                         IsDragging = true;
                     }
 
@@ -62,7 +60,6 @@ public class Mouse : MonoBehaviour
                 timeLeftBeforeDragBox = 0;
                 IsDragging = false;
                 currentMousePosition = hitInfo.point;
-                Debug.Log("Mouse up " + hitInfo.point);
             }
         }
     }

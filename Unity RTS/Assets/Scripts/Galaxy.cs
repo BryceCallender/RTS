@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Galaxy : UnitStats 
 {
 	public int damage = 10;
-	public int health = 50;
+	public int health = 150;
 	public int range = 10;
     public int cost = 20;
 
@@ -83,6 +83,7 @@ public class Galaxy : UnitStats
                 {
                     fireCoolDownLeft = fireCoolDown;
                     GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
+                    projectile.tag = "Cluster";
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
@@ -143,14 +144,12 @@ public class Galaxy : UnitStats
 
     public override void TakeDamage(int damage)
     {
-		if (health > 0)
-		{
-			health -= damage;
-		}
-		else
-		{
-			Die();
-		}
+        health -= damage;
+        Debug.Log(health);
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     public void ActivateThrusters()

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Tank : UnitStats
 {
-    public int damage = 10;
-    public int health = 50;
+    public int damage = 5;
+    public int health = 100;
     public int range = 10;
     public int cost = 10;
     public Transform turretEnd;
@@ -58,6 +58,7 @@ public class Tank : UnitStats
 				{
 					fireCoolDown = 0.5f;
 					GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
+                    projectile.tag = "Laser";
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -73,15 +74,12 @@ public class Tank : UnitStats
 
     public override void TakeDamage(int damage)
     {
-        if(health > 0)
-        {
-            health -= damage;
-        }
-        else
+        health -= damage;
+        Debug.Log(health);
+        if (health <= 0)
         {
             Die();
         }
-
     }
 
     public override GameObject FindEnemy()
