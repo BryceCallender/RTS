@@ -33,7 +33,6 @@ public class Enemy : UnitStats
         enemies = new List<GameObject>();
         originalTurretPosition = transform.rotation;
         turrentPosition = transform.Find("turret");
-        Physics.IgnoreLayerCollision(8, 10, false);
 	}
 	
 	// Update is called once per frame
@@ -78,9 +77,12 @@ public class Enemy : UnitStats
                 {
                     fireCoolDown = 0.5f;
                     GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
+                    projectile.tag = "Laser";
+                    //Ignores collisions between enemy and bullet collision 
+                    //once it initially fires and also ignores the collision with
+                    //the ground
                     Physics.IgnoreLayerCollision(9,10);
                     Physics.IgnoreLayerCollision(10,0);
-                    projectile.tag = "Laser";
                     //projectile.transform.LookAt(nearestEnemy.transform.position);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -128,13 +130,17 @@ public class Enemy : UnitStats
         {
             randomObjectToAttack = (int)Random.Range(0, enemies.Count);
             nearestEnemy = enemies[randomObjectToAttack];
-            direction = nearestEnemy.transform.position - this.transform.position;
-            if (direction.magnitude <= range)
+            if (nearestEnemy != null)
             {
-                if (direction != Vector3.zero)
+                direction = nearestEnemy.transform.position - this.transform.position;
+
+                if (direction.magnitude <= range)
                 {
-                    Quaternion lookRotation = Quaternion.LookRotation(direction);
-                    turrentPosition.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion lookRotation = Quaternion.LookRotation(direction);
+                        turrentPosition.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+                    }
                 }
             }
         }

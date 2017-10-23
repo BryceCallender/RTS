@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Harvester : MonoBehaviour
 {
-    public int health = 30;
+    public int health = 100;
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
     public int cost = 5;
@@ -65,7 +65,10 @@ public class Harvester : MonoBehaviour
             if (resourceAmount >= maxResourceToCollect || nearestResource.resourceLeft == 0)
 			{
 				isFull = true;
-				agent.destination = resourceCollector.position;
+                if(resourceCollector != null)
+                {
+                    agent.destination = resourceCollector.position;
+                }
                 timer += Time.deltaTime;
                 if (agent.remainingDistance <= agent.stoppingDistance && !isTurnedIn && timer >= timeToWait)
                 {
@@ -91,7 +94,11 @@ public class Harvester : MonoBehaviour
                 WhereToGo();
                 if (nearestResource == null && resourceAmount > 0)
                 {
-                    agent.destination = resourceCollector.position;
+                    if(resourceCollector != null)
+                    {
+                        agent.destination = resourceCollector.position;
+                    }
+
                     timer += Time.deltaTime;
                     if (agent.remainingDistance <= agent.stoppingDistance && !isTurnedIn && timer >= timeToWait)
                     {
@@ -202,6 +209,18 @@ public class Harvester : MonoBehaviour
         else
         {
             Die();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(5);
+        }
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(10);
         }
     }
 }

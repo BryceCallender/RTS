@@ -28,7 +28,7 @@ public class CommandBuilding : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        health = 100;
+        health = 500;
         gameController = FindObjectOfType<GameController>();
         //commandBuildText = GameObject.Find("HarvesterStats").GetComponent<Text>();
         commandBuildText.text = "Harvester Cost: 10 resources";
@@ -60,6 +60,8 @@ public class CommandBuilding : MonoBehaviour
 			{
 				spawnTimer = spawnTimerCoolDown;
 				Instantiate(harvesterGameObject, harvesterSpawn.transform.position, harvesterSpawn.transform.rotation);
+                //Unit layer
+                harvesterGameObject.layer = 8;
 				Debug.Log(harvesterQueue.Dequeue());
 				amountText.text = "x" + harvesterQueue.Count;
 			}
@@ -76,7 +78,7 @@ public class CommandBuilding : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if (hitInfo.collider.name == "Building_Command_Blue" && Input.GetMouseButtonDown(0))
+            if (hitInfo.collider.name.Contains("Building_Command_Blue") && Input.GetMouseButtonDown(0))
             {
                 clickedBuilding = true;
                 harvesterPanel.SetActive(true);
@@ -86,7 +88,7 @@ public class CommandBuilding : MonoBehaviour
                 //if(hitInfo.collider.name == "RTSTerrain" && Input.GetMouseButtonDown(0))
                 //{
 					clickedBuilding = false;
-				//	harvesterPanel.SetActive(false);
+					harvesterPanel.SetActive(false);
 				//}
 
             }
@@ -149,13 +151,22 @@ public class CommandBuilding : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-		if (health > 0)
-		{
-			health -= damage;
-		}
-		else
-		{
-			Die();
-		}
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(5);
+        }
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(10);
+        }
+    }
 }

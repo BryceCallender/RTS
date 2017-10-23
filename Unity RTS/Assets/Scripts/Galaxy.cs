@@ -168,4 +168,16 @@ public class Galaxy : UnitStats
         random = (int)Random.Range(0,turrets.Length);
         return random;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(5);
+        }
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(10);
+        }
+    }
 }

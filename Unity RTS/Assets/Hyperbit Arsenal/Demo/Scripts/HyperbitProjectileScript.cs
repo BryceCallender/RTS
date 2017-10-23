@@ -34,11 +34,12 @@ public class HyperbitProjectileScript : MonoBehaviour
     {
         //if (hit.gameObject.tag == "Enemy")
         //{
-        //Debug.Log(hit.collider.gameObject.name);
+        //Debug.Log("Hit " + hit.collider.gameObject.name + " with layer " + hit.collider.gameObject.layer);
         if(!Physics.GetIgnoreLayerCollision(8,10) || !Physics.GetIgnoreLayerCollision(9,10))
         {
             if (!hasCollided)
             {
+                //Debug.Log("Killed by " + hit.collider.gameObject.name);
                 //Debug.Log(hit.gameObject.name);
                 hasCollided = true;
                 //transform.DetachChildren();

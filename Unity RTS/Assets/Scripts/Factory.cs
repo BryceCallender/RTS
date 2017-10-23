@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class Factory : MonoBehaviour, IPointerEnterHandler
+public class Factory : MonoBehaviour
 {
     public int health;
     private GameObject unitGameObject;
@@ -36,7 +36,7 @@ public class Factory : MonoBehaviour, IPointerEnterHandler
     // Use this for initialization
     void Start()
     {
-        health = 100;
+        health = 300;
         gameController = FindObjectOfType<GameController>();
         unitQueue = new Queue<GameObject>();
         nextInQueue = new List<GameObject>();
@@ -164,8 +164,31 @@ public class Factory : MonoBehaviour, IPointerEnterHandler
 		}
 	}
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void Die()
     {
-        Debug.Log("roo4");
+        Destroy(gameObject);
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(5);
+        }
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+        {
+            TakeDamage(10);
+        }
+    }
+
+
 }

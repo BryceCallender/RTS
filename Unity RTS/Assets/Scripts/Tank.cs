@@ -59,6 +59,9 @@ public class Tank : UnitStats
 					fireCoolDown = 0.5f;
 					GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
+                    //Ignores collisions between unit and bullet collision 
+                    //once it initially fires and also ignores the collision with
+                    //the ground
                     Physics.IgnoreLayerCollision(8,10);
                     Physics.IgnoreLayerCollision(0,8);
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
@@ -132,11 +135,11 @@ public class Tank : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 9)
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
         {
             TakeDamage(5);
         }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 9)
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
         {
             TakeDamage(10);
         }
