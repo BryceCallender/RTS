@@ -34,6 +34,9 @@ public class HyperbitProjectileScript : MonoBehaviour
     {
         //if (hit.gameObject.tag == "Enemy")
         //{
+        //Debug.Log(hit.collider.gameObject.name);
+        if(!Physics.GetIgnoreLayerCollision(8,10) || !Physics.GetIgnoreLayerCollision(9,10))
+        {
             if (!hasCollided)
             {
                 //Debug.Log(hit.gameObject.name);
@@ -71,10 +74,11 @@ public class HyperbitProjectileScript : MonoBehaviour
                     Destroy(trail.gameObject, 2);
                 }
             }
-        //}
-        //else
-        //{
-        //    Destroy(gameObject, 5f);
+            //}
+            //else
+            //{
+            //    Destroy(gameObject, 5f);
+            //}
         //}
     }
 
@@ -89,5 +93,5 @@ public class HyperbitProjectileScript : MonoBehaviour
 		//{
 			
 		//}
-    //}
+    }
 }

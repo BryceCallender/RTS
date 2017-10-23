@@ -59,6 +59,8 @@ public class Tank : UnitStats
 					fireCoolDown = 0.5f;
 					GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
+                    Physics.IgnoreLayerCollision(8,10);
+                    Physics.IgnoreLayerCollision(0,8);
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -126,5 +128,22 @@ public class Tank : UnitStats
                 turrentPosition.rotation = Quaternion.Lerp(Quaternion.Euler(direction), gameObject.GetComponent<Transform>().rotation, 1.0f);
 			}
 		}	
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 9)
+        {
+            TakeDamage(5);
+        }
+        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 9)
+        {
+            TakeDamage(10);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Physics.IgnoreLayerCollision(8, 10, false);
     }
 }
