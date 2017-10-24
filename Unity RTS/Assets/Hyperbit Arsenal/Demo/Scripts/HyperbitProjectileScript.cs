@@ -9,15 +9,9 @@ public class HyperbitProjectileScript : MonoBehaviour
     public GameObject[] trailParticles;
     [HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
-
+    public string owner;
     public int speed = 30;
-
-
     private bool hasCollided = false;
-    private Vector3 direction;
-
-	private float timer = 0;
-	private float timeToWait = 1.0f;
  
     void Start()
     {
@@ -35,11 +29,11 @@ public class HyperbitProjectileScript : MonoBehaviour
         //if (hit.gameObject.tag == "Enemy")
         //{
         //Debug.Log("Hit " + hit.collider.gameObject.name + " with layer " + hit.collider.gameObject.layer);
-        if(!Physics.GetIgnoreLayerCollision(8,10) || !Physics.GetIgnoreLayerCollision(9,10))
+        if (owner != hit.gameObject.name)
         {
             if (!hasCollided)
             {
-                //Debug.Log("Killed by " + hit.collider.gameObject.name);
+                Debug.Log("Killed by " + hit.collider.gameObject.name);
                 //Debug.Log(hit.gameObject.name);
                 hasCollided = true;
                 //transform.DetachChildren();
@@ -58,8 +52,8 @@ public class HyperbitProjectileScript : MonoBehaviour
                     curTrail.transform.parent = null;
                     Destroy(curTrail, 3f);
                 }
-                Destroy(projectileParticle, 3f);
-                Destroy(impactParticle, 3f);
+                Destroy(projectileParticle, 1f);
+                Destroy(impactParticle, 1f);
                 Destroy(gameObject);
                 //projectileParticle.Stop();
 
@@ -75,24 +69,6 @@ public class HyperbitProjectileScript : MonoBehaviour
                     Destroy(trail.gameObject, 2);
                 }
             }
-            //}
-            //else
-            //{
-            //    Destroy(gameObject, 5f);
-            //}
-        //}
-    }
-
-  //  public void HitEnemy(Vector3 enemyPosition)
-  //  {
-  //      direction = enemyPosition - this.transform.position;
-  //      float distance = speed * Time.deltaTime;
-  //      //Debug.Log(direction.ToString());
-  //      Debug.Log(direction.magnitude);
-  //      Debug.Log(distance);
-		//if (direction.magnitude <= distance)
-		//{
-			
-		//}
+        }
     }
 }

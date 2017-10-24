@@ -88,7 +88,7 @@ public class CommandBuilding : MonoBehaviour
                 //if(hitInfo.collider.name == "RTSTerrain" && Input.GetMouseButtonDown(0))
                 //{
 					clickedBuilding = false;
-					harvesterPanel.SetActive(false);
+					//harvesterPanel.SetActive(false);
 				//}
 
             }

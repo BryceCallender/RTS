@@ -19,17 +19,17 @@ public class Enemy : UnitStats
 
     private int randomObjectToAttack;
     private float fireCoolDown = 0.5f;
-    private float fireCoolDownLeft = 0;
+   // private float fireCoolDownLeft = 0;
     private RaycastHit[] hitInfo;
     private Vector3 direction;
-    private Vector3 bulletDirection;
-    private float distance;
 
+    GameObject projectile;
     private bool enemyHasBeenSelected = false;
 
 	// Use this for initialization
 	void Start() 
     {
+        projectile = bulletPrefab;
         enemies = new List<GameObject>();
         originalTurretPosition = transform.rotation;
         turrentPosition = transform.Find("turret");
@@ -76,13 +76,16 @@ public class Enemy : UnitStats
                 if (fireCoolDown <= 0 && direction.magnitude <= range)
                 {
                     fireCoolDown = 0.5f;
-                    GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
+                    projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
+                    projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
                     //Ignores collisions between enemy and bullet collision 
                     //once it initially fires and also ignores the collision with
                     //the ground
-                    Physics.IgnoreLayerCollision(9,10);
-                    Physics.IgnoreLayerCollision(10,0);
+
+                    //Physics.IgnoreLayerCollision(9,10);
+                    //Physics.IgnoreLayerCollision(10,0);
+
                     //projectile.transform.LookAt(nearestEnemy.transform.position);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -150,19 +153,24 @@ public class Enemy : UnitStats
     //When something enters the collider take damage to the unit!
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
         {
-            TakeDamage(5);
-        }
-        else if(collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
-        {
-            TakeDamage(10);
+            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
+        Debug.Log("bullet left meh thing");
         Physics.IgnoreLayerCollision(9, 10, false);
+        //Debug.Log("OnCollisionExit " + Physics.GetIgnoreLayerCollision(9,10));
     }
 
     void OnDrawGizmosSelected()

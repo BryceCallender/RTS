@@ -26,10 +26,12 @@ public class Galaxy : UnitStats
     private Vector3 position;
     private NavMeshAgent agent;
 
+    GameObject projectile;
     private bool enemyHasBeenSelected = false;
 
     private void Start()
     {
+        projectile = bulletPrefab;
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
         turrets = GameObject.FindGameObjectsWithTag("GalaxyTurrets");
 
@@ -82,8 +84,12 @@ public class Galaxy : UnitStats
                 if (fireCoolDownLeft <= 0 && direction.magnitude <= range)
                 {
                     fireCoolDownLeft = fireCoolDown;
-                    GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
+                    projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
                     projectile.tag = "Cluster";
+                    projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
+
+                    //Physics.IgnoreLayerCollision(8, 10);
+                    //Physics.IgnoreLayerCollision(0, 10);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
@@ -171,13 +177,21 @@ public class Galaxy : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
         {
-            TakeDamage(5);
+            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
-        {
-            TakeDamage(10);
-        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        Physics.IgnoreLayerCollision(8, 10, false);
     }
 }

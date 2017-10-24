@@ -21,14 +21,14 @@ public class Tank : UnitStats
     private float fireCoolDownLeft = 0;
     private RaycastHit hitInfo;
     private Vector3 direction;
-    private Vector3 bulletDirection;
-    private float distance;
     private UnitSelected unitSelected;
 
+    GameObject projectile;
     private bool enemyHasBeenSelected = false;
 
     private void Start()
     {
+        projectile = bulletPrefab;
         turrentPosition = transform.Find("turret");
         originalTurretPosition = transform.rotation;
         unitSelected = GetComponent<UnitSelected>();
@@ -57,17 +57,19 @@ public class Tank : UnitStats
 				if (fireCoolDown <= 0 && direction.magnitude <= range)
 				{
 					fireCoolDown = 0.5f;
-					GameObject projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
+					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
+                    projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
                     //Ignores collisions between unit and bullet collision 
                     //once it initially fires and also ignores the collision with
                     //the ground
-                    Physics.IgnoreLayerCollision(8,10);
-                    Physics.IgnoreLayerCollision(0,8);
+
+                    //Physics.IgnoreLayerCollision(8,10);
+                    //Physics.IgnoreLayerCollision(0,10);
+
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
-					//projectile.GetComponent<HyperbitProjectileScript>().HitEnemy(nearestEnemy.transform.position);
 				}
 			}
             else
@@ -135,18 +137,22 @@ public class Tank : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
         {
-            TakeDamage(5);
-        }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
-        {
-            TakeDamage(10);
+            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         Physics.IgnoreLayerCollision(8, 10, false);
+        //Physics.IgnoreLayerCollision(9, 10, false);
     }
 }
