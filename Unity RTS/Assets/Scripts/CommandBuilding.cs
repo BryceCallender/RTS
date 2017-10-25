@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class CommandBuilding : MonoBehaviour 
 {
@@ -28,7 +29,7 @@ public class CommandBuilding : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        health = 500;
+        health = 1000;
         gameController = FindObjectOfType<GameController>();
         //commandBuildText = GameObject.Find("HarvesterStats").GetComponent<Text>();
         commandBuildText.text = "Harvester Cost: 10 resources";
@@ -83,14 +84,15 @@ public class CommandBuilding : MonoBehaviour
                 clickedBuilding = true;
                 harvesterPanel.SetActive(true);
             }
-            else
+            //If panel is on then lets conisder if they want to have ui go away 
+            //if we click away
+            if(harvesterPanel.activeSelf)
             {
-                //if(hitInfo.collider.name == "RTSTerrain" && Input.GetMouseButtonDown(0))
-                //{
-					clickedBuilding = false;
-					//harvesterPanel.SetActive(false);
-				//}
-
+                if(!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(1))
+                {
+                    clickedBuilding = false;
+                    harvesterPanel.SetActive(false);
+                }
             }
         }
     }

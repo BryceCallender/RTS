@@ -25,6 +25,7 @@ public class Enemy : UnitStats
 
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
+    private int team = 1;
 
 	// Use this for initialization
 	void Start() 
@@ -73,19 +74,23 @@ public class Enemy : UnitStats
             if (nearestEnemy != null)
             {
                 fireCoolDown -= Time.deltaTime;
+                direction = nearestEnemy.transform.position - this.transform.position;
+
+                if (direction.magnitude <= range)
+                {
+                    if (direction != Vector3.zero)
+                    {
+                        Quaternion lookRotation = Quaternion.LookRotation(direction);
+                        turrentPosition.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+                    }
+                }
                 if (fireCoolDown <= 0 && direction.magnitude <= range)
                 {
                     fireCoolDown = 0.5f;
                     projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-                    //Ignores collisions between enemy and bullet collision 
-                    //once it initially fires and also ignores the collision with
-                    //the ground
-
-                    //Physics.IgnoreLayerCollision(9,10);
-                    //Physics.IgnoreLayerCollision(10,0);
-
+                    projectile.GetComponent<HyperbitProjectileScript>().team = team;
                     //projectile.transform.LookAt(nearestEnemy.transform.position);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -133,19 +138,6 @@ public class Enemy : UnitStats
         {
             randomObjectToAttack = (int)Random.Range(0, enemies.Count);
             nearestEnemy = enemies[randomObjectToAttack];
-            if (nearestEnemy != null)
-            {
-                direction = nearestEnemy.transform.position - this.transform.position;
-
-                if (direction.magnitude <= range)
-                {
-                    if (direction != Vector3.zero)
-                    {
-                        Quaternion lookRotation = Quaternion.LookRotation(direction);
-                        turrentPosition.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
-                    }
-                }
-            }
         }
 
     }
@@ -153,8 +145,15 @@ public class Enemy : UnitStats
     //When something enters the collider take damage to the unit!
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
+        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
+            //Physics.IgnoreLayerCollision(9, 10);
+        }
+
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
+            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        {
+            //Physics.IgnoreLayerCollision(9, 10, false);
             if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);
@@ -164,13 +163,6 @@ public class Enemy : UnitStats
                 TakeDamage(10);
             }
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Debug.Log("bullet left meh thing");
-        Physics.IgnoreLayerCollision(9, 10, false);
-        //Debug.Log("OnCollisionExit " + Physics.GetIgnoreLayerCollision(9,10));
     }
 
     void OnDrawGizmosSelected()

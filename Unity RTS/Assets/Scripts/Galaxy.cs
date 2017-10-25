@@ -25,12 +25,14 @@ public class Galaxy : UnitStats
     private ParticleSystem thruster;
     private Vector3 position;
     private NavMeshAgent agent;
+    private int team = 0;
 
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
 
     private void Start()
     {
+        health = 150;
         projectile = bulletPrefab;
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
         turrets = GameObject.FindGameObjectsWithTag("GalaxyTurrets");
@@ -87,7 +89,7 @@ public class Galaxy : UnitStats
                     projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
                     projectile.tag = "Cluster";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-
+                    projectile.GetComponent<HyperbitProjectileScript>().team = team;
                     //Physics.IgnoreLayerCollision(8, 10);
                     //Physics.IgnoreLayerCollision(0, 10);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
@@ -177,8 +179,15 @@ public class Galaxy : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
+        //if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        //{
+        //    Physics.IgnoreLayerCollision(8, 10);
+        //}
+
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
+            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
+            //Physics.IgnoreLayerCollision(8, 10, false);
             if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);
@@ -188,10 +197,5 @@ public class Galaxy : UnitStats
                 TakeDamage(10);
             }
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Physics.IgnoreLayerCollision(8, 10, false);
     }
 }

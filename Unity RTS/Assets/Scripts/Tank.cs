@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tank : UnitStats
 {
@@ -18,17 +19,22 @@ public class Tank : UnitStats
     public GameObject nearestEnemy;
 
     private float fireCoolDown = 0.5f;
-    private float fireCoolDownLeft = 0;
     private RaycastHit hitInfo;
     private Vector3 direction;
     private UnitSelected unitSelected;
+    private int team = 0;
 
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
+    public Slider healthBar;
+
 
     private void Start()
     {
+        healthBar.gameObject.SetActive(false);
         projectile = bulletPrefab;
+        healthBar.maxValue = health;
+        healthBar.value = health;
         turrentPosition = transform.Find("turret");
         originalTurretPosition = transform.rotation;
         unitSelected = GetComponent<UnitSelected>();
@@ -60,13 +66,7 @@ public class Tank : UnitStats
 					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
                     projectile.tag = "Laser";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-                    //Ignores collisions between unit and bullet collision 
-                    //once it initially fires and also ignores the collision with
-                    //the ground
-
-                    //Physics.IgnoreLayerCollision(8,10);
-                    //Physics.IgnoreLayerCollision(0,10);
-
+                    projectile.GetComponent<HyperbitProjectileScript>().team = team;
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -81,7 +81,9 @@ public class Tank : UnitStats
 
     public override void TakeDamage(int damage)
     {
+        healthBar.gameObject.SetActive(true);
         health -= damage;
+        healthBar.value -= damage;
         Debug.Log(health);
         if (health <= 0)
         {
@@ -137,7 +139,14 @@ public class Tank : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name))
+        if(collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        {
+            //Physics.IgnoreLayerCollision(8,10);
+            //Debug.Log("Same team bro");
+        }
+
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
+            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
             if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
             {
@@ -148,11 +157,5 @@ public class Tank : UnitStats
                 TakeDamage(10);
             }
         }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        Physics.IgnoreLayerCollision(8, 10, false);
-        //Physics.IgnoreLayerCollision(9, 10, false);
     }
 }

@@ -152,15 +152,16 @@ public class Factory : MonoBehaviour
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);
 			}
-			else
-			{
-				//if(hitInfo.collider.name == "RTSTerrain" && Input.GetMouseButtonDown(0))
-				//{
-				    clickedBuilding = false;
-    //                factoryPanel.SetActive(false);
-				//}
-
-			}
+            //If panel is on then lets conisder if they want to have ui go away 
+            //if we click away
+            if (factoryPanel.activeSelf)
+            {
+                if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(1))
+                {
+                    clickedBuilding = false;
+                    factoryPanel.SetActive(false);
+                }
+            }
 		}
 	}
 

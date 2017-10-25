@@ -10,6 +10,7 @@ public class HyperbitProjectileScript : MonoBehaviour
     [HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
     public string owner;
+    public int team;
     public int speed = 30;
     private bool hasCollided = false;
  
@@ -33,7 +34,7 @@ public class HyperbitProjectileScript : MonoBehaviour
         {
             if (!hasCollided)
             {
-                Debug.Log("Killed by " + hit.collider.gameObject.name);
+                //Debug.Log("Killed by " + hit.collider.gameObject.name);
                 //Debug.Log(hit.gameObject.name);
                 hasCollided = true;
                 //transform.DetachChildren();
