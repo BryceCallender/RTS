@@ -9,6 +9,10 @@ public class Harvester : MonoBehaviour
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
     public int cost = 5;
+    public int capacity = 1;
+
+    public GameObject[] buildableBuildings;
+
     public Resource[] resources;
     public Resource nearestResource;
     public Transform resourceCollector;
@@ -222,5 +226,10 @@ public class Harvester : MonoBehaviour
         {
             TakeDamage(10);
         }
+    }
+
+    public void Build(GameObject buildingToBuild)
+    {
+        
     }
 }

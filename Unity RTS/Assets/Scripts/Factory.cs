@@ -7,10 +7,13 @@ using UnityEngine.EventSystems;
 public class Factory : MonoBehaviour
 {
     public int health;
+    private int team = 0;
     private GameObject unitGameObject;
+    [SerializeField]
     private GameObject factoryPanel;
     private GameObject nextUnitInQueue;
     private Transform unitSpawn;
+    [SerializeField]
     private Text unitStats;
 
     public Slider unitSpawnSlider;
@@ -41,8 +44,6 @@ public class Factory : MonoBehaviour
         unitQueue = new Queue<GameObject>();
         nextInQueue = new List<GameObject>();
         unitSpriteList = new List<Sprite>();
-        factoryPanel = GameObject.Find("FactoryPanel");
-        unitStats = GameObject.Find("UnitStats").GetComponent<Text>();
         nextUnitInQueue = GameObject.Find("nextUnit");
         unitSliderImage = unitSpawnSlider.GetComponentInChildren<Image>();
         unitSpawn = this.transform.Find("unitSpawn");
@@ -181,13 +182,24 @@ public class Factory : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            TakeDamage(5);
+            //Physics.IgnoreLayerCollision(8, 10);
+            //Debug.Log("Same team bro");
         }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
+            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            TakeDamage(10);
+            //Physics.IgnoreLayerCollision(9, 10, false);
+            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
     }
 

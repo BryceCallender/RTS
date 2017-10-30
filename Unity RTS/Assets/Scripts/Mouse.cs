@@ -92,7 +92,7 @@ public class Mouse : MonoBehaviour
 
         boxFinish = new Vector2(boxStart.x + Mathf.Abs(boxWidth),boxStart.y - Mathf.Abs(boxHeight));
 
-		if (Event.current.type == EventType.mouseDrag)
+        if (Event.current.type == EventType.mouseDrag)
 		{
             if (!IsDragging)
 			{

@@ -40,7 +40,7 @@ public class Enemy : UnitStats
 	void Update () 
     {
         //LockOn();
-        Fire();
+        //Fire();
 	}
 
     public override void Die()
@@ -150,10 +150,10 @@ public class Enemy : UnitStats
             //Physics.IgnoreLayerCollision(9, 10);
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Red")
             && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(9, 10, false);
+            //Physics.IgnoreLayerCollision(8, 10, false);
             if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);

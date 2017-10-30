@@ -9,6 +9,7 @@ public class Galaxy : UnitStats
 	public int health = 150;
 	public int range = 10;
     public int cost = 20;
+    public int capacity = 10;
 
 	public GameObject[] enemies;
 	public GameObject nearestEnemy;
@@ -179,10 +180,10 @@ public class Galaxy : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
-        //{
+        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        {
         //    Physics.IgnoreLayerCollision(8, 10);
-        //}
+        }
 
         if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
             && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))

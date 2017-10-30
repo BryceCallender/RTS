@@ -9,28 +9,38 @@ public class Tank : UnitStats
     public int health = 100;
     public int range = 10;
     public int cost = 10;
+    public int capacity = 5;
     public Transform turretEnd;
 
+    //Turrent rotations
     Transform turrentPosition;
     Quaternion originalTurretPosition;
 
+    //Bullets and enemies
     public GameObject bulletPrefab;
     public GameObject[] enemies;
     public GameObject nearestEnemy;
+    private GameObject projectile;
 
+    //Firing and dealing with unit
     private float fireCoolDown = 0.5f;
     private RaycastHit hitInfo;
     private Vector3 direction;
     private UnitSelected unitSelected;
     private int team = 0;
 
-    GameObject projectile;
+
     private bool enemyHasBeenSelected = false;
+    private Quaternion keepUIAbove;
+
+    //UI stuff
     public Slider healthBar;
+    public Canvas canvas;
 
 
     private void Start()
     {
+        keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
         healthBar.gameObject.SetActive(false);
         projectile = bulletPrefab;
         healthBar.maxValue = health;
@@ -42,6 +52,11 @@ public class Tank : UnitStats
 
     private void Update()
     {
+        canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
+        if(unitSelected.selected)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
         Fire();
     }
 
@@ -145,9 +160,10 @@ public class Tank : UnitStats
             //Debug.Log("Same team bro");
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
             && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
+            //Physics.IgnoreLayerCollision(9, 10, false);
             if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);

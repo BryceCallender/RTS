@@ -5,6 +5,7 @@ using UnityEngine;
 public class SupplyBuilding : MonoBehaviour 
 {
     public int health;
+    private int team = 0;
 	// Use this for initialization
 	void Start () 
     {
@@ -27,13 +28,24 @@ public class SupplyBuilding : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            TakeDamage(5);
+            //Physics.IgnoreLayerCollision(8, 10);
+            //Debug.Log("Same team bro");
         }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+
+        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
+            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            TakeDamage(10);
+            //Physics.IgnoreLayerCollision(9, 10, false);
+            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
     }
 }
