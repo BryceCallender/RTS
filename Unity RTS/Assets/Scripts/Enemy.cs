@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : UnitStats
 {
@@ -26,14 +27,21 @@ public class Enemy : UnitStats
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
     private int team = 1;
+    public Slider healthBar;
+    private Quaternion keepUIAbove;
+    public Canvas canvas;
 
 	// Use this for initialization
 	void Start() 
     {
+        keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
         projectile = bulletPrefab;
         enemies = new List<GameObject>();
+        healthBar.gameObject.SetActive(false);
         originalTurretPosition = transform.rotation;
         turrentPosition = transform.Find("turret");
+        healthBar.maxValue = health;
+        healthBar.value = health;
 	}
 	
 	// Update is called once per frame
@@ -41,6 +49,7 @@ public class Enemy : UnitStats
     {
         //LockOn();
         //Fire();
+        canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
 	}
 
     public override void Die()
@@ -51,7 +60,9 @@ public class Enemy : UnitStats
 
 	public override void TakeDamage(int damage)
 	{
+        healthBar.gameObject.SetActive(true);
         health -= damage;
+        healthBar.value -= damage;
         Debug.Log(health);
         if (health <= 0)
         {
@@ -102,19 +113,11 @@ public class Enemy : UnitStats
                 enemyHasBeenSelected = false;
             }
         }
-    }
 
-    public override GameObject FindEnemy()
-    {
-        if (nearestEnemy == null)
+        if(enemies.Count == 0)
         {
-            
+            turrentPosition.rotation = Quaternion.Lerp(Quaternion.Euler(direction), gameObject.GetComponent<Transform>().rotation, 1.0f);
         }
-        else
-        {
-
-        }
-        return nearestEnemy;
     }
 
     /*
@@ -123,6 +126,7 @@ public class Enemy : UnitStats
      */
     public void LockOn()
     {
+        enemies.Clear();
         hitInfo = Physics.SphereCastAll(this.transform.position, range, Vector3.forward);
         for (int i = 0; i < hitInfo.Length; i++)
         {

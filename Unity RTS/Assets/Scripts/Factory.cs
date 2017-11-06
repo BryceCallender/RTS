@@ -6,13 +6,19 @@ using UnityEngine.EventSystems;
 
 public class Factory : MonoBehaviour
 {
+    //TODO: make it so the button click is not hardcoded into the inspector 
+    //allow it to be coded in here possibly
     public int health;
     private int team = 0;
     private GameObject unitGameObject;
+
     [SerializeField]
     private GameObject factoryPanel;
     private GameObject nextUnitInQueue;
+
+    [SerializeField]
     private Transform unitSpawn;
+
     [SerializeField]
     private Text unitStats;
 
@@ -46,7 +52,6 @@ public class Factory : MonoBehaviour
         unitSpriteList = new List<Sprite>();
         nextUnitInQueue = GameObject.Find("nextUnit");
         unitSliderImage = unitSpawnSlider.GetComponentInChildren<Image>();
-        unitSpawn = this.transform.Find("unitSpawn");
         factoryPanel.SetActive(false);
         //nextUnitInQueue.SetActive(false);
     }
@@ -148,7 +153,7 @@ public class Factory : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
 		{
-			if (hitInfo.collider.name == "Building_Factory_Blue" && Input.GetMouseButtonDown(0))
+            if (hitInfo.collider.name.Contains("Building_Factory_Blue") && Input.GetMouseButtonDown(0))
 			{
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);

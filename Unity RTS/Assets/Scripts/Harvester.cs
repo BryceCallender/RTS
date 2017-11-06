@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Harvester : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class Harvester : MonoBehaviour
     public int capacity = 1;
 
     public GameObject[] buildableBuildings;
+    public Button factoryButton;
+    public Button supplyButton;
 
     public Resource[] resources;
     public Resource nearestResource;
     public Transform resourceCollector;
+    public Slider healthBar;
 
     static GameController gameController;
 
@@ -36,6 +40,7 @@ public class Harvester : MonoBehaviour
     private RaycastHit hitInfo;
     private UnitSelected unitSelected;
 
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -43,6 +48,9 @@ public class Harvester : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
         unitSelected = GetComponent<UnitSelected>();
         agent.stoppingDistance = 3;
+        healthBar.gameObject.SetActive(false);
+        healthBar.maxValue = health;
+        healthBar.value = health;
         if(resourceCollector == null)
         {
             resourceCollector = transform.Find("SupplyBuilding");
@@ -73,13 +81,17 @@ public class Harvester : MonoBehaviour
                 {
                     agent.destination = resourceCollector.position;
                 }
+
                 timer += Time.deltaTime;
+
                 if (agent.remainingDistance <= agent.stoppingDistance && !isTurnedIn && timer >= timeToWait)
                 {
-                    
-                    isTurnedIn = true;
-                    TurnInResource();
-                    timer = 0;
+                    if(resourceCollector != null)
+                    {
+                        isTurnedIn = true;
+                        TurnInResource();
+                        timer = 0;
+                    }
                 }
                 isTurnedIn = false;
                 isFull = false;
@@ -183,7 +195,6 @@ public class Harvester : MonoBehaviour
 		{
 			if (hitInfo.transform.gameObject.CompareTag("Resource"))
 			{
-				Debug.Log("hit resource after we had resource");
 				GameObject resource = hitInfo.transform.gameObject;
 				nearestResource = resource.GetComponent<Resource>();
 				agent.destination = nearestResource.transform.position;
@@ -206,11 +217,10 @@ public class Harvester : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (health > 0)
-        {
-            health -= damage;
-        }
-        else
+        healthBar.gameObject.SetActive(true);
+        health -= damage;
+        healthBar.value -= damage;
+        if (health <= 0)
         {
             Die();
         }
@@ -228,8 +238,13 @@ public class Harvester : MonoBehaviour
         }
     }
 
-    public void Build(GameObject buildingToBuild)
+    public void BuidlingToBuild(GameObject building)
     {
-        
+        if(unitSelected.selected)
+        {
+            
+        }
+        Debug.Log(building.name);
     }
+
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Galaxy : UnitStats 
 {
@@ -18,6 +19,9 @@ public class Galaxy : UnitStats
     [SerializeField]
     private GameObject[] turrets;
 
+    public Slider healthBar;
+    private Quaternion keepUIAbove;
+    public Canvas canvas; 
 
 	private float fireCoolDown = 1.5f;
 	private float fireCoolDownLeft = 0;
@@ -35,13 +39,12 @@ public class Galaxy : UnitStats
     {
         health = 150;
         projectile = bulletPrefab;
+        keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
         turrets = GameObject.FindGameObjectsWithTag("GalaxyTurrets");
-
-        //for (int i = 0; i < turrets.Length; i++)
-        //{
-        //    turrets[i].transform.LookAt(nearestEnemy.transform.position);
-        //}
+        healthBar.gameObject.SetActive(false);
+        healthBar.maxValue = health;
+        healthBar.value = health;
         thruster.Stop();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -49,6 +52,7 @@ public class Galaxy : UnitStats
     private void Update()
     {
         Fire();
+        canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
         if(agent.velocity != Vector3.zero)
         {
             ActivateThrusters();
@@ -58,20 +62,6 @@ public class Galaxy : UnitStats
             DeActivateThrusters();
         }
     }
-
-	public override GameObject FindEnemy()
-	{
-		if (nearestEnemy == null)
-		{
-			enemies = GameObject.FindGameObjectsWithTag("Enemy");
-			nearestEnemy = enemies[0] as GameObject;
-		}
-		else
-		{
-
-		}
-		return nearestEnemy;
-	}
 
     public override void Fire()
     {
@@ -91,8 +81,6 @@ public class Galaxy : UnitStats
                     projectile.tag = "Cluster";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
                     projectile.GetComponent<HyperbitProjectileScript>().team = team;
-                    //Physics.IgnoreLayerCollision(8, 10);
-                    //Physics.IgnoreLayerCollision(0, 10);
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
@@ -134,7 +122,6 @@ public class Galaxy : UnitStats
                 {
                     Quaternion lookRotation = Quaternion.LookRotation(direction);
                 }
-				//turrentPosition.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
 			}
             if (nearestEnemy == null || direction.magnitude > range)
             {
@@ -153,8 +140,9 @@ public class Galaxy : UnitStats
 
     public override void TakeDamage(int damage)
     {
+        healthBar.gameObject.SetActive(true);
         health -= damage;
-        Debug.Log(health);
+        healthBar.value -= damage;
         if (health <= 0)
         {
             Die();

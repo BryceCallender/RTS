@@ -99,25 +99,10 @@ public class Tank : UnitStats
         healthBar.gameObject.SetActive(true);
         health -= damage;
         healthBar.value -= damage;
-        Debug.Log(health);
         if (health <= 0)
         {
             Die();
         }
-    }
-
-    public override GameObject FindEnemy()
-    {
-        if(nearestEnemy == null)
-        {
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            nearestEnemy = enemies[0] as GameObject;
-        }
-        else
-        {
-            
-        }
-        return nearestEnemy;
     }
 
     public void LockOn()
