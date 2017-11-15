@@ -31,6 +31,8 @@ public class Factory : MonoBehaviour
     private Queue<GameObject> unitQueue;
     private List<GameObject> nextInQueue;
     private List<Sprite> unitSpriteList;
+    [SerializeField]
+    private List<GameObject> buildableUnits;
 
     static GameController gameController;
 
@@ -41,11 +43,18 @@ public class Factory : MonoBehaviour
     private bool clickedBuilding;
     private Transform rallyLocation;
     private bool isTank;
+    private bool isSelected;
+
+    [SerializeField]
+    private Button tankButton;
+    [SerializeField]
+    private Button galaxyButton;
 
     // Use this for initialization
     void Start()
     {
         health = 300;
+        isSelected = false;
         gameController = FindObjectOfType<GameController>();
         unitQueue = new Queue<GameObject>();
         nextInQueue = new List<GameObject>();
@@ -53,6 +62,8 @@ public class Factory : MonoBehaviour
         nextUnitInQueue = GameObject.Find("nextUnit");
         unitSliderImage = unitSpawnSlider.GetComponentInChildren<Image>();
         factoryPanel.SetActive(false);
+        tankButton.onClick.AddListener(AddTankToQueue);
+        galaxyButton.onClick.AddListener(AddGalaxyToQueue);
         //nextUnitInQueue.SetActive(false);
     }
 
@@ -91,44 +102,58 @@ public class Factory : MonoBehaviour
 
     public void AddTankToQueue()
     {
-        if (gameController.currency >= unitGameObject.GetComponent<Tank>().cost)
+        if(isSelected)
         {
-            unitQueue.Enqueue(unitGameObject);
-            gameController.currency -= unitGameObject.GetComponent<Tank>().cost;
-            Debug.Log(unitQueue.Count);
+            //What da frick is this but it works?!?!?!
+            SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Tank")));
+            if (gameController.currency >= unitGameObject.GetComponent<Tank>().cost)
+            {
+                unitQueue.Enqueue(unitGameObject);
+                gameController.currency -= unitGameObject.GetComponent<Tank>().cost;
+                Debug.Log(unitQueue.Count);
+            } 
         }
 
     }
 
     public void AddGalaxyToQueue()
     {
-        if (gameController.currency >= unitGameObject.GetComponent<Galaxy>().cost)
+        if(isSelected)
         {
-            unitQueue.Enqueue(unitGameObject);
-            gameController.currency -= unitGameObject.GetComponent<Galaxy>().cost;
-            Debug.Log(unitQueue.Count);
+            SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Galaxy")));
+            if (gameController.currency >= unitGameObject.GetComponent<Galaxy>().cost)
+            {
+                unitQueue.Enqueue(unitGameObject);
+                gameController.currency -= unitGameObject.GetComponent<Galaxy>().cost;
+                Debug.Log(unitQueue.Count);
+            }
         }
-
     }
 
     public void DeleteTankFromQueue()
     {
-        if (unitQueue.Count > 0)
+        if (isSelected)
         {
-            unitQueue.Dequeue();
-            gameController.currency += unitGameObject.GetComponent<Tank>().cost;
-            Debug.Log(unitQueue.Count);
+            if (unitQueue.Count > 0)
+            {
+                unitQueue.Dequeue();
+                gameController.currency += unitGameObject.GetComponent<Tank>().cost;
+                Debug.Log(unitQueue.Count);
+            }
         }
     }
 
 	public void DeleteGalaxyFromQueue()
 	{
-		if (unitQueue.Count > 0)
-		{
-			unitQueue.Dequeue();
-            gameController.currency += unitGameObject.GetComponent<Galaxy>().cost;
-			Debug.Log(unitQueue.Count);
-		}
+        if (isSelected)
+        {
+            if (unitQueue.Count > 0)
+            {
+                unitQueue.Dequeue();
+                gameController.currency += unitGameObject.GetComponent<Galaxy>().cost;
+                Debug.Log(unitQueue.Count);
+            }
+        }
 	}
 
     public void SetUnit(GameObject obj)
@@ -142,7 +167,7 @@ public class Factory : MonoBehaviour
         }
         else
         {
-            isTank = false;
+            isTank = false; 
             unitSpriteList.Add(galaxy);
             //unitQueue.Enqueue(unitGameObject);
         }
@@ -153,8 +178,10 @@ public class Factory : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
 		{
-            if (hitInfo.collider.name.Contains("Building_Factory_Blue") && Input.GetMouseButtonDown(0))
+            if (hitInfo.collider.name == gameObject.name && Input.GetMouseButtonDown(0))
 			{
+                isSelected = true;
+                Debug.Log("roo3");
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);
 			}
@@ -164,8 +191,10 @@ public class Factory : MonoBehaviour
             {
                 if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(1))
                 {
+                    Debug.Log("roo4");
                     clickedBuilding = false;
                     factoryPanel.SetActive(false);
+                    isSelected = false;
                 }
             }
 		}
