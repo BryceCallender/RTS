@@ -12,7 +12,8 @@ public class Harvester : MonoBehaviour
     public int cost = 5;
     public int capacity = 1;
 
-    public GameObject[] buildableBuildings;
+    public List<GameObject> buildableBuildings;
+    private GameObject buildingToBuild;
     public Button factoryButton;
     public Button supplyButton;
 
@@ -22,6 +23,7 @@ public class Harvester : MonoBehaviour
     public Slider healthBar;
 
     static GameController gameController;
+    static BuildingPlacement buildingPlacement;
 
     private NavMeshAgent agent;
     private float harvestTime = 2.0f;
@@ -45,9 +47,18 @@ public class Harvester : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         resources = FindObjectsOfType<Resource>();
+        //buildableBuildings = new List<GameObject>();
+
         gameController = FindObjectOfType<GameController>();
+        buildingPlacement = FindObjectOfType<BuildingPlacement>();
+
         unitSelected = GetComponent<UnitSelected>();
+
         agent.stoppingDistance = 3;
+
+        factoryButton.onClick.AddListener(BuildFactory);
+        supplyButton.onClick.AddListener(BuildSupply);
+
         healthBar.gameObject.SetActive(false);
         healthBar.maxValue = health;
         healthBar.value = health;
@@ -238,13 +249,36 @@ public class Harvester : MonoBehaviour
         }
     }
 
-    public void BuidlingToBuild(GameObject building)
+    private void BuildFactory()
     {
-        if(unitSelected.selected)
-        {
-            
-        }
-        Debug.Log(building.name);
+        buildingPlacement.SetBuilding(buildableBuildings.Find(x => x.gameObject.name.Contains("Factory")));
+        ResetBuildingPlacement();
+        Debug.Log("Building Factory");
     }
+
+    private void BuildSupply()
+    {
+        buildingPlacement.SetBuilding(buildableBuildings.Find(x => x.gameObject.name.Contains("Supply")));
+        ResetBuildingPlacement();
+        Debug.Log("Building Supply");
+    }
+
+    private GameObject FindBuilding(string buildingName)
+    {
+        GameObject building;
+        building = buildableBuildings.Find(x => x.gameObject.name.Contains(buildingName));
+        if(building == null)
+        {
+            return null;
+        }
+        return building;
+    }
+
+    private void ResetBuildingPlacement()
+    {
+        buildingPlacement.hasPlaced = false;
+        //buildingPlacement.collisions.Clear();
+    }
+
 
 }

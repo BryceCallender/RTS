@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class Factory : MonoBehaviour
 {
-    //TODO: make it so the button click is not hardcoded into the inspector 
-    //allow it to be coded in here possibly
     public int health;
     private int team = 0;
     private GameObject unitGameObject;
@@ -96,7 +94,7 @@ public class Factory : MonoBehaviour
         {
 			//Dont show the animation since we have none in queue
             unitSpawnSlider.gameObject.SetActive(false);
-        }
+        }    
 
     }
 
@@ -104,16 +102,19 @@ public class Factory : MonoBehaviour
     {
         if(isSelected)
         {
-            //What da frick is this but it works?!?!?!
             SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Tank")));
             if (gameController.currency >= unitGameObject.GetComponent<Tank>().cost)
             {
                 unitQueue.Enqueue(unitGameObject);
                 gameController.currency -= unitGameObject.GetComponent<Tank>().cost;
                 Debug.Log(unitQueue.Count);
-            } 
+            }
+            else
+            {
+                //Sets the error message
+                gameController.mineralErrorText.gameObject.SetActive(true);
+            }
         }
-
     }
 
     public void AddGalaxyToQueue()
@@ -126,6 +127,11 @@ public class Factory : MonoBehaviour
                 unitQueue.Enqueue(unitGameObject);
                 gameController.currency -= unitGameObject.GetComponent<Galaxy>().cost;
                 Debug.Log(unitQueue.Count);
+            }
+            else
+            {
+                //Sets the error message
+                gameController.mineralErrorText.gameObject.SetActive(true);
             }
         }
     }
@@ -181,7 +187,7 @@ public class Factory : MonoBehaviour
             if (hitInfo.collider.name == gameObject.name && Input.GetMouseButtonDown(0))
 			{
                 isSelected = true;
-                Debug.Log("roo3");
+                //Debug.Log("roo3");
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);
 			}
@@ -191,7 +197,7 @@ public class Factory : MonoBehaviour
             {
                 if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(1))
                 {
-                    Debug.Log("roo4");
+                    //Debug.Log("roo4");
                     clickedBuilding = false;
                     factoryPanel.SetActive(false);
                     isSelected = false;
@@ -236,6 +242,4 @@ public class Factory : MonoBehaviour
             }
         }
     }
-
-
 }

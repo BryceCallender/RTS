@@ -6,6 +6,7 @@ public class SupplyBuilding : MonoBehaviour
 {
     public int health;
     private int team = 0;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -46,6 +47,7 @@ public class SupplyBuilding : MonoBehaviour
             {
                 TakeDamage(10);
             }
+
         }
     }
 }
