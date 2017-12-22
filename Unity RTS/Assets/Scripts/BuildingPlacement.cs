@@ -30,15 +30,6 @@ public class BuildingPlacement : MonoBehaviour
             if(!IsValidSpot())
             {
                 gameController.buildingErrorText.gameObject.SetActive(true);
-                gameController.FadeAlpha(gameController.colorFadeTime,
-                                         ref gameController.buildingErrorText,
-                                         ref gameController.buildingErrorColor);
-                if(gameController.IsZeroAlpha(gameController.buildingErrorColor))
-                {
-                    gameController.SetAlphaBack(ref gameController.buildingErrorText,
-                                                ref gameController.buildingErrorColor);
-                }
-
             }
         }
 

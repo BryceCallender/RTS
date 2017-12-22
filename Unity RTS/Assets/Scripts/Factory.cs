@@ -187,7 +187,6 @@ public class Factory : MonoBehaviour
             if (hitInfo.collider.name == gameObject.name && Input.GetMouseButtonDown(0))
 			{
                 isSelected = true;
-                //Debug.Log("roo3");
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);
 			}
@@ -197,7 +196,6 @@ public class Factory : MonoBehaviour
             {
                 if (!EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(1))
                 {
-                    //Debug.Log("roo4");
                     clickedBuilding = false;
                     factoryPanel.SetActive(false);
                     isSelected = false;

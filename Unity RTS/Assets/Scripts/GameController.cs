@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
     {
         timeText.text =  Time.realtimeSinceStartup.ToString();
         resourcePanel.text = "Resource:" + currency;
+
         if(mineralErrorText.gameObject.activeSelf)
         {
             FadeAlpha(colorFadeTime, ref mineralErrorText, ref mineralErrorColor);
@@ -42,6 +43,16 @@ public class GameController : MonoBehaviour
         {
             SetAlphaBack(ref mineralErrorText,ref mineralErrorColor);
         }
+
+        if(buildingErrorText.gameObject.activeSelf)
+        {
+            FadeAlpha(colorFadeTime, ref buildingErrorText, ref buildingErrorColor);
+        }
+        if(IsZeroAlpha(buildingErrorColor))
+        {
+            SetAlphaBack(ref buildingErrorText, ref buildingErrorColor);
+        }
+
     }
 
     public void FadeAlpha(float fadeTime,ref Text errorText, ref Color errorColor)
