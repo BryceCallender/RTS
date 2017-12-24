@@ -10,35 +10,28 @@ public class HarvesterAI : MonoBehaviour
 
     public Resource[] resources;
     public Resource nearestResource;
-    public Transform resourceCollector;
+    public List<Resource> resourceList;
 
-    public bool isTargetingResource = false;
-    public bool isFull = false;
-    public bool isTurnedIn = false;
-    public bool isResourceGone = false;
-    public bool foundResource = true;
-
-    Animator anim;
-
-    public float timer = 0;
-    public float timeToWait = 1.0f;
-
-    public float harvestTime = 2.0f;
-    public float harvestCoolDown = 3.0f;
-    public int harvestAmount = 10;
+    public Animator anim;
 
 	// Use this for initialization
 	void Start () 
     {
         anim = GetComponent<Animator>();
-        resources = FindObjectsOfType<Resource>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
+        //TODO::fix this. This is gross making new lists everytime maybe dont 
+        //need it since all resources will be laid out in game??? if so 
+        //place back in start and no more worrying.
+        resources = FindObjectsOfType<Resource>();
+        resourceList = new List<Resource>(resources);
+
         FindResource();
-        anim.SetBool("foundResource",true);
+        if(resourceList.Count > 0)
+            anim.SetBool("foundResource",true);
 	}
 
     public void FindResource()
@@ -48,6 +41,7 @@ public class HarvesterAI : MonoBehaviour
         foreach(Resource resource in resources)
         {
             if(resource != null)             {                 float resourceDistance = Vector3.Distance(this.transform.position, resource.transform.position);                 if (nearestResource == null || resourceDistance < distance)
-                {                     nearestResource = resource;                     distance = resourceDistance;                 }             }         }          if (nearestResource == null)         {             return;          }  
+                {                     nearestResource = resource;                     distance = resourceDistance;                 }             }         }          if (nearestResource == null)
+            return;
         }
 }
