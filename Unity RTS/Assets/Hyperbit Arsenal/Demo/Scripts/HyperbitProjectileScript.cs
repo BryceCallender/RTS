@@ -13,6 +13,10 @@ public class HyperbitProjectileScript : MonoBehaviour
     public int team;
     public int speed = 30;
     private bool hasCollided = false;
+
+
+    private float timeToKill = 5.0f;
+    private float timerToKill = 0;
  
     void Start()
     {
@@ -27,49 +31,69 @@ public class HyperbitProjectileScript : MonoBehaviour
 
     void OnCollisionEnter(Collision hit)
     {
-        //if (hit.gameObject.tag == "Enemy")
-        //{
-        //Debug.Log("Hit " + hit.collider.gameObject.name + " with layer " + hit.collider.gameObject.layer);
+        int hitObjectTeam = 0;
+        int hitObjectTeamLayer = hit.gameObject.layer;
+        switch(hitObjectTeamLayer)
+        {
+            case 8: hitObjectTeam = 0;
+                break;
+            case 9: hitObjectTeam = 1;
+                break;
+        }
+
         if (owner != hit.gameObject.name)
         {
-            if (!hasCollided)
+            if(hitObjectTeam != team)
             {
-                //Debug.Log("Killed by " + hit.collider.gameObject.name);
-                //Debug.Log(hit.gameObject.name);
-                hasCollided = true;
-                //transform.DetachChildren();
-                impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
-                //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);
-
-                //if (hit.gameObject.tag == "Destructible") // Projectile will destroy objects tagged as Destructible
-                //{
-                //  Destroy(hit.gameObject);
-                //}
-
-                //yield WaitForSeconds (0.05);
-                foreach (GameObject trail in trailParticles)
+                if (!hasCollided)
                 {
-                    GameObject curTrail = transform.Find(projectileParticle.name + "/" + trail.name).gameObject;
-                    curTrail.transform.parent = null;
-                    Destroy(curTrail, 3f);
-                }
-                Destroy(projectileParticle, 1f);
-                Destroy(impactParticle, 1f);
-                Destroy(gameObject);
-                //projectileParticle.Stop();
+                    //Debug.Log("Killed by " + hit.collider.gameObject.name);
+                    //Debug.Log(hit.gameObject.name);
+                    hasCollided = true;
+                    //transform.DetachChildren();
+                    impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+                    //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);
 
-                ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
-                //Component at [0] is that of the parent i.e. this object (if there is any)
-                for (int i = 1; i < trails.Length; i++)
-                {
-                    ParticleSystem trail = trails[i];
-                    if (!trail.gameObject.name.Contains("Trail"))
-                        continue;
+                    //if (hit.gameObject.tag == "Destructible") // Projectile will destroy objects tagged as Destructible
+                    //{
+                    //  Destroy(hit.gameObject);
+                    //}
 
-                    trail.transform.SetParent(null);
-                    Destroy(trail.gameObject, 2);
-                }
+                    //yield WaitForSeconds (0.05);
+                    foreach (GameObject trail in trailParticles)
+                    {
+                        GameObject curTrail = transform.Find(projectileParticle.name + "/" + trail.name).gameObject;
+                        curTrail.transform.parent = null;
+                        Destroy(curTrail, 3f);
+                    }
+                    Destroy(projectileParticle, 1f);
+                    Destroy(impactParticle, 1f);
+                    Destroy(gameObject);
+                    //projectileParticle.Stop();
+
+                    ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
+                    //Component at [0] is that of the parent i.e. this object (if there is any)
+                    for (int i = 1; i < trails.Length; i++)
+                    {
+                        ParticleSystem trail = trails[i];
+                        if (!trail.gameObject.name.Contains("Trail"))
+                            continue;
+
+                        trail.transform.SetParent(null);
+                        Destroy(trail.gameObject, 2);
+                    }
+                } 
             }
+        }
+    }
+
+    public void Update()
+    {
+        timerToKill += Time.deltaTime;
+        if(timerToKill >= timeToKill)
+        {
+            Destroy(gameObject);
+            timeToKill = 0;
         }
     }
 }

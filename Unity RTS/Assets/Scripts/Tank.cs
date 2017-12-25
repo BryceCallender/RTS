@@ -37,6 +37,8 @@ public class Tank : UnitStats
     public Slider healthBar;
     public Canvas canvas;
 
+    public HyperbitProjectileScript hyperProjectileScript;
+
 
     private void Start()
     {
@@ -139,21 +141,24 @@ public class Tank : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+        if(hyperProjectileScript.team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(8,10);
-            //Debug.Log("Same team bro");
+            return;
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
-            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        if (!hyperProjectileScript.owner.Contains("Blue")
+            && !hyperProjectileScript.team.Equals(team))
         {
             //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            if (collision.gameObject.tag.Contains("Laser") 
+                && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);
             }
-            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            else if (collision.gameObject.tag.Contains("Cluster") 
+                     && collision.gameObject.layer == 10)
             {
                 TakeDamage(10);
             }

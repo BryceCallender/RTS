@@ -31,6 +31,9 @@ public class Enemy : UnitStats
     private Quaternion keepUIAbove;
     public Canvas canvas;
 
+    public HyperbitProjectileScript hyperProjectileScript;
+
+
 	// Use this for initialization
 	void Start() 
     {
@@ -149,20 +152,24 @@ public class Enemy : UnitStats
     //When something enters the collider take damage to the unit!
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+        if (hyperProjectileScript.team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(9, 10);
+            return;
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Red")
-            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        if (!hyperProjectileScript.owner.Contains("Red")
+            && !hyperProjectileScript.team.Equals(team))
         {
             //Physics.IgnoreLayerCollision(8, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            if (collision.gameObject.tag.Contains("Laser") 
+                && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);
             }
-            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            else if (collision.gameObject.tag.Contains("Cluster")
+                     && collision.gameObject.layer == 10)
             {
                 TakeDamage(10);
             }

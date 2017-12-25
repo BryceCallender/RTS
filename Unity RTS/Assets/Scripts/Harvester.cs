@@ -11,6 +11,7 @@ public class Harvester : MonoBehaviour
     public int maxResourceToCollect = 100;
     public int cost = 5;
     public int capacity = 1;
+    public int team = 0;
 
     public List<GameObject> buildableBuildings;
     private GameObject buildingToBuild;
@@ -41,6 +42,8 @@ public class Harvester : MonoBehaviour
 
     private RaycastHit hitInfo;
     private UnitSelected unitSelected;
+
+    public HyperbitProjectileScript hyperProjectileScript;
 
 
     private void Start()
@@ -239,13 +242,27 @@ public class Harvester : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+        if (hyperProjectileScript.team.Equals(team))
         {
-            TakeDamage(5);
+            return;
         }
-        else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+
+        if (!hyperProjectileScript.owner.Contains("Blue")
+            && !hyperProjectileScript.team.Equals(team))
         {
-            TakeDamage(10);
+            //Physics.IgnoreLayerCollision(9, 10, false);
+            if (collision.gameObject.tag.Contains("Laser")
+                && collision.gameObject.layer == 10)
+            {
+                TakeDamage(5);
+            }
+            else if (collision.gameObject.tag.Contains("Cluster")
+                     && collision.gameObject.layer == 10)
+            {
+                TakeDamage(10);
+            }
         }
     }
 

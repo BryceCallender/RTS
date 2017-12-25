@@ -35,6 +35,8 @@ public class Galaxy : UnitStats
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
 
+    public HyperbitProjectileScript hyperProjectileScript;
+
     private void Start()
     {
         health = 150;
@@ -168,20 +170,24 @@ public class Galaxy : UnitStats
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+        if (hyperProjectileScript.team.Equals(team))
         {
-        //    Physics.IgnoreLayerCollision(8, 10);
+            return;
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Equals(gameObject.name)
-            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        if (!hyperProjectileScript.owner.Contains("Blue")
+            && !hyperProjectileScript.team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(8, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            //Physics.IgnoreLayerCollision(9, 10, false);
+            if (collision.gameObject.tag.Contains("Laser")
+                && collision.gameObject.layer == 10)
             {
                 TakeDamage(5);
             }
-            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            else if (collision.gameObject.tag.Contains("Cluster")
+                     && collision.gameObject.layer == 10)
             {
                 TakeDamage(10);
             }

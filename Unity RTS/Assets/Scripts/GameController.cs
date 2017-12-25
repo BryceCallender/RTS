@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour 
 {
     public int currency;
     public Text resourcePanel;
-    public Text timeText;
+    public TextMeshProUGUI timeText;
 
     //Minerals
     public Text mineralErrorText;
@@ -28,11 +29,12 @@ public class GameController : MonoBehaviour
         mineralErrorColor = mineralErrorText.color;
         gasErrorColor = mineralErrorColor;
         buildingErrorColor = mineralErrorColor;
+        timeText = FindObjectOfType<TextMeshProUGUI>().GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
-        timeText.text =  Time.realtimeSinceStartup.ToString();
+        timeText.SetText(Time.realtimeSinceStartup.ToString());
         resourcePanel.text = "Resource:" + currency;
 
         if(mineralErrorText.gameObject.activeSelf)
