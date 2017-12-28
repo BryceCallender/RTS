@@ -2,8 +2,6 @@
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/Assembly-CSharp-firstpass.pdb
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/nunit.framework.dll
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/Pathfinding.Ionic.Zip.Reduced.dll
-/Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/RAIN.dll
-/Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/RAINMetaform.dll
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/UnityEditor.dll
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/UnityEngine.Analytics.dll
 /Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/UnityEngine.dll
@@ -54,3 +52,5 @@
 /Users/brycecallender/Desktop/RTS/Unity RTS/obj/Debug/Assembly-CSharp-firstpass.csproj.CoreCompileInputs.cache
 /Users/brycecallender/Desktop/RTS/Unity RTS/obj/Debug/Assembly-CSharp-firstpass.dll
 /Users/brycecallender/Desktop/RTS/Unity RTS/obj/Debug/Assembly-CSharp-firstpass.pdb
+/Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/TextMeshPro-2017.2-1.0.56-Editor.dll
+/Users/brycecallender/Desktop/RTS/Unity RTS/Temp/bin/Debug/TextMeshPro-2017.2-1.0.56-Runtime.dll

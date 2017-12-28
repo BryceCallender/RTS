@@ -11,7 +11,7 @@ public class HyperbitProjectileScript : MonoBehaviour
     public Vector3 impactNormal; //Used to rotate impactparticle.
     public string owner;
     public int team;
-    public int speed = 30;
+    public int speed = 250;
     private bool hasCollided = false;
 
 
@@ -93,7 +93,7 @@ public class HyperbitProjectileScript : MonoBehaviour
         if(timerToKill >= timeToKill)
         {
             Destroy(gameObject);
-            timeToKill = 0;
+            timerToKill = 0;
         }
     }
 }
