@@ -19,7 +19,6 @@ public class Tank : UnitStats
 
     //Bullets and enemies
     public GameObject bulletPrefab;
-    public GameObject[] enemies;
     public GameObject nearestEnemy;
     private GameObject projectile;
 

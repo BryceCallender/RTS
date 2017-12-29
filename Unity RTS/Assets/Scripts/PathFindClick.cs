@@ -21,16 +21,6 @@ public class PathFindClick : MonoBehaviour
 
     public void LateUpdate()
     {
-
-        //      if ((this.transform.position - targetPosition).sqrMagnitude < Mathf.Pow(agent.stoppingDistance, 2))
-        //{
-        //	// If the agent is in attack range, become an obstacle and
-        //	// disable the NavMeshAgent component
-        //	obstacle.enabled = true;
-        //          agent.enabled = false;
-        //}
-        //else
-        //{
         if(this.GetComponent<UnitSelected>().selected)
         {
 			// If we are not in range, become an agent again
@@ -48,7 +38,5 @@ public class PathFindClick : MonoBehaviour
 				}
 			}
         }
-			
-		//}
     }
 }
