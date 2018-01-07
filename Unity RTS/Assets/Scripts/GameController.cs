@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour
 
     public float colorFadeTime = 0.5f;
 
+	public bool hitEscape;
+
     private void Start()
     {
         mineralErrorColor = mineralErrorText.color;
@@ -34,6 +36,16 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+		if(PressedEscape())
+		{
+			PauseGame();
+		}
+
+		//if(HitEscapeAgain())
+		//{
+		//	UnPauseGame();
+		//}
+
         timeText.SetText(Time.realtimeSinceStartup.ToString());
         resourcePanel.text = "Resource:" + currency;
 
@@ -87,5 +99,50 @@ public class GameController : MonoBehaviour
         errorText.color = errorColor;
         colorFadeTime = 0.5f;
     }
+
+	public bool PressedEscape()
+	{
+		if(Input.GetKey(KeyCode.Escape))
+		{
+			hitEscape = true;
+		}
+		else
+		{
+			hitEscape = false;
+		}
+		return hitEscape;
+	}
+
+	public bool HitEscapeAgain()
+	{
+		if (hitEscape)
+		{
+			if (Input.GetKey(KeyCode.Escape))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	 
+	public void PauseGame()
+	{
+		if(hitEscape)
+		{
+			Time.timeScale = 0f;
+		}
+	}
+
+	public void UnPauseGame()
+	{
+		if (HitEscapeAgain())
+		{
+			Time.timeScale = 1f;
+		}
+	}
+
+
+
+
 
 }

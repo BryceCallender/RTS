@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(GameController))]
 public class Factory : MonoBehaviour
 {
     public int health;
@@ -42,6 +43,7 @@ public class Factory : MonoBehaviour
     private Transform rallyLocation;
     private bool isTank;
     private bool isSelected;
+	private UIManager uiManager;
 
     [SerializeField]
     private Button tankButton;
@@ -54,6 +56,7 @@ public class Factory : MonoBehaviour
         health = 300;
         isSelected = false;
         gameController = FindObjectOfType<GameController>();
+		uiManager = gameController.GetComponent<UIManager>();
         unitQueue = new Queue<GameObject>();
         nextInQueue = new List<GameObject>();
         unitSpriteList = new List<Sprite>();
@@ -189,6 +192,7 @@ public class Factory : MonoBehaviour
                 isSelected = true;
 				clickedBuilding = true;
                 factoryPanel.SetActive(true);
+				uiManager.SetAllOffBut(factoryPanel);
 			}
             //If panel is on then lets conisder if they want to have ui go away 
             //if we click away

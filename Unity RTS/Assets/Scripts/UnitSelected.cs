@@ -8,6 +8,7 @@ public class UnitSelected : MonoBehaviour
     public int health;
     public bool selected;
     public bool added;
+	public bool isFirst;
     public Mouse mouse;
 
     private new Renderer renderer;
@@ -70,5 +71,7 @@ public class UnitSelected : MonoBehaviour
                 }
             }	
         }
+
+		isFirst = mouse.IsFirstInList(this.gameObject);
     }
 }

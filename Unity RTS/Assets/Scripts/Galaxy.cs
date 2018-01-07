@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Galaxy : UnitStats 
+public class Galaxy : UnitStats, IImageable
 {
 	public int damage = 10;
-	public int health = 150;
+	public float health = 150;
 	public int range = 10;
     public int cost = 20;
     public int capacity = 10;
@@ -28,7 +28,8 @@ public class Galaxy : UnitStats
 	private RaycastHit hitInfo;
 	private Vector3 direction;
     private ParticleSystem thruster;
-    private Vector3 position;
+	private UnitSelected unitSelected;
+	private Vector3 position;
     private NavMeshAgent agent;
     private int team = 0;
 
@@ -49,7 +50,8 @@ public class Galaxy : UnitStats
         healthBar.value = health;
         thruster.Stop();
         agent = GetComponent<NavMeshAgent>();
-    }
+		unitSelected = GetComponent<UnitSelected>();
+	}
 
     private void Update()
     {
@@ -63,11 +65,16 @@ public class Galaxy : UnitStats
         {
             DeActivateThrusters();
         }
-    }
+
+		if (unitSelected.isFirst)
+		{
+			ShowImage();
+		}
+	}
 
     public override void Fire()
     {
-        if (this.gameObject.GetComponent<UnitSelected>().selected || enemyHasBeenSelected)
+        if (unitSelected.selected || enemyHasBeenSelected)
         {
             LockOn();
             enemyHasBeenSelected = true;
@@ -140,7 +147,7 @@ public class Galaxy : UnitStats
         Destroy(gameObject);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         healthBar.gameObject.SetActive(true);
         health -= damage;
@@ -168,7 +175,12 @@ public class Galaxy : UnitStats
         return random;
     }
 
-    private void OnCollisionEnter(Collision collision)
+	public void ShowImage()
+	{
+		UIManager.Instance.SetPhoto(this.gameObject.name);
+	}
+
+	private void OnCollisionEnter(Collision collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

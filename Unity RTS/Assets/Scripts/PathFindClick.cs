@@ -29,7 +29,7 @@ public class PathFindClick : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
 			{
-				if (Input.GetMouseButtonDown(1) && Mouse.IsDragging  == false)
+				if (Input.GetMouseButtonDown(1) && Mouse.IsDragging  == false && hitInfo.collider.gameObject.layer != 9)
 				{
 					targetPosition = hitInfo.point;
 					//transform.LookAt(targetPosition);

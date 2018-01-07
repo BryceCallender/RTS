@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Tank : UnitStats
+public class Tank : UnitStats, IImageable
 {
     public int damage = 5;
-    public int health = 100;
+    public float health = 100;
     public int range = 10;
     public int cost = 10;
     public int capacity = 5;
@@ -60,6 +60,11 @@ public class Tank : UnitStats
             healthBar.gameObject.SetActive(true);
         }
         Fire();
+
+		if(unitSelected.isFirst)
+		{
+			ShowImage();
+		}
     }
 
     public override void Die()
@@ -96,7 +101,7 @@ public class Tank : UnitStats
         }
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         healthBar.gameObject.SetActive(true);
         health -= damage;
@@ -138,6 +143,11 @@ public class Tank : UnitStats
 			}
 		}	
     }
+
+	public void ShowImage()
+	{
+		UIManager.Instance.SetPhoto(this.gameObject.name);
+	}
 
     private void OnCollisionEnter(Collision collision)
     {

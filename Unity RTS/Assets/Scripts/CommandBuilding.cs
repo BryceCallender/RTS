@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(GameController))]
 public class CommandBuilding : MonoBehaviour 
 {
-    public int health;
+	#region variables
+	public int health;
     private int team = 0;
     public Text commandBuildText;
     public Text amountText;
@@ -26,12 +28,15 @@ public class CommandBuilding : MonoBehaviour
     private RaycastHit hitInfo;
     private bool clickedBuilding;
     private Transform rallyLocation;
+	private UIManager uiManager;
+	#endregion
 
 	// Use this for initialization
 	void Start () 
     {
         health = 1000;
         gameController = FindObjectOfType<GameController>();
+		uiManager = gameController.GetComponent<UIManager>();
         //commandBuildText = GameObject.Find("HarvesterStats").GetComponent<Text>();
         commandBuildText.text = "Harvester Cost: 10 resources";
         harvesterSpawn = GameObject.Find("HarvesterSpawner");
@@ -84,7 +89,8 @@ public class CommandBuilding : MonoBehaviour
             {
                 clickedBuilding = true;
                 harvesterPanel.SetActive(true);
-            }
+				uiManager.SetAllOffBut(harvesterPanel);
+			}
             //If panel is on then lets conisder if they want to have ui go away 
             //if we click away
             if(harvesterPanel.activeSelf)
@@ -111,6 +117,10 @@ public class CommandBuilding : MonoBehaviour
             Debug.Log(harvesterQueue.Count);
             amountText.text = "x" + harvesterQueue.Count;
         }
+		else
+		{
+			gameController.mineralErrorText.gameObject.SetActive(true);
+		}
     }
 
     /*
@@ -165,8 +175,7 @@ public class CommandBuilding : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(8, 10);
-            //Debug.Log("Same team bro");
+			return;
         }
 
         if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")

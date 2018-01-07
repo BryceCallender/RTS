@@ -14,11 +14,15 @@ public class HyperbitProjectileScript : MonoBehaviour
     public int speed = 250;
     private bool hasCollided = false;
 
+	private SphereCollider sphereCollider;
+	private Rigidbody rb;
 
     private float timeToKill = 5.0f;
     private float timerToKill = 0;
- 
-    void Start()
+
+	private int hitObjectTeam = 0;
+
+	void Start()
     {
         projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
         projectileParticle.transform.parent = transform;
@@ -27,25 +31,27 @@ public class HyperbitProjectileScript : MonoBehaviour
             muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
             Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
 		}
-    }
+
+		sphereCollider = GetComponent<SphereCollider>();
+		rb = GetComponent<Rigidbody>();
+	}
 
     void OnCollisionEnter(Collision hit)
     {
-        int hitObjectTeam = 0;
-        int hitObjectTeamLayer = hit.gameObject.layer;
-        switch(hitObjectTeamLayer)
-        {
-            case 8: hitObjectTeam = 0;
-                break;
-            case 9: hitObjectTeam = 1;
-                break;
-        }
+		if(hit.gameObject.name.Contains("Blue"))
+		{
+			hitObjectTeam = 0;
+		}
+		else
+		{
+			hitObjectTeam = 1;
+		}
 
         if (owner != hit.gameObject.name)
         {
             if(hitObjectTeam != team)
             {
-                if (!hasCollided)
+				if (!hasCollided)
                 {
                     //Debug.Log("Killed by " + hit.collider.gameObject.name);
                     //Debug.Log(hit.gameObject.name);
@@ -84,10 +90,30 @@ public class HyperbitProjectileScript : MonoBehaviour
                     }
                 } 
             }
+			else
+			{
+				//IgnoreHit(hitObjectTeam);
+			}
         }
     }
 
-    public void Update()
+	void OnCollisionExt(Collision hit)
+	{
+		int hitObjectTeamLayer = hit.gameObject.layer;
+		switch (hitObjectTeamLayer)
+		{
+			case 8:
+				hitObjectTeam = 0;
+				break;
+			case 9:
+			hitObjectTeam = 1;
+				break;
+		}
+
+		DontIgnoreHit(hitObjectTeam);
+	}
+
+	public void Update()
     {
         timerToKill += Time.deltaTime;
         if(timerToKill >= timeToKill)
@@ -96,4 +122,40 @@ public class HyperbitProjectileScript : MonoBehaviour
             timerToKill = 0;
         }
     }
+
+	public void TurnOffCollisions(Rigidbody rigidBody, SphereCollider sphereCol)
+	{
+		rigidBody.detectCollisions = false;
+		sphereCol.enabled = false;
+	}
+
+	public void TurnOnCollisions(Rigidbody rigidBody, SphereCollider sphereCol)
+	{
+		rigidBody.detectCollisions = true;
+		sphereCol.enabled = true;
+	}
+
+	public void IgnoreHit(int team)
+	{
+		if(team == 0)
+		{
+			Physics.IgnoreLayerCollision(8, 10,true);
+		}
+		else
+		{
+			Physics.IgnoreLayerCollision(9, 10,true);
+		}
+	}
+
+	public void DontIgnoreHit(int team)
+	{
+		if (team == 0)
+		{
+			Physics.IgnoreLayerCollision(9, 10, false);
+		}
+		else
+		{
+			Physics.IgnoreLayerCollision(8, 10, false);
+		}
+	}
 }

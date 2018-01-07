@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Harvester : MonoBehaviour
+public class Harvester : MonoBehaviour, IImageable
 {
     public int health = 100;
     public int resourceAmount = 0;
@@ -15,6 +15,7 @@ public class Harvester : MonoBehaviour
 
     public List<GameObject> buildableBuildings;
     private GameObject buildingToBuild;
+	public GameObject harvesterPanel;
     public Button factoryButton;
     public Button supplyButton;
 
@@ -44,13 +45,15 @@ public class Harvester : MonoBehaviour
     private UnitSelected unitSelected;
 
     public HyperbitProjectileScript hyperProjectileScript;
+	public UIManager uiManager;
 
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         resources = FindObjectsOfType<Resource>();
-        //buildableBuildings = new List<GameObject>();
+		uiManager = GameObject.FindObjectOfType<UIManager>();
+
 
         gameController = FindObjectOfType<GameController>();
         buildingPlacement = FindObjectOfType<BuildingPlacement>();
@@ -75,6 +78,8 @@ public class Harvester : MonoBehaviour
     private void Update()
     {
         FindResource();
+
+		//We have found a resource
         if(nearestResource != null)
         {
             Ray ray2 = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -112,6 +117,7 @@ public class Harvester : MonoBehaviour
 			}
 
         }
+		//Need to find a resource
         else
         {
             //raycast to check where user clicked mouse
@@ -142,7 +148,23 @@ public class Harvester : MonoBehaviour
                 }
             }
         }
-    }
+
+		if (unitSelected.isFirst)
+		{
+			ShowImage();
+		}
+
+		//If its selected wont let u open anything else
+		//if(unitSelected.selected)
+		//{
+		//	harvesterPanel.SetActive(true);
+		//	uiManager.SetAllOffBut(harvesterPanel);
+		//}
+		//else
+		//{
+		//	harvesterPanel.SetActive(false);
+		//}
+	}
 
     /*
      * This function makes the harvester wait a bit to collect each resource 
@@ -240,7 +262,12 @@ public class Harvester : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+	public void ShowImage()
+	{
+		UIManager.Instance.SetPhoto(this.gameObject.name);
+	}
+
+	private void OnCollisionEnter(Collision collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

@@ -27,7 +27,7 @@ public class Attacking : StateMachineBehaviour
         if(turret.targets.Count > 0)
         {
             if(enemy != null)
-            {
+            { 
                 LockOn();
                 Fire(animator);
             }
@@ -38,13 +38,43 @@ public class Attacking : StateMachineBehaviour
         {
             if(enemy == null)
             {
-                turret.targets.RemoveAt(0);
-                if(turret.targets.Count > 0)
-                    enemy = turret.targets[0];
+				enemy = ResetTarget();
             }
 
             turret.turretRotator.rotation = Quaternion.Lerp(Quaternion.Euler(direction), animator.gameObject.GetComponent<Transform>().rotation, 1.0f);
         }
+
+		//TODO::fix
+		if(turret.targets.Count > 0)
+		{
+			if (Vector3.Distance(animator.transform.position, enemy.transform.position) > turret.range)
+			{
+				enemy = ResetTarget();
+			}
+		}
+		
+	}
+
+	private GameObject ResetTarget()
+	{
+		GameObject newTarget = null;
+
+		if(turret.targets.Count == 0)
+		{
+			return newTarget;
+		}
+
+		if(turret.targets.Count > 1)
+		{
+			turret.targets.Remove(enemy);
+			newTarget = turret.targets[0];
+		}
+		else
+		{
+			turret.targets.Remove(enemy);
+		}
+
+		return newTarget;
 	}
 
     public void LockOn()
