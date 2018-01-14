@@ -81,7 +81,7 @@ public class HarvesterAI : MonoBehaviour
 		}
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
 	{
 		hyperbitProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

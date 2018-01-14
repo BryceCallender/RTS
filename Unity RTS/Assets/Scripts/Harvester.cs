@@ -15,7 +15,7 @@ public class Harvester : MonoBehaviour, IImageable
 
     public List<GameObject> buildableBuildings;
     private GameObject buildingToBuild;
-	public GameObject harvesterPanel;
+	//public GameObject harvesterPanel;
     public Button factoryButton;
     public Button supplyButton;
 
@@ -50,7 +50,7 @@ public class Harvester : MonoBehaviour, IImageable
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+		agent = GetComponent<NavMeshAgent>();
         resources = FindObjectsOfType<Resource>();
 		uiManager = GameObject.FindObjectOfType<UIManager>();
 
@@ -151,7 +151,13 @@ public class Harvester : MonoBehaviour, IImageable
 
 		if (unitSelected.isFirst)
 		{
+			//harvesterPanel.gameObject.SetActive(true);
+			//uiManager.SetAllOffBut(harvesterPanel);
 			ShowImage();
+		}
+		else
+		{
+			//harvesterPanel.gameObject.SetActive(false);
 		}
 
 		//If its selected wont let u open anything else
@@ -267,7 +273,7 @@ public class Harvester : MonoBehaviour, IImageable
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

@@ -86,8 +86,8 @@ public class Tank : UnitStats, IImageable
 				{
 					fireCoolDown = 0.5f;
 					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
-                    projectile.tag = "Laser";
-                    projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
+					projectile.tag = "Laser";
+					projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
                     projectile.GetComponent<HyperbitProjectileScript>().team = team;
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
@@ -149,29 +149,55 @@ public class Tank : UnitStats, IImageable
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 
-        if(hyperProjectileScript.team.Equals(team))
-        {
-            return;
-        }
+    //    if(hyperProjectileScript.team.Equals(team))
+    //    {
+    //        return;
+    //    }
 
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") 
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(5);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster") 
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(10);
-            }
-        }
-    }
+    //    if (!hyperProjectileScript.owner.Contains("Blue")
+    //        && !hyperProjectileScript.team.Equals(team))
+    //    {
+    //        //Physics.IgnoreLayerCollision(9, 10, false);
+    //        if (collision.gameObject.tag.Contains("Laser") 
+    //            && collision.gameObject.layer == 10)
+    //        {
+    //            TakeDamage(5);
+    //        }
+    //        else if (collision.gameObject.tag.Contains("Cluster") 
+    //                 && collision.gameObject.layer == 10)
+    //        {
+    //            TakeDamage(10);
+    //        }
+    //    }
+    //}
+
+	private void OnTriggerEnter(Collider collision)
+	{
+		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+		if (hyperProjectileScript.team.Equals(team))
+		{
+			return;
+		}
+
+		if (!hyperProjectileScript.owner.Contains("Blue")
+			&& !hyperProjectileScript.team.Equals(team))
+		{
+			//Physics.IgnoreLayerCollision(9, 10, false);
+			if (collision.gameObject.tag.Contains("Laser")
+				&& collision.gameObject.layer == 10)
+			{
+				TakeDamage(5);
+			}
+			else if (collision.gameObject.tag.Contains("Cluster")
+					 && collision.gameObject.layer == 10)
+			{
+				TakeDamage(10);
+			}
+		}
+	}
 }

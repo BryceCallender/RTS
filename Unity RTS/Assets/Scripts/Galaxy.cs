@@ -180,7 +180,7 @@ public class Galaxy : UnitStats, IImageable
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

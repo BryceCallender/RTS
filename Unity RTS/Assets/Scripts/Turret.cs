@@ -18,6 +18,7 @@ public class Turret : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+		//Since its turrents the only targets is the units so layers
         layerTeam = this.gameObject.layer;
         switch(layerTeam)
         {
@@ -44,7 +45,7 @@ public class Turret : MonoBehaviour
 
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
 	{
 		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

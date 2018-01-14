@@ -20,12 +20,10 @@ public class EnemyTank : Enemy
 
 	GameObject projectile;
 	private bool enemyHasBeenSelected = false;
-	private int team = 1;
-	public Slider healthBar;
 	private Quaternion keepUIAbove;
 	public Canvas canvas;
 
-	public HyperbitProjectileScript hyperProjectileScript;
+	
 
 	// Use this for initialization
 	void Start ()
@@ -33,31 +31,15 @@ public class EnemyTank : Enemy
 		keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
 		projectile = bulletPrefab;
 		enemies = new List<GameObject>();
-		healthBar.gameObject.SetActive(false);
 		originalTurretPosition = transform.rotation;
 		turrentPosition = transform.Find("turret");
-		healthBar.maxValue = health;
-		healthBar.value = health;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		//LockOn();
-		Fire();
+		//Fire();
 		canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
-	}
-
-	public void TakeDamage(float damage)
-	{
-		healthBar.gameObject.SetActive(true);
-		health -= damage;
-		healthBar.value -= damage;
-		Debug.Log(health);
-		if (health <= 0)
-		{
-			Die();
-		}
 	}
 
 	public void Fire()
@@ -136,7 +118,7 @@ public class EnemyTank : Enemy
 	}
 
 	//When something enters the collider take damage to the unit!
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
 	{
 		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

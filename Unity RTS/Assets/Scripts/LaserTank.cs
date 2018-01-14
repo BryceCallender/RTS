@@ -49,6 +49,7 @@ public class LaserTank : Tank
 		chargeEffect.gameObject.SetActive(false);
         unitSel = GetComponent<UnitSelected>();
         turretPos = this.gameObject.transform.Find("Turret");
+		healthBar.maxValue = health;
 		healthBar.value = health;
 	}
 
@@ -121,6 +122,7 @@ public class LaserTank : Tank
                 enemySelected = false;
                 isFiring = false;
                 isCharged = false;
+				DestroyLaser();
             }
 
             if(!isFiring)
@@ -213,10 +215,22 @@ public class LaserTank : Tank
         }
     }
 
+	public void TakeDamage(float damage)
+	{
+		healthBar.gameObject.SetActive(true);
+		health -= damage;
+		healthBar.value -= damage;
+		if (health <= 0)
+		{
+			DestroyLaser();
+			Die();
+		}
+	}
+
 	public void Die()
 	{
-		Destroy(gameObject);
 		DestroyLaser();
+		Destroy(gameObject);
 	}
 
 	private void DestroyLaser()
@@ -244,7 +258,7 @@ public class LaserTank : Tank
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
-	private void OnCollisionEnter(Collision collision)
+	private void OnTriggerEnter(Collider collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
 

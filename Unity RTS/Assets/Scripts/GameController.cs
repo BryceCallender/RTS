@@ -24,29 +24,36 @@ public class GameController : MonoBehaviour
 
     public float colorFadeTime = 0.5f;
 
-	public bool hitEscape;
+	public static bool hitEscape;
+	public bool isPaused;
+	public GameObject pauseMenuUI;
+
+	private Timer time;
 
     private void Start()
     {
         mineralErrorColor = mineralErrorText.color;
         gasErrorColor = mineralErrorColor;
         buildingErrorColor = mineralErrorColor;
-        timeText = FindObjectOfType<TextMeshProUGUI>().GetComponent<TextMeshProUGUI>();
+        timeText = timeText.GetComponent<TextMeshProUGUI>();
+		time = GetComponent<Timer>();
     }
 
     private void Update()
     {
 		if(PressedEscape())
 		{
-			PauseGame();
+			if(isPaused)
+			{
+				UnPauseGame();
+			}
+			else
+			{
+				PauseGame();
+			}
 		}
 
-		//if(HitEscapeAgain())
-		//{
-		//	UnPauseGame();
-		//}
-
-        timeText.SetText(Time.realtimeSinceStartup.ToString());
+		timeText.SetText(time.DisplayTime());
         resourcePanel.text = "Resource:" + currency;
 
         if(mineralErrorText.gameObject.activeSelf)
@@ -102,7 +109,7 @@ public class GameController : MonoBehaviour
 
 	public bool PressedEscape()
 	{
-		if(Input.GetKey(KeyCode.Escape))
+		if(Input.GetKeyDown(KeyCode.Escape))
 		{
 			hitEscape = true;
 		}
@@ -113,36 +120,17 @@ public class GameController : MonoBehaviour
 		return hitEscape;
 	}
 
-	public bool HitEscapeAgain()
-	{
-		if (hitEscape)
-		{
-			if (Input.GetKey(KeyCode.Escape))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	 
 	public void PauseGame()
 	{
-		if(hitEscape)
-		{
-			Time.timeScale = 0f;
-		}
+		pauseMenuUI.gameObject.SetActive(true);
+		Time.timeScale = 0f;
+		isPaused = true;
 	}
 
 	public void UnPauseGame()
 	{
-		if (HitEscapeAgain())
-		{
-			Time.timeScale = 1f;
-		}
+		pauseMenuUI.gameObject.SetActive(false);
+		isPaused = false;
+		Time.timeScale = 1f;
 	}
-
-
-
-
-
 }
