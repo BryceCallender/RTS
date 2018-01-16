@@ -55,7 +55,6 @@ public class Galaxy : UnitStats, IImageable
 
     private void Update()
     {
-        Fire();
         canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
         if(agent.velocity != Vector3.zero)
         {
@@ -72,7 +71,12 @@ public class Galaxy : UnitStats, IImageable
 		}
 	}
 
-    public override void Fire()
+	private void FixedUpdate()
+	{
+		Fire();
+	}
+
+	public override void Fire()
     {
         if (unitSelected.selected || enemyHasBeenSelected)
         {
@@ -82,6 +86,8 @@ public class Galaxy : UnitStats, IImageable
             {
                 GameObject turretToFire = turrets[RandomizeTurretSelection()];
                 direction = nearestEnemy.transform.position - turretToFire.transform.position;
+				Debug.DrawRay(turretToFire.transform.position, direction, Color.cyan,Mathf.Infinity);
+				Debug.Log(direction.ToString());
                 fireCoolDownLeft -= Time.deltaTime;
                 if (fireCoolDownLeft <= 0 && direction.magnitude <= range)
                 {
@@ -93,7 +99,7 @@ public class Galaxy : UnitStats, IImageable
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
-            }
+			}
             else
             {
                 enemyHasBeenSelected = false;  

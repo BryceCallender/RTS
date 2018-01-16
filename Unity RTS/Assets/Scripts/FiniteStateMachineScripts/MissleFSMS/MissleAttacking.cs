@@ -82,7 +82,7 @@ public class MissleAttacking : StateMachineBehaviour
 	public void LockOn()
 	{
 		direction = enemy.transform.position - turret.gameObject.transform.position;
-		// Debug.DrawRay(turret.turretEnd.position,direction,Color.red,Mathf.Infinity);
+		Debug.DrawRay(turret.turretEnds[0].position,direction,Color.red,Mathf.Infinity);
 
 		if (direction.magnitude <= turret.range)
 		{
@@ -102,7 +102,7 @@ public class MissleAttacking : StateMachineBehaviour
 
 		if (timeToFire >= fireCoolDown && direction.magnitude <= turret.range)
 		{
-			projectile = (GameObject)Instantiate(turret.bullet, turret.turretEnds[turrentNum].transform.position, turret.turretEnds[turrentNum].transform.rotation);
+			projectile = Instantiate(turret.bullet, turret.turretEnds[turrentNum].transform.position, turret.turretEnds[turrentNum].transform.rotation);
 			HideMissle(turrentNum);
 			hasFired = true;
 		}
@@ -115,7 +115,6 @@ public class MissleAttacking : StateMachineBehaviour
 			projectile.GetComponent<HyperbitProjectileScript>().team = turret.team;
 			//projectile.transform.LookAt(nearestEnemy.transform.position);
 			int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
-
 			float rotateAmount = Vector3.Cross(direction,Vector3.forward).y;
 			//projectile.GetComponent<Rigidbody>().angularVelocity = 
 			projectile.GetComponent<Rigidbody>().AddForce(direction * speed);

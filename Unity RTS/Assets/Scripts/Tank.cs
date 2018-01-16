@@ -59,7 +59,6 @@ public class Tank : UnitStats, IImageable
         {
             healthBar.gameObject.SetActive(true);
         }
-        Fire();
 
 		if(unitSelected.isFirst)
 		{
@@ -67,7 +66,12 @@ public class Tank : UnitStats, IImageable
 		}
     }
 
-    public override void Die()
+	private void FixedUpdate()
+	{
+		Fire();
+	}
+
+	public override void Die()
     {
         Destroy(gameObject);
     }
@@ -81,7 +85,7 @@ public class Tank : UnitStats, IImageable
             if(nearestEnemy != null)
             {
 				fireCoolDown -= Time.deltaTime;
-                direction = nearestEnemy.transform.position - this.transform.position;
+                direction = nearestEnemy.transform.position - turretEnd.position;
 				if (fireCoolDown <= 0 && direction.magnitude <= range)
 				{
 					fireCoolDown = 0.5f;

@@ -56,7 +56,6 @@ public class LaserTank : Tank
 	// Update is called once per frame
 	void Update () 
     {
-        Fire();
 		if (unitSel.isFirst)
 		{
 			ShowImage();
@@ -66,7 +65,12 @@ public class LaserTank : Tank
 			DestroyLaser();
 	}
 
-    private void Charge(bool charging)
+	private void FixedUpdate()
+	{
+		Fire();
+	}
+
+	private void Charge(bool charging)
     {
         if(isCharging)
         {

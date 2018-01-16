@@ -38,8 +38,12 @@ public class EnemyTank : Enemy
 	// Update is called once per frame
 	void Update ()
 	{
-		//Fire();
 		canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
+	}
+
+	private void FixedUpdate()
+	{
+		//Fire();
 	}
 
 	public void Fire()
