@@ -42,9 +42,19 @@ public class Timer : MonoBehaviour
 
 	public string DisplayTime()
 	{
-		string time;
+        string time = "";
 
-		time = hour.ToString() + ":" + minutes.ToString() + ":"  + seconds.ToString();
+        if(hour > 0)
+        {
+            time += hour.ToString() + ":";
+        }
+
+        if(minutes > 0)
+        {
+            time += minutes.ToString() + ":";
+        }
+
+        time += seconds.ToString();
 
 		return time;
 	}

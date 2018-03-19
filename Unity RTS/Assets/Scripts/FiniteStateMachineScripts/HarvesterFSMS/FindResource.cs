@@ -32,6 +32,5 @@ public class FindResource : BaseHarvesterAIFSM
         {
             animator.SetBool("foundResource",false);   
         }
-
 	}
 }

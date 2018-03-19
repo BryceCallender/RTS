@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: bf2948a259d024a879dec3f3d3fdc169
-timeCreated: 1513352683
+guid: 0185d54d455ab4bb985d55fa50f9c1b8
+timeCreated: 1519843403
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -171,7 +171,7 @@ ModelImporter:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -209,6 +209,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88

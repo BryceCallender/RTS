@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class MissleAttacking : StateMachineBehaviour 
 {
+    //Missle Necessities
 	public MissleTurret turret;
 	public GameObject enemy;
 	public Vector3 direction;
 
-	private float timeToFire = 3.0f;
-	private float fireCoolDown = 3.0f;
+    //Timers
+	private float timeToFire = 5.0f;
+	private float fireCoolDown = 5.0f;
+    private float TIME_TO_RESTORE_MISSLE_HEAD = 3.0f;
+
+    //Booleans
 	private bool hasFired = false;
 	private bool missleIsTraveling = false;
+
+    HyperbitProjectileScript hyperProjectileScript;
+    HomingMissile missile;
 
 	//OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -43,10 +51,11 @@ public class MissleAttacking : StateMachineBehaviour
 				enemy = ResetTarget();
 			}
 
-			turret.turretRotator.rotation = Quaternion.Lerp(Quaternion.Euler(direction), animator.gameObject.GetComponent<Transform>().rotation, 1.0f);
+			turret.turretRotator.rotation = Quaternion.Lerp(Quaternion.Euler(direction), 
+                                                            animator.gameObject.GetComponent<Transform>().rotation, 
+                                                            1.0f);
 		}
 
-		//TODO::fix
 		if (turret.targets.Count > 0)
 		{
 			if (Vector3.Distance(animator.transform.position, enemy.transform.position) > turret.range)
@@ -82,8 +91,6 @@ public class MissleAttacking : StateMachineBehaviour
 	public void LockOn()
 	{
 		direction = enemy.transform.position - turret.gameObject.transform.position;
-		Debug.DrawRay(turret.turretEnds[0].position,direction,Color.red,Mathf.Infinity);
-
 		if (direction.magnitude <= turret.range)
 		{
 			if (direction != Vector3.zero)
@@ -97,26 +104,29 @@ public class MissleAttacking : StateMachineBehaviour
 	public void Fire(Animator animator)
 	{
 		GameObject projectile = null;
-		int turrentNum = Random.Range(0, turret.turretEnds.Length);
+        int turrentNum = Random.Range(0, turret.missleRepresentations.Count);
 		timeToFire += Time.deltaTime;
+        MissleHead missileHead = turret.missleRepresentations[turrentNum];
 
 		if (timeToFire >= fireCoolDown && direction.magnitude <= turret.range)
 		{
-			projectile = Instantiate(turret.bullet, turret.turretEnds[turrentNum].transform.position, turret.turretEnds[turrentNum].transform.rotation);
+            projectile = Instantiate(turret.bullet, turret.missleRepresentations[turrentNum].turretEnds.position, 
+                                     turret.missleRepresentations[turrentNum].turretEnds.rotation);
+            missile = projectile.GetComponent<HomingMissile>();
+            hyperProjectileScript = projectile.GetComponent<HyperbitProjectileScript>();
+            missile.enemy = enemy;
 			HideMissle(turrentNum);
 			hasFired = true;
+            timeToFire = 0;
 		}
 
-		if(hasFired)
+        if(hasFired && projectile != null)
 		{
 			missleIsTraveling = true;
 			projectile.tag = "Missle";
-			projectile.GetComponent<HyperbitProjectileScript>().owner = animator.gameObject.name;
-			projectile.GetComponent<HyperbitProjectileScript>().team = turret.team;
-			//projectile.transform.LookAt(nearestEnemy.transform.position);
-			int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
-			float rotateAmount = Vector3.Cross(direction,Vector3.forward).y;
-			//projectile.GetComponent<Rigidbody>().angularVelocity = 
+            hyperProjectileScript.owner = animator.gameObject.name;
+            hyperProjectileScript.team = turret.team;
+            int speed = hyperProjectileScript.speed;
 			projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
 		}
 
@@ -124,16 +134,29 @@ public class MissleAttacking : StateMachineBehaviour
 		{
 			timeToFire = 0;
 		}
-		
 	}
 
 	public void HideMissle(int missleNum)
 	{
-		turret.turretEnds[missleNum].gameObject.SetActive(false);
+        MissleHead missileHead = turret.missleRepresentations[missleNum];
+        missileHead.turretEnds.gameObject.SetActive(false);
+        missileHead.hasBeenFired = true;
+        if (missileHead.hasBeenFired)
+        {
+            //Starts A coroutine to make game wait 3 seconds to reload before
+            //shooting another missile
+            turret.StartCoroutine(StartResetTimer(missileHead,missleNum));
+        }
 	}
 
 	public void ResetMissle(int missleNum)
 	{
-		turret.turretEnds[missleNum].gameObject.SetActive(true);
+        turret.missleRepresentations[missleNum].turretEnds.gameObject.SetActive(true);
 	}
+
+    public IEnumerator StartResetTimer(MissleHead missileHead,int missleNum)
+    {
+        yield return new WaitForSeconds(TIME_TO_RESTORE_MISSLE_HEAD);
+        missileHead.turretEnds.gameObject.SetActive(true); 
+    }
 }

@@ -195,12 +195,12 @@ public class Tank : UnitStats, IImageable
 			if (collision.gameObject.tag.Contains("Laser")
 				&& collision.gameObject.layer == 10)
 			{
-				TakeDamage(5);
+                TakeDamage(GameController.LASER_DAMAGE);
 			}
 			else if (collision.gameObject.tag.Contains("Cluster")
 					 && collision.gameObject.layer == 10)
 			{
-				TakeDamage(10);
+                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
 			}
 		}
 	}

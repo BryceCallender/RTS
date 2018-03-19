@@ -16,37 +16,20 @@ public class MissleSearching : StateMachineBehaviour
 		turret = animator.gameObject.GetComponent<MissleTurret>();
 	}
 
-	//OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-	{
-		if (turret.targets.Count.Equals(0))
-		{
-			//Rotate pls 
-			//turret.StartCoroutine(Rotate());
-			SearchForEnemies();
-		}
-		else
-		{
-			animator.SetBool("foundEnemy", true);
-		}
-	}
-
-	//IEnumerator Rotate()
-	//{
-	//	int yRotationValue;
-
-	//	yRotationValue = (int)Random.Range(0.0f, 360.0f);
-
-	//	for (int i = 0; i < yRotationValue; i++)
-	//	{
-	//		isRotating = true;
-	//		Vector3 temp = turret.turretRotator.rotation.eulerAngles;
-	//		temp.y -= i;
-	//		turret.turretRotator.rotation = Quaternion.Euler(temp);
-	//	}
-
-	//	yield return new WaitForSeconds(turnDelay);
-	//}
+    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (turret.targets.Count.Equals(0))
+        {
+            //Rotate pls 
+            //turret.StartCoroutine(Rotate());
+            SearchForEnemies();
+        }
+        else
+        {
+            animator.SetBool("foundEnemy", true);
+        }
+    }
 
 	public void SearchForEnemies()
 	{

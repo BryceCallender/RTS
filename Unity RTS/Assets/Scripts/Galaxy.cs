@@ -1,11 +1,10 @@
-﻿ using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Galaxy : UnitStats, IImageable
 {
+    //TODO:: make galaxies fly in the air maybe?
 	public int damage = 10;
 	public float health = 150;
 	public int range = 10;
@@ -86,8 +85,6 @@ public class Galaxy : UnitStats, IImageable
             {
                 GameObject turretToFire = turrets[RandomizeTurretSelection()];
                 direction = nearestEnemy.transform.position - turretToFire.transform.position;
-				Debug.DrawRay(turretToFire.transform.position, direction, Color.cyan,Mathf.Infinity);
-				Debug.Log(direction.ToString());
                 fireCoolDownLeft -= Time.deltaTime;
                 if (fireCoolDownLeft <= 0 && direction.magnitude <= range)
                 {
@@ -202,12 +199,12 @@ public class Galaxy : UnitStats, IImageable
             if (collision.gameObject.tag.Contains("Laser")
                 && collision.gameObject.layer == 10)
             {
-                TakeDamage(5);
+                TakeDamage(GameController.LASER_DAMAGE);
             }
             else if (collision.gameObject.tag.Contains("Cluster")
                      && collision.gameObject.layer == 10)
             {
-                TakeDamage(10);
+                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
             }
         }
     }

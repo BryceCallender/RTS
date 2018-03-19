@@ -30,6 +30,10 @@ public class GameController : MonoBehaviour
 
 	private Timer time;
 
+    public static int LASER_DAMAGE = 5;
+    public static int CLUSTER_BOMB_DAMAGE = 10;
+    public static int MISSILE_DAMAGE = 5;
+
     private void Start()
     {
         mineralErrorColor = mineralErrorText.color;
@@ -92,11 +96,7 @@ public class GameController : MonoBehaviour
 
     public bool IsZeroAlpha(Color errorColor)
     {
-        if(errorColor.a.Equals(0))
-        {
-            return true;
-        }
-        return false;
+        return errorColor.a.Equals(0);
     }
 
     public void SetAlphaBack(ref Text errorText,ref Color errorColor)

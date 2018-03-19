@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct MissleHead
+{
+    public bool hasBeenFired;
+    public Transform turretEnds;
+}
+
 public class MissleTurret : MonoBehaviour
 {
 	public List<GameObject> targets;
+    public List<MissleHead> missleRepresentations;
 	public GameObject bullet;
-	public Transform[] turretEnds;
 	public Transform turretRotator;
 	public float health = 100f;
 	public int range = 15;

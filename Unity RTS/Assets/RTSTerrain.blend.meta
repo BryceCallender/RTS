@@ -1,28 +1,24 @@
 fileFormatVersion: 2
-guid: d678281b7b90e4b719ed9d2157eda27e
-timeCreated: 1513352687
+guid: d7b437f7a1a60449baefc43a3dc8212f
+timeCreated: 1519843408
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
+    2100000: unnamed
     2300000: //RootNode
     3300000: //RootNode
     4300000: Plane
     7400000: Default Take
     9500000: //RootNode
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: unnamed
-    second: {fileID: 2100000, guid: 2f740bd5cba4f40c89f4d65c58f63643, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -60,6 +56,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
