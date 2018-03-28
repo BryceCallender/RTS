@@ -3,45 +3,48 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using Unit;
 
 [RequireComponent(typeof(GameController))]
 public class Factory : MonoBehaviour
 {
-    public int health;
-    private int team = 0;
+    [Header("Factory Attributes")]
+    public float health;
+    private int team = (int)Team.BLUE;
     private GameObject unitGameObject;
-
-    [SerializeField]
-    private GameObject factoryPanel;
-    [SerializeField]
-    private GameObject factoryQueuePanel;
-    private GameObject nextUnitInQueue;
-    [SerializeField]
-    private TextMeshProUGUI nextUnitNameText;
-
-    [SerializeField]
-    private Transform unitSpawn;
-
-    [SerializeField]
-    private Text unitStats;
-
-    public Slider unitSpawnSlider;
-    private Image unitSliderImage;
 
     public Sprite tank;
     public Sprite galaxy;
 
-    private Queue<GameObject> unitQueue;
-    private List<GameObject> nextInQueue;
+    private float spawnTimer = 5.0f;
+    private float spawnTimerCoolDown = 5.0f;
+
+    [Header("Factory Queue's and Buidlable Units")]
+    private Queue<UnitStruct> unitQueue;
     private List<Sprite> unitSpriteList;
     [SerializeField]
     private List<GameObject> buildableUnits;
 
+
+    [Header("Factory Spawner")]
+    [SerializeField]
+    private Transform unitSpawn;
+
+    [Header("Factory UI Elements")]
+    [SerializeField]
+    private GameObject factoryPanel;
+    [SerializeField]
+    private GameObject factoryQueuePanel;
+    [SerializeField]
+    private Text unitStats;
+    [SerializeField]
+    private TextMeshProUGUI nextUnitNameText;
+    public Slider unitSpawnSlider;
+    private Image unitSliderImage;
+
+
+    [Header("Booleans and Controllers")]
     static GameController gameController;
-
-    private float spawnTimer = 5.0f;
-    private float spawnTimerCoolDown = 5.0f;
-
     private RaycastHit hitInfo;
     private bool clickedBuilding;
     private Transform rallyLocation;
@@ -66,10 +69,8 @@ public class Factory : MonoBehaviour
         isSelected = false;
         gameController = FindObjectOfType<GameController>();
 		uiManager = gameController.GetComponent<UIManager>();
-        unitQueue = new Queue<GameObject>();
-        nextInQueue = new List<GameObject>();
+        unitQueue = new Queue<UnitStruct>();
         unitSpriteList = new List<Sprite>();
-        nextUnitInQueue = GameObject.Find("nextUnit");
         unitSliderImage = unitSpawnSlider.GetComponentInChildren<Image>();
         factoryPanel.SetActive(false);
         factoryQueuePanel.SetActive(false);
@@ -111,7 +112,6 @@ public class Factory : MonoBehaviour
             if(unitQueue.Count.Equals(1))
             {
                 nextUnitNameText.gameObject.SetActive(false);
-                isShowingNextUnit = false;
             }
 
 			//Once timer hits 0 or lower we will spawn unit reset counter for 
@@ -119,9 +119,11 @@ public class Factory : MonoBehaviour
 			if (spawnTimer < 0)
 			{
 				spawnTimer = spawnTimerCoolDown;
-                Instantiate(unitQueue.Peek(), unitSpawn.transform.position, unitSpawn.transform.rotation);
-                Debug.Log(unitQueue.Dequeue());
+                Instantiate(unitQueue.Peek().unit, unitSpawn.transform.position, unitSpawn.transform.rotation);
+                unitQueue.Dequeue();
                 unitSpriteList.RemoveAt(0);
+                //Reset to change the next name of the next unit
+                isShowingNextUnit = false;
 			}
         }
         else
@@ -138,10 +140,16 @@ public class Factory : MonoBehaviour
         if(isSelected)
         {
             SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Tank")));
-            if (gameController.currency >= unitGameObject.GetComponent<Tank>().cost)
+            int cost = unitGameObject.GetComponent<Tank>().cost;
+            if (gameController.currency >= cost)
             {
-                unitQueue.Enqueue(unitGameObject);
-                gameController.currency -= unitGameObject.GetComponent<Tank>().cost;
+                UnitStruct unitToQueue;
+                unitToQueue.unit = unitGameObject;
+                unitToQueue.cost = cost;
+                unitToQueue.name = UnitName.GetNameOfUnit(unitGameObject);
+
+                unitQueue.Enqueue(unitToQueue);
+                gameController.currency -= cost;
                 Debug.Log(unitQueue.Count);
             }
             else
@@ -157,10 +165,16 @@ public class Factory : MonoBehaviour
         if(isSelected)
         {
             SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Galaxy")));
-            if (gameController.currency >= unitGameObject.GetComponent<Galaxy>().cost)
+            int cost = unitGameObject.GetComponent<Galaxy>().cost;
+            if (gameController.currency >= cost)
             {
-                unitQueue.Enqueue(unitGameObject);
-                gameController.currency -= unitGameObject.GetComponent<Galaxy>().cost;
+                UnitStruct unitToQueue;
+                unitToQueue.unit = unitGameObject;
+                unitToQueue.cost = cost;
+                unitToQueue.name = UnitName.GetNameOfUnit(unitGameObject);
+
+                unitQueue.Enqueue(unitToQueue);
+                gameController.currency -= cost;
                 Debug.Log(unitQueue.Count);
             }
             else
@@ -284,26 +298,37 @@ public class Factory : MonoBehaviour
         }
     }
 
-    public string GetNextInQueue(Queue<GameObject> queue)
+    public string GetNextInQueue(Queue<UnitStruct> queue)
     {
         string unitName;
-        GameObject[] queueArray = queue.ToArray();
+        UnitStruct[] queueArray = queue.ToArray();
         string[] nameSplit;
-        if(queue.Count == 0)
+        if(queue.Count == 0 || queue.Count == 1)
         {
             return null;
         }
         else
         {
-            GameObject unit = queueArray[1].gameObject;
-            nameSplit = unit.gameObject.name.Split('_');
+            UnitStruct unitFromQueue = queueArray[1];
+            nameSplit = unitFromQueue.unit.name.Split('_');
             unitName = nameSplit[1];
         }
 
         return unitName;
     }
 
-    public bool HasMoreThanOneInQueue(Queue<GameObject> queue)
+    public void DeleteUnitFromQueue()
+    {
+        if (unitQueue.Count > 0)
+        {
+            UnitStruct unitToDelete = unitQueue.Peek();
+            gameController.currency += unitToDelete.cost;
+            unitQueue.Dequeue();
+            Debug.Log("Unit Queue is now " + unitQueue.Count);
+        }
+    }
+
+    public bool HasMoreThanOneInQueue(Queue<UnitStruct> queue)
     {
         return queue.Count > 1;
     }
@@ -319,6 +344,8 @@ public class Factory : MonoBehaviour
         if (health <= 0)
         {
             Die();
+            //Building dies so does the units its making and your money 
+            unitQueue.Clear();
         }
     }
 
@@ -326,8 +353,7 @@ public class Factory : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
         {
-            //Physics.IgnoreLayerCollision(8, 10);
-            //Debug.Log("Same team bro");
+            return;
         }
 
         if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")

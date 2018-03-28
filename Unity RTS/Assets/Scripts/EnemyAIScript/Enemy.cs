@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using Unit;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class Enemy : MonoBehaviour
 
 	public Slider healthBar;
 	public HyperbitProjectileScript hyperProjectileScript;
-	public int team = 1;
+    public int team = (int)Team.RED;
 
 	private bool hasCollided= false;
 

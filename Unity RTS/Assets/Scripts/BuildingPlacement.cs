@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BuildingPlacement : MonoBehaviour 
 {
@@ -9,15 +7,10 @@ public class BuildingPlacement : MonoBehaviour
     private Transform currentBuilding;
     public bool hasPlaced;
 
-    private Color notPlacable;
-
-
-
 	// Use this for initialization
 	void Start () 
     {
         gameController = FindObjectOfType<GameController>();
-        notPlacable = Color.red;
 	}
 	
 	// Update is called once per frame

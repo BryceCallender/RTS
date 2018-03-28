@@ -3,57 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Unit;
 
 public class Harvester : MonoBehaviour, IImageable
 {
+    [Header("Harvester Stats")]
     public int health = 100;
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
     public int cost = 5;
     public int capacity = 1;
-    public int team = 0;
+    public int team = (int)Team.BLUE;
 
+    //Harvester Building Capabilites and what building to build if we want one
     public List<GameObject> buildableBuildings;
     private GameObject buildingToBuild;
-	//public GameObject harvesterPanel;
+
+    //Ui elements for the harvester to control
+    [Header("UI Elements")]
+	public GameObject harvesterPanel;
     public Button factoryButton;
     public Button supplyButton;
+    public Slider healthBar;
 
+    // Resources and collector for it to go to 
+    [Header("Harvester Resource/Collector")]
     public Resource[] resources;
     public Resource nearestResource;
     public Transform resourceCollector;
-    public Slider healthBar;
 
-    static GameController gameController;
-    static BuildingPlacement buildingPlacement;
-
-    private NavMeshAgent agent;
+    //Harvester Abilities Harvest amount and cooldowns
     private float harvestTime = 2.0f;
     private float harvestCoolDown = 3.0f;
     private int harvestAmount = 10;
+    [SerializeField]
+    private GameObject crystal;
 
+    //Booleans
     private bool isTargetingResource = false;
     private bool isFull = false;
     private bool isTurnedIn = false;
     private bool isAtResource = false;
 
-
+    //Timers
     private float timer = 0;
     private float timeToWait = 1.0f;
 
+    //Other scripts and RayCast info holders
     private RaycastHit hitInfo;
     private UnitSelected unitSelected;
-
+    private NavMeshAgent agent;
+    [Header("Other Scripts")]
     public HyperbitProjectileScript hyperProjectileScript;
 	public UIManager uiManager;
+    static GameController gameController;
+    static BuildingPlacement buildingPlacement;
+
+
 
 
     private void Start()
     {
 		agent = GetComponent<NavMeshAgent>();
         resources = FindObjectsOfType<Resource>();
-		uiManager = GameObject.FindObjectOfType<UIManager>();
-
+		uiManager = FindObjectOfType<UIManager>();
 
         gameController = FindObjectOfType<GameController>();
         buildingPlacement = FindObjectOfType<BuildingPlacement>();
@@ -68,6 +81,9 @@ public class Harvester : MonoBehaviour, IImageable
         healthBar.gameObject.SetActive(false);
         healthBar.maxValue = health;
         healthBar.value = health;
+
+        crystal.gameObject.SetActive(false);
+
         if(resourceCollector == null)
         {
             resourceCollector = transform.Find("SupplyBuilding");
@@ -95,7 +111,8 @@ public class Harvester : MonoBehaviour, IImageable
 
             if (resourceAmount >= maxResourceToCollect || nearestResource.resourceLeft == 0)
 			{
-				isFull = true;
+                isFull = true;
+                crystal.gameObject.SetActive(true);
                 if(resourceCollector != null)
                 {
                     agent.destination = resourceCollector.position;
@@ -149,27 +166,11 @@ public class Harvester : MonoBehaviour, IImageable
             }
         }
 
-		if (unitSelected.isFirst)
+        if (unitSelected.isFirst && unitSelected.selected)
 		{
-			//harvesterPanel.gameObject.SetActive(true);
-			//uiManager.SetAllOffBut(harvesterPanel);
+            
 			ShowImage();
 		}
-		else
-		{
-			//harvesterPanel.gameObject.SetActive(false);
-		}
-
-		//If its selected wont let u open anything else
-		//if(unitSelected.selected)
-		//{
-		//	harvesterPanel.SetActive(true);
-		//	uiManager.SetAllOffBut(harvesterPanel);
-		//}
-		//else
-		//{
-		//	harvesterPanel.SetActive(false);
-		//}
 	}
 
     /*
@@ -195,7 +196,7 @@ public class Harvester : MonoBehaviour, IImageable
     {
         gameController.currency += resourceAmount;
         resourceAmount = 0;
-        
+        crystal.gameObject.SetActive(false);
     }
 
 	/*

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unit;
 
 [System.Serializable]
 public struct MissleHead
@@ -30,10 +31,10 @@ public class MissleTurret : MonoBehaviour
 		switch (layerTeam)
 		{
 			case 8:
-				team = 0;
+                team = (int)Team.BLUE;
 				break;
 			case 9:
-				team = 1;
+                team = (int)Team.RED;
 				break;
 		}
 		targets = new List<GameObject>();

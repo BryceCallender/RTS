@@ -1,16 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using Unit;
 
 [RequireComponent(typeof(GameController))]
 public class CommandBuilding : MonoBehaviour 
 {
 	#region variables
-	public int health;
-    private int team = 0;
+	public float health;
+    private int team = (int)Team.BLUE;
     public Text commandBuildText;
     public Text amountText;
     public GameObject harvesterGameObject;

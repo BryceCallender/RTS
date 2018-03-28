@@ -145,6 +145,11 @@ public class EnemyTank : Enemy
 			{
                 TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
 			}
+            else if (collision.gameObject.tag.Contains("Missle")
+                     && collision.gameObject.layer == 10)
+            {
+                TakeDamage(GameController.MISSILE_DAMAGE);
+            }
 		}
 	}
 

@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Unit;
 
 public class LaserTank : Tank 
 {
@@ -10,7 +9,7 @@ public class LaserTank : Tank
     public bool isCharged;
     public bool isFiring;
     public GameObject chargeArea;
-    private int tankTeam = 0;
+    private int tankTeam = (int)Team.BLUE;
 	private ParticleSystem chargeEffect;
 
     [Header("Prefabs")]
@@ -45,12 +44,12 @@ public class LaserTank : Tank
     {
 		damage = 10;
         chargeEffect = chargeArea.GetComponentInChildren<ParticleSystem>();
-		//chargeEffect.Stop();
 		chargeEffect.gameObject.SetActive(false);
         unitSel = GetComponent<UnitSelected>();
         turretPos = this.gameObject.transform.Find("Turret");
 		healthBar.maxValue = health;
 		healthBar.value = health;
+        healthBar.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -63,6 +62,17 @@ public class LaserTank : Tank
 
 		if (nearestEnemy == null)
 			DestroyLaser();
+
+        if(unitSel.selected)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
+
+        if (!unitSel.selected && healthBar.gameObject.activeSelf)
+        {
+            HealthBarFadeAway();
+        }
+
 	}
 
 	private void FixedUpdate()
@@ -226,7 +236,6 @@ public class LaserTank : Tank
 		healthBar.value -= damage;
 		if (health <= 0)
 		{
-			DestroyLaser();
 			Die();
 		}
 	}
@@ -284,6 +293,11 @@ public class LaserTank : Tank
                      && collision.gameObject.layer == 10)
             {
                 TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
+            }
+            else if(collision.gameObject.tag.Contains("Missle")
+                     && collision.gameObject.layer == 10)
+            {
+                TakeDamage(GameController.MISSILE_DAMAGE);
             }
         }
     }

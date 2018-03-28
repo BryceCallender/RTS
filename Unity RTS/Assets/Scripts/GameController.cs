@@ -34,6 +34,23 @@ public class GameController : MonoBehaviour
     public static int CLUSTER_BOMB_DAMAGE = 10;
     public static int MISSILE_DAMAGE = 5;
 
+    //public Dictionary<string,int> unitNames = new Dictionary<string, int>();
+
+    private static GameController instance;
+
+    public static GameController Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         mineralErrorColor = mineralErrorText.color;
@@ -123,8 +140,8 @@ public class GameController : MonoBehaviour
 	public void PauseGame()
 	{
 		pauseMenuUI.gameObject.SetActive(true);
+        isPaused = true;
 		Time.timeScale = 0f;
-		isPaused = true;
 	}
 
 	public void UnPauseGame()

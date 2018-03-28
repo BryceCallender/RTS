@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	private void Start()
+	private void Awake()
 	{
 		instance = this;
 		image = selectedObjectPanel.GetComponent<Image>();

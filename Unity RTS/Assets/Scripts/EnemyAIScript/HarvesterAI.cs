@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unit;
 
 [RequireComponent(typeof(BoxCollider))]
 public class HarvesterAI : MonoBehaviour 
@@ -9,7 +10,7 @@ public class HarvesterAI : MonoBehaviour
     public int health = 30;
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
-	public int team = 1;
+    public int team = (int)Team.RED;
 
     public Resource[] resources;
     public Resource nearestResource;
@@ -27,6 +28,8 @@ public class HarvesterAI : MonoBehaviour
 		healthBar.gameObject.SetActive(false);
 		healthBar.maxValue = health;
 		healthBar.value = health;
+        //Finds all the resources in the project
+        resources = FindObjectsOfType<Resource>();
 	}
 	
 	// Update is called once per frame
@@ -35,7 +38,6 @@ public class HarvesterAI : MonoBehaviour
         //TODO::fix this. This is gross making new lists everytime maybe dont 
         //need it since all resources will be laid out in game??? if so 
         //place back in start and no more worrying.
-        resources = FindObjectsOfType<Resource>();
         resourceList = new List<Resource>(resources);
 
         FindResource();
@@ -97,13 +99,17 @@ public class HarvesterAI : MonoBehaviour
 			if (collision.gameObject.tag.Contains("Laser")
 				&& collision.gameObject.layer == 10)
 			{
-				TakeDamage(5);
+                TakeDamage(GameController.LASER_DAMAGE);
 			}
 			else if (collision.gameObject.tag.Contains("Cluster")
 					 && collision.gameObject.layer == 10)
 			{
-				TakeDamage(10);
+                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
 			}
 		}
 	}
 }
+
+//Make command center have a giant area of influence so you can build inside
+//that and randomize where we want to place it and see if it works out
+//if it does then we build it 

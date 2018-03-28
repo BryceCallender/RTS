@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unit;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Tank : UnitStats, IImageable
@@ -27,8 +28,12 @@ public class Tank : UnitStats, IImageable
     private RaycastHit hitInfo;
     private Vector3 direction;
     private UnitSelected unitSelected;
-    private int team = 0;
+    private int team = (int)Team.BLUE;
 
+
+    private float timerToStop = 0;
+    private float timeToStopShowingHealth = 3.0f;
+    private bool isUnderAttack;
 
     private bool enemyHasBeenSelected = false;
     private Quaternion keepUIAbove;
@@ -38,7 +43,6 @@ public class Tank : UnitStats, IImageable
     public Canvas canvas;
 
     public HyperbitProjectileScript hyperProjectileScript;
-
 
     private void Start()
     {
@@ -64,6 +68,11 @@ public class Tank : UnitStats, IImageable
 		{
 			ShowImage();
 		}
+
+        if(!unitSelected.selected && healthBar.gameObject.activeSelf)
+        {
+            HealthBarFadeAway();
+        }
     }
 
 	private void FixedUpdate()
@@ -108,6 +117,7 @@ public class Tank : UnitStats, IImageable
     public override void TakeDamage(float damage)
     {
         healthBar.gameObject.SetActive(true);
+        isUnderAttack = true;
         health -= damage;
         healthBar.value -= damage;
         if (health <= 0)
@@ -153,31 +163,15 @@ public class Tank : UnitStats, IImageable
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-    //    if(hyperProjectileScript.team.Equals(team))
-    //    {
-    //        return;
-    //    }
-
-    //    if (!hyperProjectileScript.owner.Contains("Blue")
-    //        && !hyperProjectileScript.team.Equals(team))
-    //    {
-    //        //Physics.IgnoreLayerCollision(9, 10, false);
-    //        if (collision.gameObject.tag.Contains("Laser") 
-    //            && collision.gameObject.layer == 10)
-    //        {
-    //            TakeDamage(5);
-    //        }
-    //        else if (collision.gameObject.tag.Contains("Cluster") 
-    //                 && collision.gameObject.layer == 10)
-    //        {
-    //            TakeDamage(10);
-    //        }
-    //    }
-    //}
+    public void HealthBarFadeAway()
+    {
+        timerToStop += Time.deltaTime;
+        if (timerToStop >= timeToStopShowingHealth)
+        {
+            timerToStop = 0;
+            healthBar.gameObject.SetActive(false);
+        }
+    }
 
 	private void OnTriggerEnter(Collider collision)
 	{
@@ -202,6 +196,11 @@ public class Tank : UnitStats, IImageable
 			{
                 TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
 			}
+            else if (collision.gameObject.tag.Contains("Missle")
+                     && collision.gameObject.layer == 10)
+            {
+                TakeDamage(GameController.MISSILE_DAMAGE);
+            }
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Unit;
 
 public class Galaxy : UnitStats, IImageable
 {
@@ -30,15 +31,18 @@ public class Galaxy : UnitStats, IImageable
 	private UnitSelected unitSelected;
 	private Vector3 position;
     private NavMeshAgent agent;
-    private int team = 0;
+    private int team = (int)Team.BLUE;
 
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
+    private float timerToStop = 0;
+    private float timeToStopShowingHealth = 3.0f;
 
     public HyperbitProjectileScript hyperProjectileScript;
 
     private void Start()
     {
+        //GameController.unitNames.Add(gameObject.name, cost);
         health = 150;
         projectile = bulletPrefab;
         keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
@@ -68,6 +72,16 @@ public class Galaxy : UnitStats, IImageable
 		{
 			ShowImage();
 		}
+
+        if (unitSelected.selected)
+        {
+            healthBar.gameObject.SetActive(true);
+        }
+
+        if (!unitSelected.selected && healthBar.gameObject.activeSelf)
+        {
+            HealthBarFadeAway();
+        }
 	}
 
 	private void FixedUpdate()
@@ -183,6 +197,16 @@ public class Galaxy : UnitStats, IImageable
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
 
+    public void HealthBarFadeAway()
+    {
+        timerToStop += Time.deltaTime;
+        if (timerToStop >= timeToStopShowingHealth)
+        {
+            timerToStop = 0;
+            healthBar.gameObject.SetActive(false);
+        }
+    }
+
 	private void OnTriggerEnter(Collider collision)
     {
         hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
@@ -205,6 +229,11 @@ public class Galaxy : UnitStats, IImageable
                      && collision.gameObject.layer == 10)
             {
                 TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
+            }
+            else if (collision.gameObject.tag.Contains("Missle")
+                     && collision.gameObject.layer == 10)
+            {
+                TakeDamage(GameController.MISSILE_DAMAGE);
             }
         }
     }
