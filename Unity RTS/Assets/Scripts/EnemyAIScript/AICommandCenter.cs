@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AICommandCenter : MonoBehaviour 
+public class AICommandCenter : MonoBehaviour
 {
     public float health;
     public AI AIManager;
@@ -10,29 +10,38 @@ public class AICommandCenter : MonoBehaviour
     public int buildingCount;
     public bool isOkToPlace = false;
 
+    [SerializeField]
     private GameObject chosenBuilding;
 
-    private BoxCollider buildingBoxCollider;
-    private 
+    private PlaceableBuilding placeBuilding;
 
     private const int MAX_RADIUS = 1000;
     private int radiusOfInfluence = 100;
 
-	// Use this for initialization
-	void Start () 
+    private int timesBuildResource = 1;
+
+    Vector3 centerOfBuilding;
+    Vector3 sizeOfBound;
+
+    // Use this for initialization
+    void Start()
     {
         health = 1000;
         buildingCount = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
-        //if(CheckIfBuildingCanBePlaced(GetRandomLocation(gameObject.transform)))
-        //{
-            
-        //}
-	}
+       
+        if (CheckIfBuildingCanBePlaced(GetRandomLocation(gameObject.transform)))
+        {
+            //if (radiusOfInfluence <= MAX_RADIUS)
+            //{
+            //    radiusOfInfluence += 100;
+            //}
+        }
+    }
 
     //TODO::We need to make it build close to itself
     //or the base building will be sparatic and truly random 
@@ -51,19 +60,71 @@ public class AICommandCenter : MonoBehaviour
 
     public bool CheckIfBuildingCanBePlaced(Vector3 placeToCheck)
     {
-        chosenBuilding = BuildingToBuild();
-        return true;
+        //chosenBuilding = BuildingToBuild();
+
+        Bounds bound = chosenBuilding.GetComponent<Collider>().bounds;
+
+        sizeOfBound = bound.size;
+
+        centerOfBuilding = bound.center;
+
+        Debug.Log("Center of Bounds " + bound.center);
+
+        return Physics.CheckBox(centerOfBuilding, sizeOfBound / 2, Quaternion.identity);
     }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.blue;
-        //Gizmos.DrawWireSphere(transform.position, radiusOfInfluence);
+        Gizmos.DrawWireSphere(transform.position, radiusOfInfluence);
         //Gizmos.DrawLine(gameObject.transform.position,GetRandomLocation(gameObject.transform));
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireCube(centerOfBuilding,Vector3.one*10);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(GetRandomLocation(gameObject.transform),Vector3.one*10);
     }
 
-    public GameObject BuildingToBuild()
+    //public GameObject BuildingToBuild()
+    //{
+    //    GameObject building = null;
+
+    //    //If we have full capacity ATM and can build more houses 
+    //    //or if the current capacity plus the ones we are building then
+    //    //lets make a house 
+    //    if (AIManager.currentCapacity == AIManager.capacityMax 
+    //        //(AIManager.currentCapacity + AIManager.globalQueue.Count) > AIManager.capacityMax
+    //        && GameController.MAX_CAPACITY != AIManager.capacityMax)
+    //    {
+    //        //house building
+    //        if (AIManager.currency >= AIManager.buildings["House"])
+    //        {
+    //            //build house
+    //        }
+    //    }
+
+    //    //Builds every increment of 10 harvesters to make it somewhat
+    //    //efficient
+    //    if(AIManager.harvesters.Count > 10 * timesBuildResource)
+    //    {
+    //        //Resource building
+    //        if(AIManager.currency >= AIManager.buildings["Supply"])
+    //        {
+    //            //build resource
+    //            timesBuildResource++;
+    //        }
+    //    }
+
+    //    return building;
+    //}
+
+    public GameObject FindHarvesterToBuildBuilding()
     {
-        return null;
+        GameObject harvester;
+
+        int RNG = Random.Range(0,AIManager.harvesters.Count);
+        harvester = AIManager.harvesters[RNG];
+
+        return harvester;
     }
+
 }

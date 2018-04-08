@@ -30,11 +30,11 @@ public class GameController : MonoBehaviour
 
 	private Timer time;
 
+    public const int MAX_CAPACITY = 100;
+
     public static int LASER_DAMAGE = 5;
     public static int CLUSTER_BOMB_DAMAGE = 10;
     public static int MISSILE_DAMAGE = 5;
-
-    //public Dictionary<string,int> unitNames = new Dictionary<string, int>();
 
     private static GameController instance;
 

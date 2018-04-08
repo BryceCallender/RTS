@@ -10,6 +10,7 @@ public class Factory : MonoBehaviour
 {
     [Header("Factory Attributes")]
     public float health;
+    public int resourceCost;
     private int team = (int)Team.BLUE;
     private GameObject unitGameObject;
 
@@ -54,6 +55,7 @@ public class Factory : MonoBehaviour
     private bool isShowingNextUnit;
     private string selectedFactoryName;
 	private UIManager uiManager;
+    private HyperbitProjectileScript hyperProjectileScript;
 
     [Header("Unit Buttons")]
     [SerializeField]
@@ -351,20 +353,24 @@ public class Factory : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+
+        if (hyperProjectileScript.team.Equals(team))
         {
             return;
         }
 
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
-            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
+        if (!hyperProjectileScript.owner.Contains("Blue")
+            && !hyperProjectileScript.team.Equals(team))
         {
             //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
+            if (collision.gameObject.tag.Contains("Laser")
+                && collision.gameObject.layer == 10)
             {
                 TakeDamage(GameController.LASER_DAMAGE);
             }
-            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
+            else if (collision.gameObject.tag.Contains("Cluster")
+                     && collision.gameObject.layer == 10)
             {
                 TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
             }
