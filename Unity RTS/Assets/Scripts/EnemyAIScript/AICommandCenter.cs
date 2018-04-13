@@ -36,6 +36,7 @@ public class AICommandCenter : MonoBehaviour
        
         if (CheckIfBuildingCanBePlaced(GetRandomLocation(gameObject.transform)))
         {
+            Instantiate(chosenBuilding, centerOfBuilding, Quaternion.identity);
             //if (radiusOfInfluence <= MAX_RADIUS)
             //{
             //    radiusOfInfluence += 100;
@@ -62,15 +63,17 @@ public class AICommandCenter : MonoBehaviour
     {
         //chosenBuilding = BuildingToBuild();
 
-        Bounds bound = chosenBuilding.GetComponent<Collider>().bounds;
+        BoxCollider bound = chosenBuilding.GetComponent<BoxCollider>();
+
+        var layerMask = 1 << 13;
+        layerMask = ~layerMask;
 
         sizeOfBound = bound.size;
+        Debug.Log(sizeOfBound);
 
-        centerOfBuilding = bound.center;
+        centerOfBuilding = placeToCheck;
 
-        Debug.Log("Center of Bounds " + bound.center);
-
-        return Physics.CheckBox(centerOfBuilding, sizeOfBound / 2, Quaternion.identity);
+        return !Physics.CheckBox(centerOfBuilding, sizeOfBound / 2, Quaternion.identity,layerMask);
     }
 
     void OnDrawGizmosSelected()
@@ -79,7 +82,7 @@ public class AICommandCenter : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, radiusOfInfluence);
         //Gizmos.DrawLine(gameObject.transform.position,GetRandomLocation(gameObject.transform));
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireCube(centerOfBuilding,Vector3.one*10);
+        Gizmos.DrawWireCube(centerOfBuilding,sizeOfBound);
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(GetRandomLocation(gameObject.transform),Vector3.one*10);
     }
@@ -128,3 +131,4 @@ public class AICommandCenter : MonoBehaviour
     }
 
 }
+
