@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unit;
 
 public class AI : MonoBehaviour 
 {
@@ -20,7 +21,7 @@ public class AI : MonoBehaviour
     public List<GameObject> currentUnits;
     public List<GameObject> harvesters;
     public List<GameObject> currentBuildings;
-    public Queue<GameObject> globalQueue;
+    public Queue<UnitStruct> globalQueue;
 
     private List<GameObject> unitsToGrab;
 
@@ -51,4 +52,16 @@ public class AI : MonoBehaviour
     {
 		
 	}
+
+    public GameObject FindUnit(string name)
+    {
+        for (int i = 0; i < buildableUnits.Count; i++)
+        {
+            if(buildableUnits[i].gameObject.name.Contains(name))
+            {
+                return buildableUnits[i];
+            }
+        }
+        return null;
+    }
 }

@@ -9,7 +9,7 @@ public class AIFactory : MonoBehaviour
     public float health;
     public int resourceCost;
     private int team = (int)Team.RED;
-    private GameObject unitGameObject;
+    private GameObject unitGameObject; 
 
     private float spawnTimer = 5.0f;
     private float spawnTimerCoolDown = 5.0f;
@@ -55,24 +55,34 @@ public class AIFactory : MonoBehaviour
         }
     }
 
-    public GameObject QueueUnit()
+    public void QueueUnit()
     {
+        UnitStruct unitToQueue;
         float weight = Random.Range(0, 1);
         if(weight > 0.50)
         {
-            //Spawn tank
+            unitToQueue.unit = AI.Instance.FindUnit("Tank");
+            unitToQueue.cost = AI.Instance.units["Tank"];
+            unitToQueue.name = unitToQueue.unit.name;
+            AI.Instance.globalQueue.Enqueue(unitToQueue);
+            
         }
         else if(weight > 0.25 && weight < 0.50)
         {
-            //spawn galaxy
+            unitToQueue.unit = AI.Instance.FindUnit("Galaxy");
+            unitToQueue.cost = AI.Instance.units["Galaxy"];
+            unitToQueue.name = unitToQueue.unit.name;
+            AI.Instance.globalQueue.Enqueue(unitToQueue);
         }
         else
         {
-            //spawn laser
+            unitToQueue.unit = AI.Instance.FindUnit("Laser");
+            unitToQueue.cost = AI.Instance.units["Laser"];
+            unitToQueue.name = unitToQueue.unit.name;
+            AI.Instance.globalQueue.Enqueue(unitToQueue);
         }
 
-        //just getting rid of error
-        return null;
+        unitQueue.Enqueue(unitToQueue);
     }
 
     public void Die()

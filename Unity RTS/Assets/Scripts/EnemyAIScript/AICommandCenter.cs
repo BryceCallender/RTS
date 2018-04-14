@@ -15,7 +15,7 @@ public class AICommandCenter : MonoBehaviour
 
     private PlaceableBuilding placeBuilding;
 
-    private const int MAX_RADIUS = 1000;
+    private const int MAX_RADIUS = 9000;
     private int radiusOfInfluence = 100;
 
     private int timesBuildResource = 1;
@@ -36,7 +36,7 @@ public class AICommandCenter : MonoBehaviour
        
         if (CheckIfBuildingCanBePlaced(GetRandomLocation(gameObject.transform)))
         {
-            Instantiate(chosenBuilding, centerOfBuilding, Quaternion.identity);
+            Instantiate(chosenBuilding, centerOfBuilding,Quaternion.Euler(new Vector3(0,-180,0)));
             //if (radiusOfInfluence <= MAX_RADIUS)
             //{
             //    radiusOfInfluence += 100;
@@ -69,7 +69,6 @@ public class AICommandCenter : MonoBehaviour
         layerMask = ~layerMask;
 
         sizeOfBound = bound.size;
-        Debug.Log(sizeOfBound);
 
         centerOfBuilding = placeToCheck;
 
@@ -87,38 +86,40 @@ public class AICommandCenter : MonoBehaviour
         Gizmos.DrawWireCube(GetRandomLocation(gameObject.transform),Vector3.one*10);
     }
 
-    //public GameObject BuildingToBuild()
-    //{
-    //    GameObject building = null;
+    public GameObject BuildingToBuild()
+    {
+        GameObject building = null;
 
-    //    //If we have full capacity ATM and can build more houses 
-    //    //or if the current capacity plus the ones we are building then
-    //    //lets make a house 
-    //    if (AIManager.currentCapacity == AIManager.capacityMax 
-    //        //(AIManager.currentCapacity + AIManager.globalQueue.Count) > AIManager.capacityMax
-    //        && GameController.MAX_CAPACITY != AIManager.capacityMax)
-    //    {
-    //        //house building
-    //        if (AIManager.currency >= AIManager.buildings["House"])
-    //        {
-    //            //build house
-    //        }
-    //    }
+        //If we have full capacity ATM and can build more houses 
+        //or if the current capacity plus the ones we are building then
+        //lets make a house 
+        if (AIManager.currentCapacity == AIManager.capacityMax
+            //(AIManager.currentCapacity + AIManager.globalQueue.Count) > AIManager.capacityMax
+            && GameController.MAX_CAPACITY != AIManager.capacityMax ||
+            //Or the queue is currently over the max so lets quickly make housing
+            AIManager.currentCapacity + GetUnitCount() > AIManager.capacityMax)
+        {
+            //house building
+            if (AIManager.currency >= AIManager.buildings["House"])
+            {
+                //build house
+            }
+        }
 
-    //    //Builds every increment of 10 harvesters to make it somewhat
-    //    //efficient
-    //    if(AIManager.harvesters.Count > 10 * timesBuildResource)
-    //    {
-    //        //Resource building
-    //        if(AIManager.currency >= AIManager.buildings["Supply"])
-    //        {
-    //            //build resource
-    //            timesBuildResource++;
-    //        }
-    //    }
+        //Builds every increment of 10 harvesters to make it somewhat
+        //efficient
+        if (AIManager.harvesters.Count > 10 * timesBuildResource)
+        {
+            //Resource building
+            if (AIManager.currency >= AIManager.buildings["Supply"])
+            {
+                //build resource
+                timesBuildResource++;
+            }
+        }
 
-    //    return building;
-    //}
+        return building;
+    }
 
     public GameObject FindHarvesterToBuildBuilding()
     {
@@ -130,5 +131,9 @@ public class AICommandCenter : MonoBehaviour
         return harvester;
     }
 
+    public int GetUnitCount()
+    {
+        return AIManager.globalQueue.Count;
+    }
 }
 
