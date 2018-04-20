@@ -3,13 +3,9 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Unit;
 
-public class Galaxy : UnitStats, IImageable
+public class Galaxy : UnitScript, IUnitStats, IImageable
 {
     //TODO:: make galaxies fly in the air maybe?
-	public int damage = 10;
-	public float health = 150;
-	public int range = 10;
-    public int cost = 20;
     public int capacity = 10;
 
 	public GameObject[] enemies;
@@ -31,14 +27,11 @@ public class Galaxy : UnitStats, IImageable
 	private UnitSelected unitSelected;
 	private Vector3 position;
     private NavMeshAgent agent;
-    private int team = (int)Team.BLUE;
 
     GameObject projectile;
     private bool enemyHasBeenSelected = false;
     private float timerToStop = 0;
     private float timeToStopShowingHealth = 3.0f;
-
-    public HyperbitProjectileScript hyperProjectileScript;
 
     private void Start()
     {
@@ -89,7 +82,7 @@ public class Galaxy : UnitStats, IImageable
 		Fire();
 	}
 
-	public override void Fire()
+	public void Fire()
     {
         if (unitSelected.selected || enemyHasBeenSelected)
         {
@@ -159,22 +152,6 @@ public class Galaxy : UnitStats, IImageable
 		}
 	}
 
-    public override void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        healthBar.gameObject.SetActive(true);
-        health -= damage;
-        healthBar.value -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
     public void ActivateThrusters()
     {
         thruster.Play();
@@ -204,37 +181,6 @@ public class Galaxy : UnitStats, IImageable
         {
             timerToStop = 0;
             healthBar.gameObject.SetActive(false);
-        }
-    }
-
-	private void OnTriggerEnter(Collider collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperProjectileScript.team.Equals(team))
-        {
-            return;
-        }
-
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Missle")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.MISSILE_DAMAGE);
-            }
         }
     }
 }

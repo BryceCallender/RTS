@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Unit;
 
-public class LaserTank : Tank 
+public class LaserTank : Tank
 {
 	#region variables
 	[Header("Laser Effects")]
@@ -47,9 +47,6 @@ public class LaserTank : Tank
 		chargeEffect.gameObject.SetActive(false);
         unitSel = GetComponent<UnitSelected>();
         turretPos = this.gameObject.transform.Find("Turret");
-		healthBar.maxValue = health;
-		healthBar.value = health;
-        healthBar.gameObject.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -61,17 +58,19 @@ public class LaserTank : Tank
 		}
 
 		if (nearestEnemy == null)
-			DestroyLaser();
-
-        if(unitSel.selected)
         {
-            healthBar.gameObject.SetActive(true);
+            DestroyLaser();
         }
+			
+        //if(unitSel.selected)
+        //{
+        //    healthBar.gameObject.SetActive(true);
+        //}
 
-        if (!unitSel.selected && healthBar.gameObject.activeSelf)
-        {
-            HealthBarFadeAway();
-        }
+        //if (!unitSel.selected && healthBar.gameObject.activeSelf)
+        //{
+        //    HealthBarFadeAway();
+        //}
 
 	}
 
@@ -80,7 +79,7 @@ public class LaserTank : Tank
 		Fire();
 	}
 
-	private void Charge(bool charging)
+	private void Charge()
     {
         if(isCharging)
         {
@@ -110,7 +109,7 @@ public class LaserTank : Tank
         }
     }
 
-    public override void Fire()
+    public void Fire()
     {
         if (unitSel.selected || enemySelected)
         {
@@ -122,7 +121,7 @@ public class LaserTank : Tank
                 enemySelected = true; 
                 isCharging = true;
 				if (!isCharged)
-                    Charge(isCharging);
+                    Charge();
                 else
 				{
 					ShootBeamInDir(enemyDirection);
@@ -229,23 +228,6 @@ public class LaserTank : Tank
         }
     }
 
-	public void TakeDamage(float damage)
-	{
-		healthBar.gameObject.SetActive(true);
-		health -= damage;
-		healthBar.value -= damage;
-		if (health <= 0)
-		{
-			Die();
-		}
-	}
-
-	public void Die()
-	{
-		DestroyLaser();
-		Destroy(gameObject);
-	}
-
 	private void DestroyLaser()
     {
         Destroy(beam);
@@ -270,35 +252,4 @@ public class LaserTank : Tank
 	{
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
-
-	private void OnTriggerEnter(Collider collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperProjectileScript.team.Equals(tankTeam))
-        {
-            return;
-        }
-
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(tankTeam))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-            }
-            else if(collision.gameObject.tag.Contains("Missle")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.MISSILE_DAMAGE);
-            }
-        }
-    }
 }

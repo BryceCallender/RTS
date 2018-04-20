@@ -5,12 +5,8 @@ using UnityEngine.UI;
 using Unit;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Tank : UnitStats, IImageable
+public class Tank : UnitScript, IUnitStats, IImageable
 {
-    public int damage = 5;
-    public float health = 100;
-    public int range = 10;
-    public int cost = 10;
     public int capacity = 5;
     public Transform turretEnd;
 
@@ -28,29 +24,18 @@ public class Tank : UnitStats, IImageable
     private RaycastHit hitInfo;
     private Vector3 direction;
     private UnitSelected unitSelected;
-    private int team = (int)Team.BLUE;
-
 
     private float timerToStop = 0;
     private float timeToStopShowingHealth = 3.0f;
     private bool isUnderAttack;
 
     private bool enemyHasBeenSelected = false;
-    private Quaternion keepUIAbove;
-
-    //UI stuff
-    public Slider healthBar;
-    public Canvas canvas;
-
-    public HyperbitProjectileScript hyperProjectileScript;
-
+  
     private void Start()
     {
-        keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
-        healthBar.gameObject.SetActive(false);
+        
         projectile = bulletPrefab;
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        
         turrentPosition = transform.Find("turret");
         originalTurretPosition = transform.rotation;
         unitSelected = GetComponent<UnitSelected>();
@@ -58,21 +43,20 @@ public class Tank : UnitStats, IImageable
 
     private void Update()
     {
-        canvas.GetComponent<RectTransform>().rotation = keepUIAbove;
-        if(unitSelected.selected)
-        {
-            healthBar.gameObject.SetActive(true);
-        }
+        //if(unitSelected.selected)
+        //{
+        //    healthBar.gameObject.SetActive(true);
+        //}
 
 		if(unitSelected.isFirst)
 		{
 			ShowImage();
 		}
 
-        if(!unitSelected.selected && healthBar.gameObject.activeSelf)
-        {
-            HealthBarFadeAway();
-        }
+        //if(!unitselected.selected && healthbar.gameobject.activeself)
+        //{
+        //    healthbarfadeaway();
+        //}
     }
 
 	private void FixedUpdate()
@@ -80,12 +64,7 @@ public class Tank : UnitStats, IImageable
 		Fire();
 	}
 
-	public override void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    public override void Fire()
+    public void Fire()
     {
         if(unitSelected.selected || enemyHasBeenSelected)
         {
@@ -111,18 +90,6 @@ public class Tank : UnitStats, IImageable
             {
                 enemyHasBeenSelected = false;   
             }
-        }
-    }
-
-    public override void TakeDamage(float damage)
-    {
-        healthBar.gameObject.SetActive(true);
-        isUnderAttack = true;
-        health -= damage;
-        healthBar.value -= damage;
-        if (health <= 0)
-        {
-            Die();
         }
     }
 
@@ -161,46 +128,5 @@ public class Tank : UnitStats, IImageable
 	public void ShowImage()
 	{
 		UIManager.Instance.SetPhoto(this.gameObject.name);
-	}
-
-    public void HealthBarFadeAway()
-    {
-        timerToStop += Time.deltaTime;
-        if (timerToStop >= timeToStopShowingHealth)
-        {
-            timerToStop = 0;
-            healthBar.gameObject.SetActive(false);
-        }
-    }
-
-	private void OnTriggerEnter(Collider collision)
-	{
-		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-		if (hyperProjectileScript.team.Equals(team))
-		{
-			return;
-		}
-
-		if (!hyperProjectileScript.owner.Contains("Blue")
-			&& !hyperProjectileScript.team.Equals(team))
-		{
-			//Physics.IgnoreLayerCollision(9, 10, false);
-			if (collision.gameObject.tag.Contains("Laser")
-				&& collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.LASER_DAMAGE);
-			}
-			else if (collision.gameObject.tag.Contains("Cluster")
-					 && collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-			}
-            else if (collision.gameObject.tag.Contains("Missle")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.MISSILE_DAMAGE);
-            }
-		}
 	}
 }

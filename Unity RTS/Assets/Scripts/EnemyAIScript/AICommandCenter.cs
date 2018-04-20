@@ -36,7 +36,7 @@ public class AICommandCenter : MonoBehaviour
        
         if (CheckIfBuildingCanBePlaced(GetRandomLocation(gameObject.transform)))
         {
-            Instantiate(chosenBuilding, centerOfBuilding,Quaternion.Euler(new Vector3(0,-180,0)));
+            //Instantiate(chosenBuilding, centerOfBuilding,Quaternion.Euler(new Vector3(0,-180,0)));
             //if (radiusOfInfluence <= MAX_RADIUS)
             //{
             //    radiusOfInfluence += 100;
@@ -74,6 +74,7 @@ public class AICommandCenter : MonoBehaviour
 
         return !Physics.CheckBox(centerOfBuilding, sizeOfBound / 2, Quaternion.identity,layerMask);
     }
+
 
     void OnDrawGizmosSelected()
     {
