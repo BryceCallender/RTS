@@ -4,6 +4,7 @@ using Unit;
 public class UnitScript: MonoBehaviour
 {
     private HyperbitProjectileScript hyperbitProjectileScript;
+    [SerializeField]private HealthManager healthManager;
 
     public int team = (int)Team.BLUE;
     public int damage;
@@ -11,12 +12,19 @@ public class UnitScript: MonoBehaviour
     public int range;
     public int cost;
 
+    private bool isUnderAttack;
+
+    private void Awake()
+    {
+        healthManager = gameObject.GetComponent<HealthManager>();
+    }
+
     public void TakeDamage(float damage)
     {
-        //healthBar.gameObject.SetActive(true);
-        //isUnderAttack = true;
+        healthManager.SetHealthBar(true);
+        isUnderAttack = true;
         health -= damage;
-        //healthBar.value -= damage;
+        healthManager.UpdateHealthBar(damage);
         if (health <= 0)
         {
             Die();

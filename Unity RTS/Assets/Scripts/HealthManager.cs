@@ -10,7 +10,6 @@ public class HealthManager : MonoBehaviour
 
     private float timerToStop = 0;
     private float timeToStopShowingHealth = 3.0f;
-    private bool isUnderAttack;
     private Quaternion keepUIAbove;
 
     // Use this for initialization
@@ -38,5 +37,16 @@ public class HealthManager : MonoBehaviour
             timerToStop = 0;
             healthBar.gameObject.SetActive(false);
         }
+    }
+
+    public void SetHealthBar(bool status)
+    {
+        healthBar.gameObject.SetActive(status);
+    }
+
+    public void UpdateHealthBar(float damage)
+    {
+        Debug.Log(healthBar.value);
+        healthBar.value -= damage;
     }
 }

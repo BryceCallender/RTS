@@ -57,11 +57,12 @@ public class Tank : UnitScript, IUnitStats, IImageable
         //{
         //    healthbarfadeaway();
         //}
+        Fire();
     }
 
-	private void FixedUpdate()
+    private void FixedUpdate()
 	{
-		Fire();
+		//Fire();
 	}
 
     public void Fire()
@@ -98,8 +99,9 @@ public class Tank : UnitScript, IUnitStats, IImageable
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if(Input.GetMouseButtonDown(1) && this.gameObject.GetComponent<UnitSelected>().selected)
+            if(Input.GetMouseButtonDown(1))
             {
+                Debug.Log(hitInfo.collider.name);
                 if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                 {
                     nearestEnemy = hitInfo.transform.gameObject;
