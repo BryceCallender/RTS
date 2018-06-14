@@ -43,7 +43,7 @@ public class EnemyTank : Enemy
 
 	private void FixedUpdate()
 	{
-		Fire();
+		//Fire();
 	}
 
 	public void Fire()

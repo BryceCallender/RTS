@@ -18,11 +18,12 @@ public class MissleAttacking : StateMachineBehaviour
 	private bool hasFired = false;
 	private bool missleIsTraveling = false;
 
-    HyperbitProjectileScript hyperProjectileScript;
-    HomingMissile missile;
+    private HyperbitProjectileScript hyperProjectileScript;
+	private Building myBuilding;
+    private HomingMissile missile;
 
 	//OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		turret = animator.gameObject.GetComponent<MissleTurret>();
 		if (turret.targets.Count > 0)
@@ -32,7 +33,7 @@ public class MissleAttacking : StateMachineBehaviour
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+	public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		if (turret.targets.Count > 0)
 		{
@@ -125,7 +126,7 @@ public class MissleAttacking : StateMachineBehaviour
 			missleIsTraveling = true;
 			projectile.tag = "Missle";
             hyperProjectileScript.owner = animator.gameObject.name;
-            hyperProjectileScript.team = turret.team;
+			myBuilding.alignment = projectile.GetComponent<SerializableIAlignmentProvider>();
             int speed = hyperProjectileScript.speed;
 			projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
 		}

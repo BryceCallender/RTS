@@ -30,7 +30,7 @@ public class BuildingPlacement : MonoBehaviour
 
     public void SetBuilding(GameObject building)
     {
-        currentBuilding = ((GameObject)Instantiate(building)).transform;
+        currentBuilding = (Instantiate(building)).transform;
         placeableBuilding = currentBuilding.GetComponent<PlaceableBuilding>();
     }
 
