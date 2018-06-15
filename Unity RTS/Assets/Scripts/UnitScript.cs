@@ -1,34 +1,80 @@
 ﻿using UnityEngine;
 using Unit;
 
-public class UnitScript: MonoBehaviour
+public class UnitScript: MonoBehaviour, IDamageable
 {
-    private HyperbitProjectileScript hyperbitProjectileScript;
-    [SerializeField]private HealthManager healthManager;
+    /// <summary>
+    /// Gets the current health.
+    /// </summary>
+    [SerializeField]
+    private float currentHealth;
+	
+    /// <summary>
+    /// Gets whether this instance is dead.
+    /// </summary>
+    public bool isDead
+    {
+        get { return currentHealth <= 0f; }
+    }
+	
+    /// <summary>
+    /// The alignment of the damager
+    /// </summary>
+    public SerializableIAlignmentProvider alignment;
+	
+    /// <summary>
+    /// Gets the <see cref="IAlignmentProvider"/> of this instance
+    /// </summary>
+    public IAlignmentProvider alignmentProvider
+    {
+        get
+        {
+            return alignment != null ? alignment.GetInterface() : null;
+        }
+    }
+    
+    [SerializeField]
+    private HealthManager healthManager;
 
-    public int team = (int)Team.BLUE;
-    public int damage;
     public float health;
-    public int range;
     public int cost;
-
+    public int capacityAmount;
+    
     private bool isUnderAttack;
+    private bool canDamage;
 
     private void Awake()
     {
         healthManager = gameObject.GetComponent<HealthManager>();
     }
 
-    public void TakeDamage(float damage)
+    // Update is called once per frame
+    void Update ()
     {
-        healthManager.SetHealthBar(true);
-        isUnderAttack = true;
-        health -= damage;
-        healthManager.UpdateHealthBar(damage);
-        if (health <= 0)
+        if (isDead)
         {
             Die();
         }
+    }
+
+    /// <summary>
+    /// Takes damage but checks if it can be damaged first
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="damageAlignment"></param>
+    /// <returns></returns>
+    public bool TakeDamage(float damage, IAlignmentProvider damageAlignment)
+    {
+        canDamage = damageAlignment == null || alignmentProvider == null ||
+                    damageAlignment.CanHarm(alignmentProvider);
+		
+        if (isDead || !canDamage)
+        {
+            return false;
+        }
+
+        currentHealth -= damage;
+        return true;
     }
 
     public void Die()
@@ -36,33 +82,30 @@ public class UnitScript: MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    /// <summary>
+    /// Typical take damage only when we get triggered
+    /// </summary>
+    /// <param name="collision"></param>
+    protected void OnTriggerEnter(Collider collision)
     {
-        hyperbitProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperbitProjectileScript.team.Equals(team))
+        if (canDamage)
         {
-            return;
-        }
+            var hitAlignment = collision.GetComponent<SerializableIAlignmentProvider>().GetInterface();
 
-        if (!hyperbitProjectileScript.owner.Contains("Blue")
-            && !hyperbitProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
             if (collision.gameObject.tag.Contains("Laser")
                 && collision.gameObject.layer == 10)
             {
-                TakeDamage(GameController.LASER_DAMAGE);
+                TakeDamage(GameController.LASER_DAMAGE,hitAlignment);
             }
             else if (collision.gameObject.tag.Contains("Cluster")
-                        && collision.gameObject.layer == 10)
+                     && collision.gameObject.layer == 10)
             {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
+                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE,hitAlignment);
             }
             else if (collision.gameObject.tag.Contains("Missle")
-                        && collision.gameObject.layer == 10)
+                     && collision.gameObject.layer == 10)
             {
-                TakeDamage(GameController.MISSILE_DAMAGE);
+                TakeDamage(GameController.MISSILE_DAMAGE,hitAlignment);
             }
         }
     }

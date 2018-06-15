@@ -7,7 +7,7 @@ using Unit;
 [RequireComponent(typeof(BoxCollider))]
 public class Tank : UnitScript, IUnitStats, IImageable
 {
-    public int capacity = 5;
+	public float range;
     public Transform turretEnd;
 
     //Turrent rotations
@@ -81,7 +81,6 @@ public class Tank : UnitScript, IUnitStats, IImageable
 					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
 					projectile.tag = "Laser";
 					projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-                    projectile.GetComponent<HyperbitProjectileScript>().team = team;
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);

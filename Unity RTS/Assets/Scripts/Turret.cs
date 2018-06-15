@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unit;
 
-public class Turret : MonoBehaviour 
+public class Turret : Building 
 {
     public List<GameObject> targets;
     public GameObject bullet;
@@ -13,64 +13,95 @@ public class Turret : MonoBehaviour
     public int range = 15;
     public int team;
     public int layerTeam;
+	
+	/// <summary>
+	/// Y rotation speed while the turret is idle in degrees per second
+	/// </summary>
+	public float idleRotationSpeed = 39f;
 
-	public HyperbitProjectileScript hyperProjectileScript;
+	/// <summary>
+	/// The time it takes for the tower to correct its x rotation on idle in seconds
+	/// </summary>
+	public float idleCorrectionTime = 2.0f;
+	
+	/// <summary>
+	/// Counter used for x rotation correction
+	/// </summary>
+	protected float m_XRotationCorrectionTime;
+	
+	/// <summary>
+	/// How fast this turret is spinning
+	/// </summary>
+	protected float m_CurrentRotationSpeed;
+	
+	/// <summary>
+	/// The seconds until the tower starts spinning
+	/// </summary>
+	protected float m_WaitTimer = 0.0f;
+	
+	/// <summary>
+	/// How long the turret waits in its idle form before spinning in seconds
+	/// </summary>
+	public float idleWaitTime = 2.0f;
 
 	// Use this for initialization
-	void Start () 
+	protected void Start () 
     {
-		//Since its turrents the only targets is the units so layers
-        layerTeam = this.gameObject.layer;
-        switch(layerTeam)
-        {
-            case 8: team = (int)Team.BLUE;
-                break;
-            case 9: team = (int)Team.RED;
-                break;
-        }
         targets = new List<GameObject>();
-	}
+	    m_WaitTimer = idleWaitTime;
+    }
 
-	private void Die()
+	protected void Update()
 	{
-		Destroy(gameObject);
+		AimTurret();
 	}
-
-	private void TakeDamage(float damage)
+	
+	/// <summary>
+	/// Aims the turret at the current target
+	/// </summary>
+	protected virtual void AimTurret()
 	{
-		health -= damage;
-		if (health <= 0)
-		{
-			Die();
-		}
-
-	}
-
-	private void OnTriggerEnter(Collider collision)
-	{
-		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-		if(hyperProjectileScript.team.Equals(team))
+		if (turretRotator == null)
 		{
 			return;
 		}
 
-		if (!hyperProjectileScript.owner.Contains("Red")
-			&& !hyperProjectileScript.team.Equals(team))
+		if (targets.Count == 0) // do idle rotation
 		{
-			//Physics.IgnoreLayerCollision(8, 10, false);
-			if (collision.gameObject.tag.Contains("Laser")
-				&& collision.gameObject.layer == 10)
+			if (m_WaitTimer > 0)
 			{
-                TakeDamage(GameController.LASER_DAMAGE);
+				m_WaitTimer -= Time.deltaTime;
+				if (m_WaitTimer <= 0)
+				{
+					m_CurrentRotationSpeed = (Random.value * 2 - 1) * idleRotationSpeed;
+				}
 			}
-			else if (collision.gameObject.tag.Contains("Cluster")
-					 && collision.gameObject.layer == 10)
+			else
 			{
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
+				Vector3 euler = turretRotator.rotation.eulerAngles;
+				euler.x = Mathf.Lerp(Wrap180(euler.x), 0, m_XRotationCorrectionTime);
+				m_XRotationCorrectionTime = Mathf.Clamp01((m_XRotationCorrectionTime + Time.deltaTime) / idleCorrectionTime);
+				euler.y += m_CurrentRotationSpeed * Time.deltaTime;
+
+				turretRotator.eulerAngles = euler;
 			}
 		}
-
 	}
 
+	/// <summary>
+	/// A simply function to convert an angle to a -180/180 wrap
+	/// </summary>
+	public static float Wrap180(float angle)
+	{
+		angle %= 360;
+		if (angle < -180)
+		{
+			angle += 360;
+		}
+		else if (angle > 180)
+		{
+			angle -= 360;
+		}
+		return angle;
+	}
 }

@@ -6,18 +6,16 @@ using UnityEngine.EventSystems;
 using Unit;
 
 [RequireComponent(typeof(GameController))]
-public class CommandBuilding : MonoBehaviour 
+public class CommandBuilding : Building 
 {
 	#region variables
-	public float health;
-    private int team = (int)Team.BLUE;
     public Text commandBuildText;
     public Text amountText;
     public GameObject harvesterGameObject;
     public GameObject harvesterPanel;
     public Slider harvesterSpawnerSlider;
 
-    GameObject harvesterSpawn;
+    private GameObject harvesterSpawn;
 
     static GameController gameController;
 
@@ -29,12 +27,15 @@ public class CommandBuilding : MonoBehaviour
     private bool clickedBuilding;
     private Transform rallyLocation;
 	private UIManager uiManager;
+
 	#endregion
 
 	// Use this for initialization
-	void Start () 
-    {
-        health = 1000;
+	void Start ()
+	{
+		requirementStructures.building = gameObject;
+		requirementStructures.requirementList = new List<GameObject>();
+		
         gameController = FindObjectOfType<GameController>();
 		uiManager = gameController.GetComponent<UIManager>();
         //commandBuildText = GameObject.Find("HarvesterStats").GetComponent<Text>();
@@ -47,7 +48,7 @@ public class CommandBuilding : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
 	{
         //Call to see if we clicked the building or not to see if we can even 
         //make units or not 
@@ -85,7 +86,7 @@ public class CommandBuilding : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if (hitInfo.collider.name.Contains("Building_Command_Blue") && Input.GetMouseButtonDown(0))
+            if (hitInfo.collider.name.Contains("Command") && Input.GetMouseButtonDown(0))
             {
                 clickedBuilding = true;
                 harvesterPanel.SetActive(true);
@@ -154,42 +155,5 @@ public class CommandBuilding : MonoBehaviour
                 harvesterGameObject.GetComponent<NavMeshAgent>().destination = rallyLocation.transform.position;
             }
 		}
-    }
-        
-
-	public void Die()
-	{
-		Destroy(gameObject);
-	}
-
-	public void TakeDamage(int damage)
-	{
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-	}
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
-        {
-			return;
-        }
-
-        if (!collision.gameObject.GetComponent<HyperbitProjectileScript>().owner.Contains("Blue")
-            && !collision.gameObject.GetComponent<HyperbitProjectileScript>().team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser") && collision.gameObject.layer == 10)
-            {
-                TakeDamage(5);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster") && collision.gameObject.layer == 10)
-            {
-                TakeDamage(10);
-            }
-        }
     }
 }

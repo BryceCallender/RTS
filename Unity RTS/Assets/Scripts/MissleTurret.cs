@@ -10,30 +10,14 @@ public struct MissleHead
     public Transform turretEnds;
 }
 
-public class MissleTurret : Building
+public class MissleTurret : Turret
 {
-	public List<GameObject> targets;
-    public List<MissleHead> missleRepresentations;
-	public GameObject bullet;
-	public Transform turretRotator;
-	public int range = 15;
-	public int layerTeam;
-
+    public List<MissleHead> missleRepresentations; // its did a missle fire and its transform name better?????
 
 	// Use this for initialization
 	void Start()
 	{
-		//Since its turrents the only targets is the units so layers
-		layerTeam = this.gameObject.layer;
-		switch (layerTeam)
-		{
-			case 8:
-                team = (int)Team.BLUE;
-				break;
-			case 9:
-                team = (int)Team.RED;
-				break;
-		}
-		targets = new List<GameObject>();
+		base.Start();
+		missleRepresentations = new List<MissleHead>();
 	}
 }

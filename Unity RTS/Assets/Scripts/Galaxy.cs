@@ -6,8 +6,7 @@ using Unit;
 public class Galaxy : UnitScript, IUnitStats, IImageable
 {
     //TODO:: make galaxies fly in the air maybe?
-    public int capacity = 10;
-
+	public float range;
 	public GameObject[] enemies;
 	public GameObject nearestEnemy;
     public GameObject Thruster;
@@ -99,7 +98,6 @@ public class Galaxy : UnitScript, IUnitStats, IImageable
                     projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
                     projectile.tag = "Cluster";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-                    projectile.GetComponent<HyperbitProjectileScript>().team = team;
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }

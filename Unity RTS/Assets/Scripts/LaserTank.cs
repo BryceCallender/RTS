@@ -4,7 +4,9 @@ using Unit;
 public class LaserTank : Tank
 {
 	#region variables
+
 	[Header("Laser Effects")]
+	public float damage;
     public bool isCharging;
     public bool isCharged;
     public bool isFiring;

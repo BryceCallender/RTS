@@ -34,6 +34,8 @@ public class Building : MonoBehaviour, ISelectable, IDamageable
 		}
 	}
 
+	protected RequirementStructure requirementStructures;
+
 	private bool canDamage;
 
 	// Update is called once per frame
