@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unit;
 
-public class AIFactory : MonoBehaviour 
+public class AIFactory : Building 
 {
     [Header("Factory Attributes")]
     public float health;
@@ -83,47 +83,5 @@ public class AIFactory : MonoBehaviour
         }
 
         unitQueue.Enqueue(unitToQueue);
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-            //Building dies so does the units its making and your money 
-            unitQueue.Clear();
-        }
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperProjectileScript.team.Equals(team))
-        {
-            return;
-        }
-
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-            }
-        }
     }
 }

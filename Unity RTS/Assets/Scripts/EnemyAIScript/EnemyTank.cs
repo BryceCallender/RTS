@@ -76,7 +76,6 @@ public class EnemyTank : Enemy
 					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
 					projectile.tag = "Laser";
 					projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
-					projectile.GetComponent<HyperbitProjectileScript>().team = team;
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
 					projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -102,7 +101,7 @@ public class EnemyTank : Enemy
 	public void LockOn()
 	{
 		enemies.Clear();
-		hitInfo = Physics.SphereCastAll(this.transform.position, range, Vector3.forward);
+		hitInfo = Physics.SphereCastAll(transform.position, range, Vector3.forward);
 		for (int i = 0; i < hitInfo.Length; i++)
 		{
 			if (hitInfo[i].collider.gameObject.layer == 8 || hitInfo[i].collider.gameObject.layer == 11)
@@ -119,38 +118,6 @@ public class EnemyTank : Enemy
 			nearestEnemy = enemies[randomObjectToAttack];
 		}
 
-	}
-
-	//When something enters the collider take damage to the unit!
-	private void OnTriggerEnter(Collider collision)
-	{
-		hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-		if (hyperProjectileScript.team.Equals(team))
-		{
-			return;
-		}
-
-		if (!hyperProjectileScript.owner.Contains("Red")
-			&& !hyperProjectileScript.team.Equals(team))
-		{
-			//Physics.IgnoreLayerCollision(8, 10, false);
-			if (collision.gameObject.tag.Contains("Laser")
-				&& collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.LASER_DAMAGE);
-			}
-			else if (collision.gameObject.tag.Contains("Cluster")
-					 && collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-			}
-            else if (collision.gameObject.tag.Contains("Missle")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.MISSILE_DAMAGE);
-            }
-		}
 	}
 
 	void OnDrawGizmosSelected()

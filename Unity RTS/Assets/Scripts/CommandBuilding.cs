@@ -32,10 +32,7 @@ public class CommandBuilding : Building
 
 	// Use this for initialization
 	void Start ()
-	{
-		requirementStructures.building = gameObject;
-		requirementStructures.requirementList = new List<GameObject>();
-		
+	{	
         gameController = FindObjectOfType<GameController>();
 		uiManager = gameController.GetComponent<UIManager>();
         //commandBuildText = GameObject.Find("HarvesterStats").GetComponent<Text>();

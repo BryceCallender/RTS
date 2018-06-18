@@ -5,15 +5,11 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using Unit;
 
-public class Harvester : MonoBehaviour, IImageable
+public class Harvester : UnitScript, IImageable
 {
     [Header("Harvester Stats")]
-    public int health = 100;
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
-    public int cost = 5;
-    public int capacity = 1;
-    public int team = (int)Team.BLUE;
 
     //Harvester Building Capabilites and what building to build if we want one
     public List<GameObject> buildableBuildings;
@@ -252,53 +248,10 @@ public class Harvester : MonoBehaviour, IImageable
 		}
     }
 
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-
-    public void TakeDamage(int damage)
-    {
-        healthBar.gameObject.SetActive(true);
-        health -= damage;
-        healthBar.value -= damage;
-        if (health <= 0)
-        {
-            Die();
-        }
-    }
-
 	public void ShowImage()
 	{
 		UIManager.Instance.SetPhoto(this.gameObject.name);
 	}
-
-	private void OnTriggerEnter(Collider collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperProjectileScript.team.Equals(team))
-        {
-            return;
-        }
-
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-            }
-        }
-    }
 
     private void BuildFactory()
     {

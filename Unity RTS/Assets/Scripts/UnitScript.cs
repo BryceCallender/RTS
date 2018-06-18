@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Unit;
 
-public class UnitScript: MonoBehaviour, IDamageable
+public class UnitScript: RTSObject, IDamageable, ISelectable
 {
     /// <summary>
     /// Gets the current health.
@@ -15,22 +15,6 @@ public class UnitScript: MonoBehaviour, IDamageable
     public bool isDead
     {
         get { return currentHealth <= 0f; }
-    }
-	
-    /// <summary>
-    /// The alignment of the damager
-    /// </summary>
-    public SerializableIAlignmentProvider alignment;
-	
-    /// <summary>
-    /// Gets the <see cref="IAlignmentProvider"/> of this instance
-    /// </summary>
-    public IAlignmentProvider alignmentProvider
-    {
-        get
-        {
-            return alignment != null ? alignment.GetInterface() : null;
-        }
     }
     
     [SerializeField]
@@ -64,7 +48,7 @@ public class UnitScript: MonoBehaviour, IDamageable
     /// <param name="damageAlignment"></param>
     /// <returns></returns>
     public bool TakeDamage(float damage, IAlignmentProvider damageAlignment)
-    {
+    {   
         canDamage = damageAlignment == null || alignmentProvider == null ||
                     damageAlignment.CanHarm(alignmentProvider);
 		
@@ -88,25 +72,23 @@ public class UnitScript: MonoBehaviour, IDamageable
     /// <param name="collision"></param>
     protected void OnTriggerEnter(Collider collision)
     {
-        if (canDamage)
+        //Bullet hit the unit so lets get the bullets allignment
+        var hitAlignment = collision.gameObject.GetComponent<HyperbitProjectileScript>().alignmentProvider;
+        
+        if (collision.gameObject.name.Contains("Laser")
+            && collision.gameObject.layer == 10)
         {
-            var hitAlignment = collision.GetComponent<SerializableIAlignmentProvider>().GetInterface();
-
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE,hitAlignment);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE,hitAlignment);
-            }
-            else if (collision.gameObject.tag.Contains("Missle")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.MISSILE_DAMAGE,hitAlignment);
-            }
+            TakeDamage(GameController.LASER_DAMAGE,hitAlignment);
+        }
+        else if (collision.gameObject.name.Contains("Cluster")
+                 && collision.gameObject.layer == 10)
+        {
+            TakeDamage(GameController.CLUSTER_BOMB_DAMAGE,hitAlignment);
+        }
+        else if (collision.gameObject.name.Contains("Missle")
+                 && collision.gameObject.layer == 10)
+        {
+            TakeDamage(GameController.MISSILE_DAMAGE,hitAlignment);
         }
     }
 }

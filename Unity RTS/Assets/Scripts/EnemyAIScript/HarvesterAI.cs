@@ -83,31 +83,31 @@ public class HarvesterAI : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider collision)
-	{
-		hyperbitProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-		if (hyperbitProjectileScript.team.Equals(team))
-		{
-			return;
-		}
-
-		if (!hyperbitProjectileScript.owner.Contains("Red")
-			&& !hyperbitProjectileScript.team.Equals(team))
-		{
-			//Physics.IgnoreLayerCollision(9, 10, false);
-			if (collision.gameObject.tag.Contains("Laser")
-				&& collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.LASER_DAMAGE);
-			}
-			else if (collision.gameObject.tag.Contains("Cluster")
-					 && collision.gameObject.layer == 10)
-			{
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-			}
-		}
-	}
+//	private void OnTriggerEnter(Collider collision)
+//	{
+//		hyperbitProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
+//
+//		if (hyperbitProjectileScript.team.Equals(team))
+//		{
+//			return;
+//		}
+//
+//		if (!hyperbitProjectileScript.owner.Contains("Red")
+//			&& !hyperbitProjectileScript.team.Equals(team))
+//		{
+//			//Physics.IgnoreLayerCollision(9, 10, false);
+//			if (collision.gameObject.tag.Contains("Laser")
+//				&& collision.gameObject.layer == 10)
+//			{
+//                TakeDamage(GameController.LASER_DAMAGE);
+//			}
+//			else if (collision.gameObject.tag.Contains("Cluster")
+//					 && collision.gameObject.layer == 10)
+//			{
+//                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
+//			}
+//		}
+//	}
 }
 
 //Make command center have a giant area of influence so you can build inside

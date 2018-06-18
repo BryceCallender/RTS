@@ -96,7 +96,6 @@ public class Galaxy : UnitScript, IUnitStats, IImageable
                 {
                     fireCoolDownLeft = fireCoolDown;
                     projectile = (GameObject)Instantiate(bulletPrefab, turretToFire.transform.position, turretToFire.transform.rotation);
-                    projectile.tag = "Cluster";
                     projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
                     int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
                     projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
@@ -114,7 +113,7 @@ public class Galaxy : UnitScript, IUnitStats, IImageable
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
 		{
-			if (Input.GetMouseButtonDown(1) && this.gameObject.GetComponent<UnitSelected>().selected)
+			if (Input.GetMouseButtonDown(1) && gameObject.GetComponent<UnitSelected>().selected)
 			{
 				if (hitInfo.collider.gameObject.CompareTag("Enemy"))
 				{

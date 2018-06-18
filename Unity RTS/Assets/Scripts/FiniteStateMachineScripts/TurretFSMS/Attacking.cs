@@ -102,7 +102,6 @@ public class Attacking : StateMachineBehaviour
             projectile = (GameObject)Instantiate(turret.bullet, turret.turretEnd.transform.position, turret.turretEnd.transform.rotation);
             projectile.tag = "Laser";
             projectile.GetComponent<HyperbitProjectileScript>().owner = animator.gameObject.name;
-            projectile.GetComponent<HyperbitProjectileScript>().team = turret.team;
             //projectile.transform.LookAt(nearestEnemy.transform.position);
             int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;
             projectile.GetComponent<Rigidbody>().AddForce(direction * speed);

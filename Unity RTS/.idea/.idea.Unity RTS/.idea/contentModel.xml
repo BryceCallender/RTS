@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\bryce\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_Unity RTS.-1692873707.00" t="ExcludeRecursive" />
+    <e p="C:\Users\bryce\Desktop\RTS\Unity RTS" t="IncludeRecursive">
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
@@ -446,8 +447,10 @@
           <e p="RequirementStructure.cs" t="Include" />
           <e p="Resource.cs" t="Include" />
           <e p="Revealer.cs" t="Include" />
+          <e p="RTSObject.cs" t="Include" />
           <e p="SimpleAlignment.cs" t="Include" />
           <e p="SupplyBuilding.cs" t="Include" />
+          <e p="SupplyDepot.cs" t="Include" />
           <e p="Tank.cs" t="Include" />
           <e p="Timer.cs" t="Include" />
           <e p="Turret.cs" t="Include" />
@@ -558,6 +561,5 @@
       </e>
       <e p="Unity RTS.sln" t="IncludeFlat" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.1/resharper-host/local/Transient/ReSharperHost/v12/SolutionCaches/_Unity RTS.810570118.00" t="ExcludeRecursive" />
   </component>
 </project>

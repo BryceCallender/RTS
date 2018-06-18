@@ -11,7 +11,6 @@ public class LaserTank : Tank
     public bool isCharged;
     public bool isFiring;
     public GameObject chargeArea;
-    private int tankTeam = (int)Team.BLUE;
 	private ParticleSystem chargeEffect;
 
     [Header("Prefabs")]
@@ -111,7 +110,7 @@ public class LaserTank : Tank
         }
     }
 
-    public void Fire()
+    private void Fire()
     {
         if (unitSel.selected || enemySelected)
         {
@@ -127,7 +126,7 @@ public class LaserTank : Tank
                 else
 				{
 					ShootBeamInDir(enemyDirection);
-					enemy.TakeDamage(damage * Time.deltaTime);
+					enemy.TakeDamage(damage * Time.deltaTime,alignmentProvider);
 				}
                     
             }

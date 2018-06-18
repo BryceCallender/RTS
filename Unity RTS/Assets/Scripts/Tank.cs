@@ -27,7 +27,6 @@ public class Tank : UnitScript, IUnitStats, IImageable
 
     private float timerToStop = 0;
     private float timeToStopShowingHealth = 3.0f;
-    private bool isUnderAttack;
 
     private bool enemyHasBeenSelected = false;
   
@@ -57,12 +56,11 @@ public class Tank : UnitScript, IUnitStats, IImageable
         //{
         //    healthbarfadeaway();
         //}
-        Fire();
     }
 
     private void FixedUpdate()
 	{
-		//Fire();
+		Fire();
 	}
 
     public void Fire()
@@ -78,8 +76,7 @@ public class Tank : UnitScript, IUnitStats, IImageable
 				if (fireCoolDown <= 0 && direction.magnitude <= range)
 				{
 					fireCoolDown = 0.5f;
-					projectile = (GameObject)Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
-					projectile.tag = "Laser";
+					projectile = Instantiate(bulletPrefab, turretEnd.transform.position, turretEnd.transform.rotation);
 					projectile.GetComponent<HyperbitProjectileScript>().owner = gameObject.name;
 					//projectile.transform.LookAt(nearestEnemy.transform.position);
 					int speed = projectile.GetComponent<HyperbitProjectileScript>().speed;

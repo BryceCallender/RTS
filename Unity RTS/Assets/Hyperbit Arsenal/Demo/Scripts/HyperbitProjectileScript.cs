@@ -10,14 +10,27 @@ public class HyperbitProjectileScript : MonoBehaviour
     [HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
     public string owner;
-    public int team;
     public int speed = 250;
     private bool hasCollided = false;
 
     private float timeToKill = 5.0f;
     private float timerToKill = 0;
 
-    private int hitObjectTeam = 0;
+    /// <summary>
+    /// The alignment of the damager
+    /// </summary>
+    public SerializableIAlignmentProvider alignment;
+	
+    /// <summary>
+    /// Gets the <see cref="IAlignmentProvider"/> of this instance
+    /// </summary>
+    public IAlignmentProvider alignmentProvider
+    {
+        get
+        {
+            return alignment != null ? alignment.GetInterface() : null;
+        }
+    }
 
     void Start()
     {
@@ -32,32 +45,15 @@ public class HyperbitProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (hit.gameObject.name.Contains("Blue"))
-        {
-            hitObjectTeam = 0;
-        }
-        else
-        {
-            hitObjectTeam = 1;
-        }
-
         if (owner != hit.gameObject.name)
         {
-            if (hitObjectTeam != team)
-            {
+//            IAlignmentProvider damageAlignment = hit.gameObject.GetComponent<RTSObject>().alignmentProvider;
+//            if (damageAlignment.CanHarm(alignmentProvider))
+//            {
                 if (!hasCollided)
                 {
-                    //Debug.Log("Killed by " + hit.collider.gameObject.name);
-                    //Debug.Log(hit.gameObject.name);
                     hasCollided = true;
-                    //transform.DetachChildren();
                     impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
-                    //Debug.DrawRay(hit.contacts[0].point, hit.contacts[0].normal * 1, Color.yellow);
-
-                    //if (hit.gameObject.tag == "Destructible") // Projectile will destroy objects tagged as Destructible
-                    //{
-                    //  Destroy(hit.gameObject);
-                    //}
 
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)
@@ -69,7 +65,6 @@ public class HyperbitProjectileScript : MonoBehaviour
                     Destroy(projectileParticle, 1f);
                     Destroy(impactParticle, 1f);
                     Destroy(gameObject);
-                    //projectileParticle.Stop();
 
                     ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
                     //Component at [0] is that of the parent i.e. this object (if there is any)
@@ -83,7 +78,7 @@ public class HyperbitProjectileScript : MonoBehaviour
                         Destroy(trail.gameObject, 2);
                     }
                 }
-            }
+//            }
         }
     }
 

@@ -6,7 +6,7 @@ using TMPro;
 using Unit;
 
 [RequireComponent(typeof(GameController))]
-public class Factory : MonoBehaviour
+public class Factory : Building
 {
     [Header("Factory Attributes")]
     public float health;
@@ -67,7 +67,6 @@ public class Factory : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        health = 300;
         isSelected = false;
         gameController = FindObjectOfType<GameController>();
 		uiManager = gameController.GetComponent<UIManager>();
@@ -142,7 +141,7 @@ public class Factory : MonoBehaviour
         if(isSelected)
         {
             SetUnit(buildableUnits.Find(x => x.gameObject.name.Contains("Tank")));
-            int cost = unitGameObject.GetComponent<Tank>().cost;
+            int cost = unitGameObject.GetComponent<UnitScript>().cost;
             if (gameController.currency >= cost)
             {
                 UnitStruct unitToQueue;
@@ -194,7 +193,7 @@ public class Factory : MonoBehaviour
             if (unitQueue.Count > 0)
             {
                 unitQueue.Dequeue();
-                gameController.currency += unitGameObject.GetComponent<Tank>().cost;
+                gameController.currency += unitGameObject.GetComponent<UnitScript>().cost;
                 Debug.Log(unitQueue.Count);
             }
         }
@@ -207,7 +206,7 @@ public class Factory : MonoBehaviour
             if (unitQueue.Count > 0)
             {
                 unitQueue.Dequeue();
-                gameController.currency += unitGameObject.GetComponent<Galaxy>().cost;
+                gameController.currency += unitGameObject.GetComponent<UnitScript>().cost;
                 Debug.Log(unitQueue.Count);
             }
         }
@@ -333,47 +332,5 @@ public class Factory : MonoBehaviour
     public bool HasMoreThanOneInQueue(Queue<UnitStruct> queue)
     {
         return queue.Count > 1;
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            Die();
-            //Building dies so does the units its making and your money 
-            unitQueue.Clear();
-        }
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        hyperProjectileScript = collision.gameObject.GetComponent<HyperbitProjectileScript>();
-
-        if (hyperProjectileScript.team.Equals(team))
-        {
-            return;
-        }
-
-        if (!hyperProjectileScript.owner.Contains("Blue")
-            && !hyperProjectileScript.team.Equals(team))
-        {
-            //Physics.IgnoreLayerCollision(9, 10, false);
-            if (collision.gameObject.tag.Contains("Laser")
-                && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.LASER_DAMAGE);
-            }
-            else if (collision.gameObject.tag.Contains("Cluster")
-                     && collision.gameObject.layer == 10)
-            {
-                TakeDamage(GameController.CLUSTER_BOMB_DAMAGE);
-            }
-        }
     }
 }
