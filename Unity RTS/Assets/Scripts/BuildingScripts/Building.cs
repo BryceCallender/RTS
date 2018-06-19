@@ -62,10 +62,10 @@ public class Building : RTSObject, ISelectable, IDamageable
 		Destroy(gameObject);
 	}
 
-	private void OnDestroy()
-	{
-		throw new System.NotImplementedException();
-	}
+//	private void OnDestroy()
+//	{
+//		throw new System.NotImplementedException();
+//	}
 
 	/// <summary>
 	/// Typical take damage only when we get triggered

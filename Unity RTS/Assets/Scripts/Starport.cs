@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkyPort : Building 
+public class Starport: Building 
 {
 	
 	// Use this for initialization

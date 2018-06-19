@@ -156,13 +156,12 @@ public class Factory : Building
         {
             isTank = true;
             unitSpriteList.Add(tank);
-            //unitQueue.Enqueue(unitGameObject);
         }
         else
         {
             isTank = false; 
             unitSpriteList.Add(galaxy);
-            //unitQueue.Enqueue(unitGameObject);
+            
         }
     }
 

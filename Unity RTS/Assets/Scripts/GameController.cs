@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,7 +6,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
 	public int currency;
-    public Text resourcePanel;
+    public TextMeshProUGUI resourceText;
     public TextMeshProUGUI timeText;
 
     //Minerals
@@ -60,7 +58,6 @@ public class GameController : MonoBehaviour
         mineralErrorColor = mineralErrorText.color;
         gasErrorColor = mineralErrorColor;
         buildingErrorColor = mineralErrorColor;
-        timeText = timeText.GetComponent<TextMeshProUGUI>();
 		time = GetComponent<Timer>();
     }
 
@@ -79,7 +76,7 @@ public class GameController : MonoBehaviour
 		}
 
 		timeText.SetText(time.DisplayTime());
-        resourcePanel.text = "Resource:" + currency;
+        resourceText.SetText(currency.ToString());
 
         if(mineralErrorText.gameObject.activeSelf)
         {
@@ -100,7 +97,7 @@ public class GameController : MonoBehaviour
         }
 
     }
-
+ 
     public void FadeAlpha(float fadeTime,ref Text errorText, ref Color errorColor)
     {
         if(errorColor.a >= 0)

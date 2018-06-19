@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class Player : MonoBehaviour
     public int capacityMax;
     public int currentCapacity;
     [SerializeField]
-    private Text capacityText;
+    private TextMeshProUGUI capacityText;
 
     [SerializeField]
     private bool isAI;
@@ -18,6 +19,6 @@ public class Player : MonoBehaviour
     {
         capacityMax = 50;
         currentCapacity = 0;
-        capacityText.text = currentCapacity + "/" + capacityMax;
+        capacityText.SetText(currentCapacity + "/" + capacityMax); 
     }
 }
