@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour 
 {
+    public int currency;
     public int capacityMax;
     public int currentCapacity;
-    public Text capacityText;
+    [SerializeField]
+    private Text capacityText;
 
-    void Start()
+    [SerializeField]
+    private bool isAI;
+
+    private void Start()
     {
         capacityMax = 50;
         currentCapacity = 0;

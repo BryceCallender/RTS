@@ -9,6 +9,7 @@ public class Building : RTSObject, ISelectable, IDamageable
 	/// </summary>
 	[SerializeField]
 	private float currentHealth;
+	protected int resourceCost;
 	[SerializeField] 
 	private int buildSpeed;
 	[SerializeField] 
@@ -59,6 +60,11 @@ public class Building : RTSObject, ISelectable, IDamageable
 	public void Die()
 	{
 		Destroy(gameObject);
+	}
+
+	private void OnDestroy()
+	{
+		throw new System.NotImplementedException();
 	}
 
 	/// <summary>

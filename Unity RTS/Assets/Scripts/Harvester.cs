@@ -206,7 +206,7 @@ public class Harvester : UnitScript, IImageable
         {
             if(resource != null)
             {
-				float resourceDistance = Vector3.Distance(this.transform.position, resource.transform.position);
+				float resourceDistance = Vector3.Distance(transform.position, resource.transform.position);
 				if (nearestResource == null || resourceDistance < distance)
 				{
 					//nearestResource = resource;
@@ -250,32 +250,27 @@ public class Harvester : UnitScript, IImageable
 
 	public void ShowImage()
 	{
-		UIManager.Instance.SetPhoto(this.gameObject.name);
+		UIManager.Instance.SetPhoto(gameObject.name);
 	}
 
     private void BuildFactory()
     {
-        buildingPlacement.SetBuilding(buildableBuildings.Find(x => x.gameObject.name.Contains("Factory")));
+        buildingPlacement.SetBuilding(FindBuilding("Factory"));
         ResetBuildingPlacement();
         Debug.Log("Building Factory");
     }
 
     private void BuildSupply()
     {
-        buildingPlacement.SetBuilding(buildableBuildings.Find(x => x.gameObject.name.Contains("Supply")));
+        buildingPlacement.SetBuilding(FindBuilding("Supply"));
         ResetBuildingPlacement();
         Debug.Log("Building Supply");
     }
 
     private GameObject FindBuilding(string buildingName)
     {
-        GameObject building;
-        building = buildableBuildings.Find(x => x.gameObject.name.Contains(buildingName));
-        if(building == null)
-        {
-            return null;
-        }
-        return building;
+        var building = buildableBuildings.Find(x => x.gameObject.name.Contains(buildingName));
+        return building == null ? null : building;
     }
 
     private void ResetBuildingPlacement()

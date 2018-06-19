@@ -3,13 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unit;
 
-public class AI : MonoBehaviour 
+public class AI : Player
 {
-    //Basic money, max capacity, and current capacity
-    public int currency;
-    public int capacityMax;
-    public int currentCapacity;
-
     //What AI can make
     public List<GameObject> buildableUnits;
     public List<GameObject> buildableBuildings;

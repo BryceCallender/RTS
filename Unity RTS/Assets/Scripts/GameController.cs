@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameController : MonoBehaviour 
+public class GameController : MonoBehaviour
 {
-    public int currency;
+	public int currency;
     public Text resourcePanel;
     public TextMeshProUGUI timeText;
 
@@ -27,6 +28,9 @@ public class GameController : MonoBehaviour
 	public static bool hitEscape;
 	public bool isPaused;
 	public GameObject pauseMenuUI;
+
+	[SerializeField]
+	private GameObject[] players;
 
 	private Timer time;
 
@@ -149,5 +153,17 @@ public class GameController : MonoBehaviour
 		pauseMenuUI.gameObject.SetActive(false);
 		isPaused = false;
 		Time.timeScale = 1f;
+	}
+
+	public GameObject grabPlayer(String identifier)
+	{
+		for (int i = 0; i < players.Length; i++)
+		{
+			if (players[i].name.Equals(identifier))
+			{
+				return players[i];
+			}
+		}
+		return null;
 	}
 }
