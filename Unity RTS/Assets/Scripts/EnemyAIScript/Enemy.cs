@@ -12,7 +12,7 @@ public class Enemy : UnitScript
 	private void Start()
 	{
 		healthBar.gameObject.SetActive(false);
-		healthBar.maxValue = health;
-		healthBar.value = health;
+		healthBar.maxValue = currentHealth;
+		healthBar.value = currentHealth;
 	}
 }

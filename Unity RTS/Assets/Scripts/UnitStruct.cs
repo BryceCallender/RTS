@@ -7,6 +7,7 @@ namespace Unit
         public GameObject unit;
         public string name;
         public int cost;
+        public Sprite sprite;
     }
 
     public class UnitName
@@ -17,11 +18,4 @@ namespace Unit
             return name[1];
         } 
     }
-
-    public enum Team
-    {
-        BLUE,
-        RED
-    }
-
 }

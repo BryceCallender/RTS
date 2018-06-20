@@ -10,7 +10,6 @@ public class HarvesterAI : MonoBehaviour
     public int health = 30;
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
-    public int team = (int)Team.RED;
 
     public Resource[] resources;
     public Resource nearestResource;

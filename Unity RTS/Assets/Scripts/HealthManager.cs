@@ -17,8 +17,8 @@ public class HealthManager : MonoBehaviour
     {
         unit = gameObject.GetComponent<UnitScript>();
         healthBar.gameObject.SetActive(false);
-        healthBar.maxValue = unit.health;
-        healthBar.value = unit.health;
+        healthBar.maxValue = unit.currentHealth;
+        healthBar.value = unit.currentHealth;
         keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
     }
 	

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RTSObject : MonoBehaviour
 {
@@ -19,4 +20,6 @@ public class RTSObject : MonoBehaviour
 			return alignment != null ? alignment.GetInterface() : null;
 		}
 	}
+
+	public Sprite sprite;
 }

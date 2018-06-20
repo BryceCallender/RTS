@@ -1,43 +1,45 @@
 Base path: D:/Program Files/Unity/Editor/Data
 Cmd: initializeCompiler
-Cmd: preprocess
-  insize=1544 outsize=545 ok=1
-Cmd: preprocess
-  insize=708 outsize=708 ok=1
-Cmd: preprocess
-  insize=1895 outsize=1087 ok=1
-Cmd: preprocess
-  insize=2533 outsize=1129 ok=1
-Cmd: preprocess
-  insize=3569 outsize=2621 ok=1
-Cmd: preprocess
-  insize=10452 outsize=4018 ok=1
-Cmd: preprocess
-  insize=883 outsize=883 ok=1
-Cmd: preprocess
-  insize=533 outsize=336 ok=1
-Cmd: preprocess
-  insize=2706 outsize=487 ok=1
-Cmd: preprocess
-  insize=2309 outsize=864 ok=1
-Cmd: preprocess
-  insize=4407 outsize=3639 ok=1
-Cmd: preprocess
-  insize=2687 outsize=1268 ok=1
-Cmd: preprocess
-  insize=7357 outsize=2448 ok=1
-Cmd: preprocess
-  insize=8348 outsize=2720 ok=1
-Cmd: preprocess
-  insize=1606 outsize=580 ok=1
-Cmd: preprocess
-  insize=7392 outsize=2458 ok=1
-Cmd: preprocess
-  insize=3748 outsize=1675 ok=1
-Cmd: preprocess
-  insize=10461 outsize=4027 ok=1
-Cmd: preprocess
-  insize=3790 outsize=1261 ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler

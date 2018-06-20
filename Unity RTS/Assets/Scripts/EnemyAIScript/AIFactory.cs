@@ -8,7 +8,6 @@ public class AIFactory : Building
     [Header("Factory Attributes")]
     public float health;
     public int resourceCost;
-    private int team = (int)Team.RED;
     private GameObject unitGameObject; 
 
     private float spawnTimer = 5.0f;
@@ -64,7 +63,7 @@ public class AIFactory : Building
             unitToQueue.unit = AI.Instance.FindUnit("Tank");
             unitToQueue.cost = AI.Instance.units["Tank"];
             unitToQueue.name = unitToQueue.unit.name;
-            AI.Instance.globalQueue.Enqueue(unitToQueue);
+            //AI.Instance.globalQueue.Enqueue(unitToQueue);
             
         }
         else if(weight > 0.25 && weight < 0.50)
@@ -72,16 +71,16 @@ public class AIFactory : Building
             unitToQueue.unit = AI.Instance.FindUnit("Galaxy");
             unitToQueue.cost = AI.Instance.units["Galaxy"];
             unitToQueue.name = unitToQueue.unit.name;
-            AI.Instance.globalQueue.Enqueue(unitToQueue);
+            //AI.Instance.globalQueue.Enqueue(unitToQueue);
         }
         else
         {
             unitToQueue.unit = AI.Instance.FindUnit("Laser");
             unitToQueue.cost = AI.Instance.units["Laser"];
             unitToQueue.name = unitToQueue.unit.name;
-            AI.Instance.globalQueue.Enqueue(unitToQueue);
+           // AI.Instance.globalQueue.Enqueue(unitToQueue);
         }
 
-        unitQueue.Enqueue(unitToQueue);
+       // unitQueue.Enqueue(unitToQueue);
     }
 }

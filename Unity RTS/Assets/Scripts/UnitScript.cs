@@ -6,8 +6,7 @@ public class UnitScript: RTSObject, IDamageable, ISelectable
     /// <summary>
     /// Gets the current health.
     /// </summary>
-    [SerializeField]
-    private float currentHealth;
+    public float currentHealth;
 	
     /// <summary>
     /// Gets whether this instance is dead.
@@ -20,7 +19,6 @@ public class UnitScript: RTSObject, IDamageable, ISelectable
     [SerializeField]
     private HealthManager healthManager;
 
-    public float health;
     public int cost;
     public int capacityAmount;
     

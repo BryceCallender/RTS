@@ -75,8 +75,8 @@ public class Harvester : UnitScript, IImageable
         supplyButton.onClick.AddListener(BuildSupply);
 
         healthBar.gameObject.SetActive(false);
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        healthBar.maxValue = currentHealth;
+        healthBar.value = currentHealth;
 
         crystal.gameObject.SetActive(false);
 

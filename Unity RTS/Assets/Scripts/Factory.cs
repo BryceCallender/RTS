@@ -19,7 +19,7 @@ public class Factory : Building
 
     [Header("Factory Queue's and Buidlable Units")]
     private Queue<UnitStruct> unitQueue;
-    private List<Sprite> unitSpriteList;
+    
     [SerializeField]
     private List<GameObject> buildableUnits;
 
@@ -33,10 +33,6 @@ public class Factory : Building
     private GameObject factoryPanel;
     [SerializeField]
     private GameObject factoryQueuePanel;
-    [SerializeField]
-    private Text unitStats;
-    [SerializeField]
-    private TextMeshProUGUI nextUnitNameText;
     public Slider unitSpawnSlider;
     private Image unitSliderImage;
 
@@ -53,12 +49,12 @@ public class Factory : Building
 	private UIManager uiManager;
     private HyperbitProjectileScript hyperProjectileScript;
 
-    [Header("Unit Buttons")]
+    [SerializeField] 
+    private Transform queueSlot;
     [SerializeField]
-    private Button tankButton;
+    private Image[] unitSpriteList;
     [SerializeField]
-    private Button galaxyButton;
-
+    private TextMeshProUGUI[] boxNumbers;
 
     // Use this for initialization
     void Start()
@@ -67,16 +63,21 @@ public class Factory : Building
         gameController = GameController.Instance;
 		uiManager = gameController.GetComponent<UIManager>();
         unitQueue = new Queue<UnitStruct>();
-        unitSpriteList = new List<Sprite>();
         unitSliderImage = unitSpawnSlider.GetComponentInChildren<Image>();
-        factoryPanel.SetActive(false);
-        factoryQueuePanel.SetActive(false);
-        tankButton.onClick.AddListener(AddTankToQueue);
-        galaxyButton.onClick.AddListener(AddGalaxyToQueue);
+        //factoryPanel.SetActive(false);
+        //factoryQueuePanel.SetActive(false);
         unitSpawnSlider.maxValue = spawnTimer;
-        unitSpawnSlider.value = spawnTimer;
-        nextUnitNameText.gameObject.SetActive(false);
+        unitSpawnSlider.value = 0;
         isShowingNextUnit = false;
+
+//        unitSpriteList = new Sprite[queueSlots.Length];
+//        boxNumbers = new TextMeshProUGUI[queueSlots.Length];
+//        
+//        for (int i = 0; i < queueSlots.Length; i++)
+//        {
+//            unitSpriteList[i] = queueSlots[i].GetComponentInChildren<Image>().sprite;
+//            boxNumbers[i] = queueSlots[i].GetComponentInChildren<TextMeshProUGUI>();
+//        }
     }
 
     // Update is called once per frame
@@ -84,40 +85,42 @@ public class Factory : Building
     {
         //Call to see if we clicked the building or not to see if we can even 
         //make units or not 
-        ClickedBuilding();
+        if (ClickedBuilding())
+        {
+            if (unitQueue.Count > 0)
+            {
+                //Go through all 5 units and set images if we have a queue
+                setImages();
+                //Get progress of the unit we are making and update slider
+                getProgress();
+            } 
+        }
 
         if(unitQueue.Count > 0)
         {
 			//Show the green timer system 
 			unitSpawnSlider.gameObject.SetActive(true);
-            factoryQueuePanel.SetActive(true);
-			spawnTimer -= Time.deltaTime;
-            unitSpawnSlider.value = spawnTimer;
-            unitSliderImage.sprite = unitSpriteList[0];
+            //factoryQueuePanel.SetActive(true);
+			unitSpawnSlider.value += Time.deltaTime;
 
             //If we have more than one in our queue lets tell the player
             //what is next in the queue!
             if(HasMoreThanOneInQueue(unitQueue) && !isShowingNextUnit)
             {
-                nextUnitNameText.gameObject.SetActive(true);
-                nextUnitNameText.text = "Next Unit in Queue: ";
-                nextUnitNameText.text += GetNextInQueue(unitQueue);
                 isShowingNextUnit = true;
-            }
-
-            if(unitQueue.Count == 1)
-            {
-                nextUnitNameText.gameObject.SetActive(false);
             }
 
 			//Once timer hits 0 or lower we will spawn unit reset counter for 
 			//next one and dequeue from the queue changing the amount being made
-			if (spawnTimer < 0)
+			if (unitSpawnSlider.value > spawnTimer)
 			{
-				spawnTimer = spawnTimerCoolDown;
+			    MoveSprites();
+			    ClearSprite();
+			    //Move the queue images one down
+			    
+				spawnTimer = 0;
                 Instantiate(unitQueue.Peek().unit, unitSpawn.transform.position, unitSpawn.transform.rotation);
                 unitQueue.Dequeue();
-                unitSpriteList.RemoveAt(0);
                 //Reset to change the next name of the next unit
                 isShowingNextUnit = false;
 			}
@@ -125,13 +128,13 @@ public class Factory : Building
         else
         {
 			//Dont show the animation since we have none in queue
-            unitSpawnSlider.gameObject.SetActive(false);
-            factoryQueuePanel.SetActive(false);
+            //unitSpawnSlider.gameObject.SetActive(false);
+            //factoryQueuePanel.SetActive(false);
         }    
 
     }
 
-    private void AddTankToQueue()
+    public void AddTankToQueue()
     {
         if(isSelected)
         {
@@ -140,7 +143,7 @@ public class Factory : Building
         }
     }
 
-    private void AddGalaxyToQueue()
+    public void AddGalaxyToQueue()
     {
         if(isSelected)
         {
@@ -152,20 +155,9 @@ public class Factory : Building
     private void SetUnit(GameObject obj)
     {
         unitGameObject = obj;
-        if(unitGameObject.GetComponent<Tank>())
-        {
-            isTank = true;
-            unitSpriteList.Add(tank);
-        }
-        else
-        {
-            isTank = false; 
-            unitSpriteList.Add(galaxy);
-            
-        }
     }
 
-    private void ClickedBuilding()
+    private bool ClickedBuilding()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
@@ -176,7 +168,7 @@ public class Factory : Building
 			{
                 isSelected = true;
 				clickedBuilding = true;
-                factoryPanel.SetActive(true);
+                //factoryPanel.SetActive(true);
 				uiManager.SetAllOffBut(factoryPanel);
 			}
             //If panel is on then lets conisder if they want to have ui go away 
@@ -188,7 +180,7 @@ public class Factory : Building
                     Input.GetMouseButtonDown(0) && isSelected)
                 {
                     clickedBuilding = false;
-                    factoryPanel.SetActive(false);
+                    //factoryPanel.SetActive(false);
                     isSelected = false;
                 }
 
@@ -197,7 +189,7 @@ public class Factory : Building
                 //are different
                 if(HitAnotherFactory(hitInfo))
                 {
-                    factoryPanel.SetActive(true);
+                    //factoryPanel.SetActive(true);
                 }
             }
 
@@ -208,7 +200,38 @@ public class Factory : Building
                 clickedBuilding = true; 
             }
 		}
+
+	    return isSelected;
 	}
+
+    private void ClearSprite()
+    {
+        int count = unitQueue.Count - 1;
+        unitSpriteList[count].sprite = null;
+        unitSpriteList[count].color = Color.black;
+        boxNumbers[count].gameObject.SetActive(true);
+    }
+
+    private void setImages()
+    {
+        int count = unitQueue.Count - 1;
+        unitSpriteList[count].sprite = unitGameObject.GetComponent<UnitScript>().sprite;
+        unitSpriteList[count].color = Color.white;
+        boxNumbers[count].gameObject.SetActive(false);
+    }
+
+    private void getProgress()
+    {
+        
+    }
+
+    private void MoveSprites()
+    {
+        for (int i = 0; i < unitQueue.Count - 1; i++)
+        {
+            unitSpriteList[i].sprite = unitSpriteList[i + 1].sprite;
+        }
+    }
 
     private bool HitAnotherFactory(RaycastHit hitInfo)
     {
@@ -247,6 +270,11 @@ public class Factory : Building
 
     private void AddUnitToQueue()
     {
+        if (unitQueue.Count > 5)
+        {
+            return;
+        }
+        
         int cost = unitGameObject.GetComponent<UnitScript>().cost;
         if (gameController.currency >= cost)
         {
@@ -254,6 +282,7 @@ public class Factory : Building
             unitToQueue.unit = unitGameObject;
             unitToQueue.cost = cost;
             unitToQueue.name = UnitName.GetNameOfUnit(unitGameObject);
+            unitToQueue.sprite = unitGameObject.GetComponent<UnitScript>().sprite;
 
             unitQueue.Enqueue(unitToQueue);
             gameController.currency -= cost;

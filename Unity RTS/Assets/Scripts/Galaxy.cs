@@ -34,15 +34,13 @@ public class Galaxy : UnitScript, IUnitStats, IImageable
 
     private void Start()
     {
-        //GameController.unitNames.Add(gameObject.name, cost);
-        health = 150;
         projectile = bulletPrefab;
         keepUIAbove = canvas.GetComponent<RectTransform>().rotation;
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
         turrets = GameObject.FindGameObjectsWithTag("GalaxyTurrets");
         healthBar.gameObject.SetActive(false);
-        healthBar.maxValue = health;
-        healthBar.value = health;
+        healthBar.maxValue = currentHealth;
+        healthBar.value = currentHealth;
         thruster.Stop();
         agent = GetComponent<NavMeshAgent>();
 		unitSelected = GetComponent<UnitSelected>();
