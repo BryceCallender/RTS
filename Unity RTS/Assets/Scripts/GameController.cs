@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameController : MonoBehaviour 
+public class GameController : MonoBehaviour
 {
-    public int currency;
+	public int currency;
     public Text resourcePanel;
     public TextMeshProUGUI timeText;
 
@@ -24,17 +25,60 @@ public class GameController : MonoBehaviour
 
     public float colorFadeTime = 0.5f;
 
+	public static bool hitEscape;
+	public bool isPaused;
+	public GameObject pauseMenuUI;
+
+	[SerializeField]
+	private GameObject[] players;
+
+	private Timer time;
+
+    public const int MAX_CAPACITY = 100;
+
+    public static int LASER_DAMAGE = 5;
+    public static int CLUSTER_BOMB_DAMAGE = 10;
+    public static int MISSILE_DAMAGE = 5;
+
+    private static GameController instance;
+
+    public static GameController Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         mineralErrorColor = mineralErrorText.color;
         gasErrorColor = mineralErrorColor;
         buildingErrorColor = mineralErrorColor;
-        timeText = FindObjectOfType<TextMeshProUGUI>().GetComponent<TextMeshProUGUI>();
+        timeText = timeText.GetComponent<TextMeshProUGUI>();
+		time = GetComponent<Timer>();
     }
 
     private void Update()
     {
-        timeText.SetText(Time.realtimeSinceStartup.ToString());
+		if(PressedEscape())
+		{
+			if(isPaused)
+			{
+				UnPauseGame();
+			}
+			else
+			{
+				PauseGame();
+			}
+		}
+
+		timeText.SetText(time.DisplayTime());
         resourcePanel.text = "Resource:" + currency;
 
         if(mineralErrorText.gameObject.activeSelf)
@@ -73,11 +117,7 @@ public class GameController : MonoBehaviour
 
     public bool IsZeroAlpha(Color errorColor)
     {
-        if(errorColor.a.Equals(0))
-        {
-            return true;
-        }
-        return false;
+        return errorColor.a.Equals(0);
     }
 
     public void SetAlphaBack(ref Text errorText,ref Color errorColor)
@@ -88,4 +128,42 @@ public class GameController : MonoBehaviour
         colorFadeTime = 0.5f;
     }
 
+	public bool PressedEscape()
+	{
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			hitEscape = true;
+		}
+		else
+		{
+			hitEscape = false;
+		}
+		return hitEscape;
+	}
+
+	public void PauseGame()
+	{
+		pauseMenuUI.gameObject.SetActive(true);
+        isPaused = true;
+		Time.timeScale = 0f;
+	}
+
+	public void UnPauseGame()
+	{
+		pauseMenuUI.gameObject.SetActive(false);
+		isPaused = false;
+		Time.timeScale = 1f;
+	}
+
+	public GameObject grabPlayer(String identifier)
+	{
+		for (int i = 0; i < players.Length; i++)
+		{
+			if (players[i].name.Equals(identifier))
+			{
+				return players[i];
+			}
+		}
+		return null;
+	}
 }

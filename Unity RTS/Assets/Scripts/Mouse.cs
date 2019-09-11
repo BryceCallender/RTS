@@ -24,14 +24,15 @@ public class Mouse : MonoBehaviour
 
     public static bool IsDragging = false;
     public static bool IsClickedAway = false;
+	public bool isFirst = false;
 
-    void Awake()
+    private void Awake()
     {
         currentMousePosition = Vector3.zero;
         mouseDownPosition = Vector3.zero;
     }
 
-    void Update()
+    private void Update()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -40,8 +41,6 @@ public class Mouse : MonoBehaviour
             currentMousePosition = hitInfo.point;
             if(Input.GetMouseButtonDown(0))
             {
-                //selectedObjects.Clear();
-                //unitsOnScreen.Clear();
                 DeselectAllUnits();
                 mouseDownPosition = hitInfo.point;
                 timeLeftBeforeDragBox = timeToMakeDragBox;
@@ -64,7 +63,7 @@ public class Mouse : MonoBehaviour
         }
     }
 
-	void OnGUI()
+    private void OnGUI()
 	{
         float boxWidth = Camera.main.WorldToScreenPoint(mouseDownPosition).x - Camera.main.WorldToScreenPoint(currentMousePosition).x;
         float boxHeight = Camera.main.WorldToScreenPoint(mouseDownPosition).y - Camera.main.WorldToScreenPoint(currentMousePosition).y;
@@ -91,8 +90,8 @@ public class Mouse : MonoBehaviour
         }
 
         boxFinish = new Vector2(boxStart.x + Mathf.Abs(boxWidth),boxStart.y - Mathf.Abs(boxHeight));
-
-        if (Event.current.type == EventType.mouseDrag)
+	    
+        if (Event.current.type == EventType.MouseDrag)
 		{
             if (!IsDragging)
 			{
@@ -100,18 +99,18 @@ public class Mouse : MonoBehaviour
 			}
 		}
 
-		if (Event.current.type == EventType.mouseUp)
+		if (Event.current.type == EventType.MouseUp)
 		{
             IsDragging = false;
 		}
 
         if (IsDragging)
         {
-            GUI.Box(new Rect(boxLeft,boxTop,boxWidth,boxHeight), "",mouseDragSkin);
+            GUI.Box(new Rect(boxLeft,boxTop,boxWidth,boxHeight),"",mouseDragSkin);
         }
 	}
 
-    void LateUpdate()
+    private void LateUpdate()
     {
         if(IsDragging && unitsOnScreen.Count > 0)
         {
@@ -211,5 +210,23 @@ public class Mouse : MonoBehaviour
         unitsOnScreen.Clear();
     }
 
+	public bool IsFirstInList(GameObject unitName)
+	{    
+		if (selectedObjects.Count == 0 || unitName == null)
+		{
+			isFirst = false;
+			return isFirst;
+		}
 
+		if(unitName.name == selectedObjects[0].name)
+		{
+			isFirst = true;
+		}
+		else
+		{
+			isFirst = false;
+		}
+
+		return isFirst;
+	}
 }

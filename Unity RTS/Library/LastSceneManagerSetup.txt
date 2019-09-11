@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/RTS.unity
+- path: Assets/RTS Proto Art/Scene/RTS Scene.unity
   isLoaded: 1
   isActive: 1
+  isSubScene: 0

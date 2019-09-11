@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: 7a8e7a2eeef4ab24f839fc9646396c11
+timeCreated: 1539024626
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ArmLift
+    100002: ArmLift 1
+    100004: //RootNode
+    100006: Building_InfantryFactory_Blue
+    100008: Building_InfantryFactory_Red
+    100010: Building_TitanFactory_Blue
+    100012: Building_TitanFactory_Red
+    100014: FactoryBase
+    100016: FactoryBase 1
+    100018: LiftPlatform
+    100020: LiftPlatform 1
+    400000: ArmLift
+    400002: ArmLift 1
+    400004: //RootNode
+    400006: Building_InfantryFactory_Blue
+    400008: Building_InfantryFactory_Red
+    400010: Building_TitanFactory_Blue
+    400012: Building_TitanFactory_Red
+    400014: FactoryBase
+    400016: FactoryBase 1
+    400018: LiftPlatform
+    400020: LiftPlatform 1
+    2300000: ArmLift
+    2300002: ArmLift 1
+    2300004: Building_InfantryFactory_Blue
+    2300006: Building_InfantryFactory_Red
+    2300008: FactoryBase
+    2300010: FactoryBase 1
+    2300012: LiftPlatform
+    2300014: LiftPlatform 1
+    3300000: ArmLift
+    3300002: ArmLift 1
+    3300004: Building_InfantryFactory_Blue
+    3300006: Building_InfantryFactory_Red
+    3300008: FactoryBase
+    3300010: FactoryBase 1
+    3300012: LiftPlatform
+    3300014: LiftPlatform 1
+    4300000: Building_InfantryFactory_Blue
+    4300002: ArmLift
+    4300004: FactoryBase
+    4300006: LiftPlatform
+    4300008: Building_InfantryFactory_Red
+    4300010: ArmLift
+    4300012: FactoryBase
+    4300014: LiftPlatform
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
