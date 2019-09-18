@@ -9,9 +9,14 @@ public class HyperbitProjectileScript : MonoBehaviour
     public GameObject[] trailParticles;
     [HideInInspector]
     public Vector3 impactNormal; //Used to rotate impactparticle.
+    
+    [HideInInspector]
     public string owner;
     public Team team;
     public int speed = 250;
+    [HideInInspector]
+    public int damage;
+    
     private bool hasCollided = false;
 
     private float timeToKill = 5.0f;
@@ -37,7 +42,9 @@ public class HyperbitProjectileScript : MonoBehaviour
                 if (!hasCollided)
                 {
                     hasCollided = true;
-                    impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal)) as GameObject;
+                    impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
+                    
+                    hit.gameObject.GetComponent<RTSObject>().TakeDamage(damage);
 
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +18,7 @@ public enum UnitDamageStrength
     None
 }
 
+[RequireComponent(typeof(UnitSelected))]
 public class Unit : RTSObject
 {
     public GameObject projectile;
@@ -24,8 +26,12 @@ public class Unit : RTSObject
 
     public float fireRate;
     public float cooldown;
-    
+
+    public Transform[] turrets;
     public Transform turretEnd;
+
+    [SerializeField]
+    private bool canAttackAndRunAway;
 
     public UnitsAttackable unitsUnitCanAttack;
     public UnitDamageStrength unitsUnitIsStrongAgainst;
@@ -46,6 +52,7 @@ public class Unit : RTSObject
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        unitSelected = GetComponent<UnitSelected>();
     }
 
     protected void Update()
@@ -59,6 +66,7 @@ public class Unit : RTSObject
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitAgentInfo, Mathf.Infinity))
             {
+                //Layer 9 is enemy
                 if (Input.GetMouseButtonDown(1) && !Mouse.IsDragging && hitAgentInfo.collider.gameObject.layer != 9)
                 {
                     targetPosition = hitAgentInfo.point;
@@ -66,10 +74,13 @@ public class Unit : RTSObject
                 }
             }
         }
+
+        Fire();
     }
 
-    protected void LockOn()
+    protected virtual void LockOn()
     {
+        AimTurrets();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
@@ -80,15 +91,24 @@ public class Unit : RTSObject
                 {
                     nearestEnemy = hitInfo.transform.gameObject;
                 }
-                else if(hitInfo.collider.gameObject.name == "RTSTerrain") 
+                //If we tell the unit to "lock onto" the ground and it cant attack when running just make it run
+                else if(!canAttackAndRunAway && hitInfo.collider.gameObject.name.Equals("RTSTerrain")) 
                 {
                     nearestEnemy = null;
+                }
+                //Unit can run away and attack until its out of range
+                else if(canAttackAndRunAway && hitInfo.collider.gameObject.name.Equals("RTSTerrain"))
+                {
+                    if ((nearestEnemy.transform.position - transform.position).sqrMagnitude > range * range)
+                    {
+                        nearestEnemy = null;
+                    }
                 }
             }
         }	
     }
 
-    protected void Fire()
+    protected virtual void Fire()
     {
         if(unitSelected.selected || enemyHasBeenSelected)
         {
@@ -98,17 +118,20 @@ public class Unit : RTSObject
             {
                 cooldown -= Time.deltaTime;
                 direction = nearestEnemy.transform.position - turretEnd.position;
-                if (cooldown <= 0 && direction.magnitude <= range)
+                if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
                 {
-                    var hyperProjScript = projectile.GetComponent<HyperbitProjectileScript>();
+                    var laser = Instantiate(projectile, turretEnd.transform.position, turretEnd.transform.rotation);
+                    var hyperProjScript = laser.GetComponent<HyperbitProjectileScript>();
                     
                     cooldown = fireRate;
-                    projectile = Instantiate(projectile, turretEnd.transform.position, turretEnd.transform.rotation);
+                    
                     hyperProjScript.owner = gameObject.name;
                     hyperProjScript.team = team;
+                    hyperProjScript.damage = damage;
+                    
                     int speed = hyperProjScript.speed;
                     
-                    projectile.GetComponent<Rigidbody>().AddForce(direction * speed);
+                    laser.GetComponent<Rigidbody>().AddForce(direction * speed);
                 }
             }
             else
@@ -116,5 +139,19 @@ public class Unit : RTSObject
                 enemyHasBeenSelected = false;   
             }
         }
+    }
+
+    protected virtual void AimTurrets()
+    {
+        if (nearestEnemy != null)
+        {
+            Vector3 aimDirection = nearestEnemy.transform.position - transform.position;
+            foreach (Transform turretTransform in turrets)
+            {
+                //Make each turret point towards the enemy target
+                turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), Time.time);
+            }
+        }
+        
     }
 }

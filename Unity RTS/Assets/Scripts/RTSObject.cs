@@ -32,12 +32,12 @@ public class RTSObject : MonoBehaviour
     public float productionDuration;
     public Team team;
 
-    protected virtual void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;
 
