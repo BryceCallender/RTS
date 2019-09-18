@@ -55,7 +55,8 @@ public class Unit : RTSObject
         unitSelected = GetComponent<UnitSelected>();
     }
 
-    protected void Update()
+    //TODO: Fog of war is what dictates if a unit will follow after their enemy
+    protected virtual void Update()
     {
         //Pathfinding
         if(unitSelected.selected)
@@ -71,6 +72,7 @@ public class Unit : RTSObject
                 {
                     targetPosition = hitAgentInfo.point;
                     agent.destination = targetPosition;
+                    agent.stoppingDistance = 0;
                 }
             }
         }
@@ -90,6 +92,18 @@ public class Unit : RTSObject
                 if (hitInfo.collider.gameObject.CompareTag("Enemy"))
                 {
                     nearestEnemy = hitInfo.transform.gameObject;
+
+                    float sqrDistance = (nearestEnemy.transform.position - transform.position).sqrMagnitude;
+
+                    if (sqrDistance > range)
+                    {
+                        agent.destination = nearestEnemy.transform.position;
+                        agent.stoppingDistance = range;
+                    }
+                    else
+                    {
+                        agent.stoppingDistance = 0;
+                    }
                 }
                 //If we tell the unit to "lock onto" the ground and it cant attack when running just make it run
                 else if(!canAttackAndRunAway && hitInfo.collider.gameObject.name.Equals("RTSTerrain")) 
