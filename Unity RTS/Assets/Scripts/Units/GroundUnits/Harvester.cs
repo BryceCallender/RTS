@@ -9,8 +9,9 @@ public class Harvester : Unit
     public int resourceAmount = 0;
     public int maxResourceToCollect = 100;
     
+    [Header("Harvester Building List")]
     //Harvester Building Capabilites and what building to build if we want one
-    public List<GameObject> buildableBuildings;
+    public List<Building> buildableBuildings;
     private GameObject buildingToBuild;
     
     // Resources and collector for it to go to 
@@ -35,19 +36,16 @@ public class Harvester : Unit
     //Timers
     private float timer = 0;
     private float timeToWait = 1.0f;
-    
-    //Other scripts and RayCast info holders
-    private RaycastHit hitInfo;
-    private UnitSelected unitSelected;
-    private NavMeshAgent agent;
 
     private void Start()
     {
+        base.Start();
+        
         crystal.gameObject.SetActive(false);
 
         if(resourceCollector == null)
         {
-            resourceCollector = transform.Find("SupplyBuilding");
+            var supplyBuildings = GameObject.FindGameObjectsWithTag("SupplyBuilding");
         }
     }
 
@@ -85,7 +83,7 @@ public class Harvester : Unit
                     if(resourceCollector != null)
                     {
                         isTurnedIn = true;
-                        TurnInResource();
+                        //TurnInResource();
                         timer = 0;
                     }
                 }

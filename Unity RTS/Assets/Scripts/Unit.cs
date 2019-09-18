@@ -38,18 +38,18 @@ public class Unit : RTSObject
     
     public GameObject nearestEnemy;
     
-    private RaycastHit hitInfo;
+    protected RaycastHit hitInfo;
     private Vector3 direction;
-    private UnitSelected unitSelected;
+    protected UnitSelected unitSelected;
 
     private bool enemyHasBeenSelected = false;
     
     //Pathfinding variables
     public Vector3 targetPosition;
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
     private RaycastHit hitAgentInfo;
 
-    private void Start()
+    protected void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         unitSelected = GetComponent<UnitSelected>();
@@ -86,7 +86,7 @@ public class Unit : RTSObject
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if(Input.GetMouseButtonDown(1))
+            if(unitSelected.selected && Input.GetMouseButtonDown(1))
             {
                 Debug.Log(hitInfo.collider.name);
                 if (hitInfo.collider.gameObject.CompareTag("Enemy"))
