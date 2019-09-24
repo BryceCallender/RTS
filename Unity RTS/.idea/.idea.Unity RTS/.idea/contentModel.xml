@@ -234,6 +234,7 @@
             </e>
             <e p="GroundUnits" t="Include">
               <e p="Harvester.cs" t="Include" />
+              <e p="LaserTank.cs" t="Include" />
               <e p="MechUnit.cs" t="Include" />
             </e>
           </e>

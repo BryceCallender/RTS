@@ -16,7 +16,7 @@ public class Harvester : Unit
     
     // Resources and collector for it to go to 
     [Header("Harvester Resource/Collector")]
-    public Resource[] resources;
+    public List<Resource> resources;
     public Resource nearestResource;
     public Transform closestResourceCollector;
     public List<GameObject> resourceCollectors;
@@ -44,19 +44,23 @@ public class Harvester : Unit
         base.Start();
         
         crystal.gameObject.SetActive(false);
-
+        
         //Adds all the supply buildings into the list of resource collectors
         //The enemy ai will have a different tag to differeniate between theirs and ours
         //TODO:: This will be slow we will need to fix this if there is a lot of supply buildings
         //present in the game
         resourceCollectors.AddRange(GameObject.FindGameObjectsWithTag("SupplyBuilding"));
 
+        FindClosestResourceCollector();
+        
         //Find all the resources on the map when they start living
-        resources = FindObjectsOfType<Resource>();
+        resources.AddRange(FindObjectsOfType<Resource>());
     }
 
     protected override void Update()
     {
+        resources.RemoveAll(resource => resource == null);
+        
         //Automatic Behavior
         if(isMining)
         {
@@ -95,7 +99,7 @@ public class Harvester : Unit
                     if(closestResourceCollector != null)
                     {
                         isTurnedIn = true;
-                        //TurnInResource();
+                        TurnInResource();
                         timer = 0;
                     }
                 }
@@ -213,5 +217,18 @@ public class Harvester : Unit
                 isAtResource = false;
 			}
 		}
+    }
+
+    private void FindClosestResourceCollector()
+    {
+        float distance = float.PositiveInfinity;
+        foreach (GameObject supplyBuilding in resourceCollectors)
+        {
+            if (distance > Vector3.Distance(transform.position, supplyBuilding.transform.position))
+            {
+                distance = Vector3.Distance(transform.position, supplyBuilding.transform.position);
+                closestResourceCollector = supplyBuilding.transform;
+            }
+        }
     }
 }

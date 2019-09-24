@@ -44,7 +44,7 @@ public class Unit : RTSObject
     protected UnitSelected unitSelected;
 
     protected bool unitIsSelected => unitSelected.selected;
-    private bool enemyHasBeenSelected;
+    protected bool enemyHasBeenSelected;
     
     //Pathfinding variables
     public Vector3 targetPosition;
@@ -58,6 +58,7 @@ public class Unit : RTSObject
     }
 
     //TODO: Fog of war is what dictates if a unit will follow after their enemy
+    //TODO: If the enemy is locked on and is leaving once out of range reset the turret!
     protected virtual void Update()
     {
         //Pathfinding
@@ -76,9 +77,9 @@ public class Unit : RTSObject
                     agent.destination = targetPosition;
                     agent.stoppingDistance = 0;
                 }
-            }
+            }            
         }
-
+        
         Fire();
     }
 
@@ -97,7 +98,7 @@ public class Unit : RTSObject
 
                     float sqrDistance = (nearestEnemy.transform.position - transform.position).sqrMagnitude;
 
-                    if (sqrDistance > range)
+                    if (sqrDistance > range * range)
                     {
                         agent.destination = nearestEnemy.transform.position;
                         agent.stoppingDistance = range;
@@ -181,7 +182,7 @@ public class Unit : RTSObject
         foreach (Transform turretTransform in turrets)
         {
             //Make each turret point towards the enemy target
-            turretTransform.rotation = Quaternion.identity;
+            turretTransform.localRotation = Quaternion.identity;
         }
     }
 }
