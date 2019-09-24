@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-
 
 public class Harvester : Unit
 {
@@ -18,7 +18,8 @@ public class Harvester : Unit
     [Header("Harvester Resource/Collector")]
     public Resource[] resources;
     public Resource nearestResource;
-    public Transform resourceCollector;
+    public Transform closestResourceCollector;
+    public List<GameObject> resourceCollectors;
     
     //Harvester Abilities Harvest amount and cooldowns
     private float harvestTime = 2.0f;
@@ -28,10 +29,11 @@ public class Harvester : Unit
     private GameObject crystal;
     
     //Booleans
-    private bool isTargetingResource = false;
-    private bool isFull = false;
-    private bool isTurnedIn = false;
-    private bool isAtResource = false;
+    private bool isTargetingResource;
+    private bool isFull;
+    private bool isTurnedIn;
+    private bool isAtResource;
+    private bool isMining;
 
     //Timers
     private float timer = 0;
@@ -43,16 +45,25 @@ public class Harvester : Unit
         
         crystal.gameObject.SetActive(false);
 
-        if(resourceCollector == null)
-        {
-            var supplyBuildings = GameObject.FindGameObjectsWithTag("SupplyBuilding");
-        }
+        //Adds all the supply buildings into the list of resource collectors
+        //The enemy ai will have a different tag to differeniate between theirs and ours
+        //TODO:: This will be slow we will need to fix this if there is a lot of supply buildings
+        //present in the game
+        resourceCollectors.AddRange(GameObject.FindGameObjectsWithTag("SupplyBuilding"));
+
+        //Find all the resources on the map when they start living
+        resources = FindObjectsOfType<Resource>();
     }
 
     protected override void Update()
     {
-        FindResource();
+        //Automatic Behavior
+        if(isMining)
+        {
+            FindResource();
+        }
 
+        //Manual Behavior
 		//We have found a resource
         if(nearestResource != null)
         {
@@ -71,16 +82,17 @@ public class Harvester : Unit
 			{
                 isFull = true;
                 crystal.gameObject.SetActive(true);
-                if(resourceCollector != null)
+                
+                if(closestResourceCollector != null)
                 {
-                    agent.destination = resourceCollector.position;
+                    agent.destination = closestResourceCollector.position;
                 }
 
                 timer += Time.deltaTime;
 
                 if (agent.remainingDistance <= agent.stoppingDistance && !isTurnedIn && timer >= timeToWait)
                 {
-                    if(resourceCollector != null)
+                    if(closestResourceCollector != null)
                     {
                         isTurnedIn = true;
                         //TurnInResource();
@@ -105,9 +117,9 @@ public class Harvester : Unit
                 WhereToGo();
                 if (nearestResource == null && resourceAmount > 0)
                 {
-                    if(resourceCollector != null)
+                    if(closestResourceCollector != null)
                     {
-                        agent.destination = resourceCollector.position;
+                        agent.destination = closestResourceCollector.position;
                     }
 
                     timer += Time.deltaTime;
@@ -165,8 +177,8 @@ public class Harvester : Unit
 				float resourceDistance = Vector3.Distance(transform.position, resource.transform.position);
 				if (nearestResource == null || resourceDistance < distance)
 				{
-					//nearestResource = resource;
-					//distance = resourceDistance;
+					nearestResource = resource;
+					distance = resourceDistance;
 				}
             }
 
@@ -174,7 +186,7 @@ public class Harvester : Unit
 
         if (nearestResource == null)
         {
-            //return; 
+            return; 
         }
     }
 
@@ -200,7 +212,6 @@ public class Harvester : Unit
 				agent.destination = hitInfo.point;
                 isAtResource = false;
 			}
-
 		}
     }
 }

@@ -15,6 +15,7 @@ public enum UnitDamageStrength
 {
     Ground,
     Air,
+    Bio,
     None
 }
 
@@ -42,7 +43,8 @@ public class Unit : RTSObject
     private Vector3 direction;
     protected UnitSelected unitSelected;
 
-    private bool enemyHasBeenSelected = false;
+    protected bool unitIsSelected => unitSelected.selected;
+    private bool enemyHasBeenSelected;
     
     //Pathfinding variables
     public Vector3 targetPosition;
@@ -59,7 +61,7 @@ public class Unit : RTSObject
     protected virtual void Update()
     {
         //Pathfinding
-        if(unitSelected.selected)
+        if(unitIsSelected)
         {
             // If we are not in range, become an agent again
             agent.enabled = true;
@@ -86,7 +88,7 @@ public class Unit : RTSObject
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if(unitSelected.selected && Input.GetMouseButtonDown(1))
+            if(unitIsSelected && Input.GetMouseButtonDown(1))
             {
                 Debug.Log(hitInfo.collider.name);
                 if (hitInfo.collider.gameObject.CompareTag("Enemy"))
@@ -109,6 +111,7 @@ public class Unit : RTSObject
                 else if(!canAttackAndRunAway && hitInfo.collider.gameObject.name.Equals("RTSTerrain")) 
                 {
                     nearestEnemy = null;
+                    ResetTurrets();
                 }
                 //Unit can run away and attack until its out of range
                 else if(canAttackAndRunAway && hitInfo.collider.gameObject.name.Equals("RTSTerrain"))
@@ -116,6 +119,7 @@ public class Unit : RTSObject
                     if ((nearestEnemy.transform.position - transform.position).sqrMagnitude > range * range)
                     {
                         nearestEnemy = null;
+                        ResetTurrets();
                     }
                 }
             }
@@ -124,7 +128,7 @@ public class Unit : RTSObject
 
     protected virtual void Fire()
     {
-        if(unitSelected.selected || enemyHasBeenSelected)
+        if(unitIsSelected || enemyHasBeenSelected)
         {
             LockOn();
             enemyHasBeenSelected = true;
@@ -157,7 +161,7 @@ public class Unit : RTSObject
 
     protected virtual void AimTurrets()
     {
-        if (nearestEnemy != null)
+        if(nearestEnemy != null)
         {
             Vector3 aimDirection = nearestEnemy.transform.position - transform.position;
             foreach (Transform turretTransform in turrets)
@@ -166,6 +170,18 @@ public class Unit : RTSObject
                 turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), Time.time);
             }
         }
-        
+        else
+        {
+            ResetTurrets();
+        }
+    }
+
+    protected virtual void ResetTurrets()
+    {
+        foreach (Transform turretTransform in turrets)
+        {
+            //Make each turret point towards the enemy target
+            turretTransform.rotation = Quaternion.identity;
+        }
     }
 }
