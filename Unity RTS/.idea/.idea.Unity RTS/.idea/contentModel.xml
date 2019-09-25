@@ -231,6 +231,7 @@
           <e p="Units" t="Include">
             <e p="FlyingUnits" t="Include">
               <e p="FlyingUnit.cs" t="Include" />
+              <e p="Galaxy.cs" t="Include" />
             </e>
             <e p="GroundUnits" t="Include">
               <e p="Harvester.cs" t="Include" />
