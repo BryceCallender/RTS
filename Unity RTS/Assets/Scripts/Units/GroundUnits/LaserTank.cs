@@ -79,6 +79,14 @@ public class LaserTank : Unit
             LockOn();
             if (nearestEnemy != null)
             {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    isCharged = false;
+                    isFiring = false;
+                    isCharging = false;
+                    DestroyLaser();
+                }
+                
                 enemyDirection = nearestEnemy.transform.position - transform.position;
                 enemyHasBeenSelected = true; 
                 isCharging = true;
@@ -122,7 +130,7 @@ public class LaserTank : Unit
     {
         if (nearestEnemy == null || enemyDirection.magnitude > range)
         {
-            turrets[0].rotation = Quaternion.Lerp(Quaternion.Euler(enemyDirection), gameObject.GetComponent<Transform>().rotation, 1.0f);
+            turrets[0].rotation = Quaternion.Lerp(Quaternion.Euler(enemyDirection), gameObject.transform.rotation, 1.0f);
             chargeEffect.gameObject.SetActive(false);
         }
     }
@@ -134,9 +142,13 @@ public class LaserTank : Unit
             MoveLaserBeginning();
             RaycastHit findEnd;
             if (Physics.Raycast(chargeArea.transform.position, dir, out findEnd))
+            {
                 end = findEnd.point - (dir.normalized * beamEndOffset);
+            }
             else
+            {
                 end = transform.position + (dir * 10);
+            }
             MoveLaserEnd(chargeArea.transform.position,end);
             line.SetPosition(1, end);
         }

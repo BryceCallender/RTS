@@ -139,18 +139,21 @@ public class Unit : RTSObject
                 direction = nearestEnemy.transform.position - turretEnd.position;
                 if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
                 {
-                    var laser = Instantiate(projectile, turretEnd.transform.position, turretEnd.transform.rotation);
-                    var hyperProjScript = laser.GetComponent<HyperbitProjectileScript>();
+                    if (projectile != null)
+                    {
+                        var laser = Instantiate(projectile, turretEnd.transform.position, turretEnd.transform.rotation);
+                        var hyperProjScript = laser.GetComponent<HyperbitProjectileScript>();
                     
-                    cooldown = fireRate;
+                        cooldown = fireRate;
                     
-                    hyperProjScript.owner = gameObject.name;
-                    hyperProjScript.team = team;
-                    hyperProjScript.damage = damage;
+                        hyperProjScript.owner = gameObject.name;
+                        hyperProjScript.team = team;
+                        hyperProjScript.damage = damage;
                     
-                    int speed = hyperProjScript.speed;
+                        int speed = hyperProjScript.speed;
                     
-                    laser.GetComponent<Rigidbody>().AddForce(direction * speed);
+                        laser.GetComponent<Rigidbody>().AddForce(direction * speed);
+                    }   
                 }
             }
             else
