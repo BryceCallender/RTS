@@ -11,8 +11,7 @@ public class Galaxy : FlyingUnit
         thruster = Thruster.GetComponentInChildren<ParticleSystem>();
         thruster.Stop();
     }
-
-
+    
     public void ActivateThrusters()
     {
         thruster.Play();
@@ -21,12 +20,5 @@ public class Galaxy : FlyingUnit
     public void DeActivateThrusters()
     {
         thruster.Stop();
-    }
-
-    public int RandomizeTurretSelection()
-    {
-        int random;
-        random = Random.Range(0,turrets.Length);
-        return random;
     }
 }

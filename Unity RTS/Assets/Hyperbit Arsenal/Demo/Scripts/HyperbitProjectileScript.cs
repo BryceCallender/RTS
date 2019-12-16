@@ -44,8 +44,8 @@ public class HyperbitProjectileScript : MonoBehaviour
                     hasCollided = true;
                     impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
                     
-                    hit.gameObject.GetComponent<RTSObject>().TakeDamage(damage);
-
+                    hit.gameObject.GetComponent<Health>().TakeDamage(damage);
+                    
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)
                     {

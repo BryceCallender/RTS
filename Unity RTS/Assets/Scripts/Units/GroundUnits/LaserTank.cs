@@ -72,9 +72,9 @@ public class LaserTank : Unit
         }
     }
 
-    private void Fire()
+    protected override void Fire()
     {
-        if (unitIsSelected || enemyHasBeenSelected)
+        if (UnitIsSelected || enemyHasBeenSelected)
         {
             LockOn();
             if (nearestEnemy != null)
@@ -97,7 +97,7 @@ public class LaserTank : Unit
                 else
                 {
                     ShootBeamInDir(enemyDirection);
-                    //nearestEnemy.TakeDamage(damage * Time.deltaTime);
+                    nearestEnemy.GetComponent<Health>().TakeDamage(damage * Time.deltaTime);
                 }
                     
             }
@@ -128,7 +128,7 @@ public class LaserTank : Unit
 
     protected override void ResetTurrets()
     {
-        if (nearestEnemy == null || enemyDirection.magnitude > range)
+        if (nearestEnemy == null || enemyDirection.sqrMagnitude > range * range)
         {
             turrets[0].rotation = Quaternion.Lerp(Quaternion.Euler(enemyDirection), gameObject.transform.rotation, 1.0f);
             chargeEffect.gameObject.SetActive(false);
@@ -158,16 +158,16 @@ public class LaserTank : Unit
             isFiring = true;
             start = chargeArea.transform.position;
     
-            beam = Instantiate(beamLineRendererPrefab, chargeArea.transform.position, Quaternion.identity) as GameObject;
+            beam = Instantiate(beamLineRendererPrefab, chargeArea.transform.position, Quaternion.identity);
             line = beam.GetComponent<LineRenderer>();
     
             line.positionCount = 2;
             line.SetPosition(0, start);
-            beamStart = Instantiate(beamStartPrefab, start, Quaternion.identity) as GameObject;
+            beamStart = Instantiate(beamStartPrefab, start, Quaternion.identity);
             beamStart.transform.position = start;
     
             end = Vector3.zero;
-            beamEnd = Instantiate(beamEndPrefab, end, Quaternion.identity) as GameObject;
+            beamEnd = Instantiate(beamEndPrefab, end, Quaternion.identity);
             RaycastHit hit;
             if (Physics.Raycast(start, dir, out hit))
             {

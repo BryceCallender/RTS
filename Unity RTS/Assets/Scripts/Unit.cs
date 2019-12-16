@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,7 +31,7 @@ public class Unit : RTSObject
     public Transform turretEnd;
 
     [SerializeField]
-    private bool canAttackAndRunAway;
+    private readonly bool canAttackAndRunAway;
 
     public UnitsAttackable unitsUnitCanAttack;
     public UnitDamageStrength unitsUnitIsStrongAgainst;
@@ -43,7 +42,7 @@ public class Unit : RTSObject
     private Vector3 direction;
     protected UnitSelected unitSelected;
 
-    protected bool unitIsSelected => unitSelected.selected;
+    protected bool UnitIsSelected => unitSelected.selected;
     protected bool enemyHasBeenSelected;
     
     //Pathfinding variables
@@ -62,7 +61,7 @@ public class Unit : RTSObject
     protected virtual void Update()
     {
         //Pathfinding
-        if(unitIsSelected)
+        if(UnitIsSelected)
         {
             // If we are not in range, become an agent again
             agent.enabled = true;
@@ -89,7 +88,7 @@ public class Unit : RTSObject
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if(unitIsSelected && Input.GetMouseButtonDown(1))
+            if(UnitIsSelected && Input.GetMouseButtonDown(1))
             {
                 Debug.Log(hitInfo.collider.name);
                 if (hitInfo.collider.gameObject.CompareTag("Enemy"))
@@ -129,14 +128,15 @@ public class Unit : RTSObject
 
     protected virtual void Fire()
     {
-        if(unitIsSelected || enemyHasBeenSelected)
+        if(UnitIsSelected || enemyHasBeenSelected)
         {
             LockOn();
             enemyHasBeenSelected = true;
             if(nearestEnemy != null)
             {
                 cooldown -= Time.deltaTime;
-                direction = nearestEnemy.transform.position - turretEnd.position;
+                direction = (nearestEnemy.transform.position - turretEnd.position).normalized;
+                Debug.DrawRay(turretEnd.transform.position, direction, Color.yellow, 1.0f);
                 if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
                 {
                     if (projectile != null)
@@ -149,10 +149,10 @@ public class Unit : RTSObject
                         hyperProjScript.owner = gameObject.name;
                         hyperProjScript.team = team;
                         hyperProjScript.damage = damage;
-                    
-                        int speed = hyperProjScript.speed;
-                    
-                        laser.GetComponent<Rigidbody>().AddForce(direction * speed);
+
+                        //laser.GetComponent<Rigidbody>().velocity = direction * hyperProjScript.speed;
+                        Debug.Log(direction);
+                        laser.GetComponent<Rigidbody>().AddForce(direction * hyperProjScript.speed);
                     }   
                 }
             }

@@ -15,12 +15,25 @@ public class FlyingUnit : Unit
     }
 
     //Define how to fly and how to move heights when going over height disturbances
-    protected void Update()
+    protected virtual void Update()
     {
         base.Update();
         
         //Raycast down to see how high we are
         //If we are not flyHeight distance from the group lerp until we are :)
         //Update the baseOffset too?
+    }
+
+    protected void RandomizeTurretSelection()
+    {
+        int random;
+        random = Random.Range(0, turrets.Length);
+        turretEnd = turrets[random];
+    }
+
+    protected override void Fire()
+    {
+        RandomizeTurretSelection();
+        base.Fire();
     }
 }

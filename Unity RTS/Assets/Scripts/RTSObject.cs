@@ -18,12 +18,13 @@ public enum ArmorClass
     Flyer
 }
 
+[RequireComponent(typeof(Health))]
 public class RTSObject : MonoBehaviour
 {
     public string name;
     public Sprite uiSprite;
-    
-    public int health;
+
+    public Health health;
     public int cost;
     public float speed;
     public float range;
@@ -32,19 +33,9 @@ public class RTSObject : MonoBehaviour
     public float productionDuration;
     public Team team;
 
-    public virtual void Die()
+    private void Start()
     {
-        Destroy(gameObject);
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Die();
-        }
+        health = GetComponent<Health>();
     }
 
     public static bool CanDamage(Team myTeam, Team otherTeam)
