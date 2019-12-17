@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum Team
 {
@@ -15,7 +12,8 @@ public enum ArmorClass
     Normal,
     Heavy,
     Bio,
-    Flyer
+    Flyer,
+    Building
 }
 
 [RequireComponent(typeof(Health))]

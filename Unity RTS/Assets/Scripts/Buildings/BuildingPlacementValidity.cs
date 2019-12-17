@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceableBuilding : MonoBehaviour 
+public class BuildingPlacementValidity : MonoBehaviour 
 {
     public List<Collider> collisions = new List<Collider>();
 

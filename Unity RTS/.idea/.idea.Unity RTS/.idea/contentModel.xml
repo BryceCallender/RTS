@@ -192,6 +192,9 @@
           </e>
         </e>
         <e p="Materials" t="Include">
+          <e p="Shaders" t="Include">
+            <e p="GhostBuilding.shader" t="Include" />
+          </e>
           <e p="UI-Default-No-Alpha.shader" t="Include" />
         </e>
         <e p="RTS Proto Art" t="Include">
@@ -218,18 +221,22 @@
           </e>
         </e>
         <e p="Scripts" t="Include">
-          <e p="Building.cs" t="Include" />
+          <e p="Buildings" t="Include">
+            <e p="Building.cs" t="Include" />
+            <e p="BuildingPlacementValidity.cs" t="Include" />
+            <e p="GhostBuilding.cs" t="Include" />
+            <e p="RequirementStructure.cs" t="Include" />
+          </e>
           <e p="GameController.cs" t="Include" />
+          <e p="Health.cs" t="Include" />
           <e p="Mouse.cs" t="Include" />
-          <e p="PlaceableBuilding.cs" t="Include" />
-          <e p="RequirementStructure.cs" t="Include" />
           <e p="Resource.cs" t="Include" />
           <e p="RTSObject.cs" t="Include" />
           <e p="Timer.cs" t="Include" />
           <e p="UIManager.cs" t="Include" />
-          <e p="Unit.cs" t="Include" />
           <e p="Units" t="Include">
             <e p="FlyingUnits" t="Include">
+              <e p="Falcon.cs" t="Include" />
               <e p="FlyingUnit.cs" t="Include" />
               <e p="Galaxy.cs" t="Include" />
             </e>
@@ -238,8 +245,9 @@
               <e p="LaserTank.cs" t="Include" />
               <e p="MechUnit.cs" t="Include" />
             </e>
+            <e p="Unit.cs" t="Include" />
+            <e p="UnitSelected.cs" t="Include" />
           </e>
-          <e p="UnitSelected.cs" t="Include" />
         </e>
         <e p="UI" t="Include">
           <e p="Fonts" t="Include">
