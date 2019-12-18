@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Factory : TrainingBuilding
 {
-    // Start is called before the first frame update
-    void Start()
+    public Animation leftDoorAnimation;
+    public Animation rightDoorAnimation;
+
+    private void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            AnimateBuildingInProductionFinish();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void AnimateBuildingDuringProduction()
+    {
+
+    }
+
+    protected override void AnimateBuildingInProductionFinish()
     {
         
     }

@@ -10,6 +10,12 @@ public class Building : RTSObject
     private float progress = 0.0f;
     [SerializeField]
     private bool isBuilding;
+
+    public Material constructionMaterial, finishedMaterial;
+    private MeshRenderer[] meshRenderers;
+
+    public readonly string buildProgressShaderName = "Vector1_79B66B06"; // weird naming thing unity chose
+
     private bool CompletedBuilding => progress >= productionDuration;
 
     // keep a copy of the executing script
@@ -26,6 +32,7 @@ public class Building : RTSObject
 
         //function normally
         buildingCoroutine = StartCoroutine(BuildBuilding());
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -33,6 +40,10 @@ public class Building : RTSObject
     {
         if(CompletedBuilding)
         { 
+            foreach (MeshRenderer renderer in meshRenderers)
+            {
+                renderer.material = finishedMaterial;
+            }
             StopBuilding();
         }
     }
@@ -65,6 +76,7 @@ public class Building : RTSObject
         while(isBuilding)
         {
             progress += Time.deltaTime;
+            constructionMaterial.SetFloat(buildProgressShaderName, progress.Remap(0, productionDuration, 0.3f, 0.85f));
             yield return null;
         }
     }

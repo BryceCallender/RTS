@@ -226,7 +226,12 @@
             <e p="BuildingPlacementValidity.cs" t="Include" />
             <e p="GhostBuilding.cs" t="Include" />
             <e p="RequirementStructure.cs" t="Include" />
+            <e p="TrainingBuildings" t="Include">
+              <e p="Factory.cs" t="Include" />
+              <e p="TrainingBuilding.cs" t="Include" />
+            </e>
           </e>
+          <e p="ExtensionMethods.cs" t="Include" />
           <e p="GameController.cs" t="Include" />
           <e p="Health.cs" t="Include" />
           <e p="Mouse.cs" t="Include" />

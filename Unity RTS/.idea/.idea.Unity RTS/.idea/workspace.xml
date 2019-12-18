@@ -2,22 +2,149 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="178a4004-90a0-4bef-b245-fa684c31e24b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity RTS/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity RTS/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Unity RTS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Unity RTS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/Unity RTS/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Unity RTS/v16/Browse.VC.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/Unity RTS/v16/Server/sqlite3/storage.ide" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/Unity RTS/v16/Server/sqlite3/storage.ide" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Cube.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Cube.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Default_Prototype.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Default_Prototype.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Default_Prototype_Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Default_Prototype_Blue.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Ground big.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Ground big.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Ground.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Materials/Ground.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Models/UnityCharacter/Models/Materials/DefaultMale_Mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Cinemachine/Examples/Shared/Models/UnityCharacter/Models/Materials/DefaultMale_Mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_1ROW.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_1ROW.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_1ROW2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_1ROW2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_blue.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_green.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_green.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_limegreen.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_limegreen.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_purple.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_purple.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_red.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_red.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_yellow.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Materials/glowblock_yellow.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_ammo.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_ammo.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_energy.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_energy.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_health.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_health.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_shield.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_shield.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_speed.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Materials/Powerups/solidbox_speed.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/No Name.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/No Name.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/box_energy2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/box_energy2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/solidbox_energy.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Hyperbit Arsenal/Models/Materials/solidbox_energy.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Images/Materials/Selection Box.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Images/Materials/Selection Box.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Blue.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Grass.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Grass.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Ground.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Ground.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Invalid.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Invalid.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Invalid.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Invalid.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Valid.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Valid.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Valid.mat.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Shaders/Ghost Building Valid.mat.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Shaders/Materials/GhostInvalidColor.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Shaders/Materials/GhostInvalidColor.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Slider Background.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Slider Background.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Slider Fill.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Slider Fill.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Slider Knob.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Slider Knob.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Window.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/Window.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Command_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Command_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Command_Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Command_Ghost.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Construct_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Construct_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Factory_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Factory_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Factory_Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Factory_Ghost.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Ghost.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_InfantryFactory_Red.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Supply_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Supply_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_Supply_Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_Supply_Ghost.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_TitanFactory_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_TitanFactory_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Building_TitanFactory_Ghost.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Building_TitanFactory_Ghost.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MechUnitBlueRig_WithGun.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MechUnitBlueRig_WithGun.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/MechUnitRedRig_WithGun.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/MechUnitRedRig_WithGun.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turret_machineGun_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turret_machineGun_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Turret_machineGun_Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Turret_machineGun_Red.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_Galaxy_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_Galaxy_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_Striker_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_Striker_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_SupplyTruck_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_SupplyTruck_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_SupplyTruck_Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_SupplyTruck_Red.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_TankRail_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_TankRail_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_Tank_Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_Tank_Blue.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Unit_Tank_Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Unit_Tank_Red.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RTS Proto Art/FBX/Materials/RTSAtlas.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RTS Proto Art/FBX/Materials/RTSAtlas.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RTS Proto Art/Texture/Materials/RTSAtlas.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RTS Proto Art/Texture/Materials/RTSAtlas.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RTS_Camera/Demo/Ground.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RTS_Camera/Demo/Ground.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/RTS_Camera/Demo/Targets.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/RTS_Camera/Demo/Targets.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/RTS.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/RTS.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Buildings/PlaceableBuilding.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Buildings/PlaceableBuilding.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/RTSObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/RTSObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/AnnotationManager" beforeDir="false" afterPath="$PROJECT_DIR$/Library/AnnotationManager" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Buildings/TrainingBuildings/TrainingBuilding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Buildings/TrainingBuildings/TrainingBuilding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcFlyer_dome_mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcFlyer_dome_mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcFlyer_metal_mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcFlyer_metal_mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcLand_clean_dome_mat.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI/Models/Materials/vehicle_rcLand_clean_dome_mat.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/Library/CurrentLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/InspectorExpandedItems.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/ScriptMapper" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptMapper" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/assetDatabase3" beforeDir="false" afterPath="$PROJECT_DIR$/Library/assetDatabase3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/expandedItems" beforeDir="false" afterPath="$PROJECT_DIR$/Library/expandedItems" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/08/0838c9bb67956499faa10069a67d13f1.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/08/0838c9bb67956499faa10069a67d13f1.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/0e/0e079ef97504e314080afe2ab2599e87.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/0e/0e079ef97504e314080afe2ab2599e87.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/11/11277dbb3aae14cf8a83bf70216b43ac" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/11/11277dbb3aae14cf8a83bf70216b43ac" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/metadata/11/11277dbb3aae14cf8a83bf70216b43ac.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/11/11277dbb3aae14cf8a83bf70216b43ac.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/15/155c934e5a7db45e4ab49e83823e014a" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/15/155c934e5a7db45e4ab49e83823e014a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/metadata/15/155c934e5a7db45e4ab49e83823e014a.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/15/155c934e5a7db45e4ab49e83823e014a.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/19/194e158178b77b74b902ebbdc417eebb.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/19/194e158178b77b74b902ebbdc417eebb.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/1a/1a1299152cdc7a445ae272a808d55557.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/1a/1a1299152cdc7a445ae272a808d55557.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/23/23188190609c74344bd49c050ebf37db.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/23/23188190609c74344bd49c050ebf37db.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/27/27342824cec2ee64ab208b2396c0d82c.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/27/27342824cec2ee64ab208b2396c0d82c.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/27/27d87a15bf86c4159800770927c9aa2f.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/27/27d87a15bf86c4159800770927c9aa2f.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/2a/2ac0972e5f0b5439998e30db4f1ab9c3.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/2a/2ac0972e5f0b5439998e30db4f1ab9c3.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/2b/2ba13e1c913304aa297f9a6b145e78af" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/2b/2ba13e1c913304aa297f9a6b145e78af" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/2b/2ba13e1c913304aa297f9a6b145e78af.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/2b/2ba13e1c913304aa297f9a6b145e78af.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/2c/2ce56a2ea0f290948b13b9adce5cd57a.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/2c/2ce56a2ea0f290948b13b9adce5cd57a.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/31/31394570ad747e6428ee7c489f0b2143.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/31/31394570ad747e6428ee7c489f0b2143.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/37/37f32e693e1d4094e9e9a860424ca70c.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/37/37f32e693e1d4094e9e9a860424ca70c.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/38/3850e25eef176411e80cd3985701bbfe" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/38/3850e25eef176411e80cd3985701bbfe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/38/3850e25eef176411e80cd3985701bbfe.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/38/3850e25eef176411e80cd3985701bbfe.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/3c/3cc66b78ab25c204f9b4d415d02e3abe.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/3c/3cc66b78ab25c204f9b4d415d02e3abe.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/3c/3cd4099388c96304794fde7a265f2ca0.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/3c/3cd4099388c96304794fde7a265f2ca0.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/51/510042c8a6f034ca1b660c7064753e35" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/51/510042c8a6f034ca1b660c7064753e35" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/51/510042c8a6f034ca1b660c7064753e35.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/51/510042c8a6f034ca1b660c7064753e35.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/55/55296d1b6ee54e14e8eb4648d4b448ee.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/55/55296d1b6ee54e14e8eb4648d4b448ee.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/6c/6c170d0cc36ce0a4780f7a474456213c.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/6c/6c170d0cc36ce0a4780f7a474456213c.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/74/74069a396ef888d4ea96c33784281ac5.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/74/74069a396ef888d4ea96c33784281ac5.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/74/74a6925eb15e340918334874fe4f3952" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/74/74a6925eb15e340918334874fe4f3952" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/74/74a6925eb15e340918334874fe4f3952.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/74/74a6925eb15e340918334874fe4f3952.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/76/768ffdf2b6949054488c74579e87288b.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/76/768ffdf2b6949054488c74579e87288b.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/81/81661a78f18f2461da4c1e48e5a9585b" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/81/81661a78f18f2461da4c1e48e5a9585b" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/81/81661a78f18f2461da4c1e48e5a9585b.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/81/81661a78f18f2461da4c1e48e5a9585b.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/86/86745fb50e6485046815fc26333d6ae2.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/86/86745fb50e6485046815fc26333d6ae2.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/86/869e52b3f9bc0124ab1e4547c783415d.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/86/869e52b3f9bc0124ab1e4547c783415d.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/87/879f5ab2d2a90614db855e052b3e2f20.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/87/879f5ab2d2a90614db855e052b3e2f20.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/89/89db8b11e2538314a89bde42040c3c94.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/89/89db8b11e2538314a89bde42040c3c94.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/8d/8d36946f380c24c7dae314f6857af65c" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/8d/8d36946f380c24c7dae314f6857af65c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/8d/8d36946f380c24c7dae314f6857af65c.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/8d/8d36946f380c24c7dae314f6857af65c.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/8e/8e5d0aa798551478680934cb383e6256.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/8e/8e5d0aa798551478680934cb383e6256.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/91/918b8300d325e4941979d7bc2b321fb8.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/91/918b8300d325e4941979d7bc2b321fb8.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/95/95fadff873f08954f81158e7cf177648.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/95/95fadff873f08954f81158e7cf177648.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/9a/9a6d99c81ff786243bba382fca3dd636.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/9a/9a6d99c81ff786243bba382fca3dd636.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/9a/9ac100b72c26a4e9f86819a61f277bec" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/9a/9ac100b72c26a4e9f86819a61f277bec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/9a/9ac100b72c26a4e9f86819a61f277bec.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/9a/9ac100b72c26a4e9f86819a61f277bec.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/c4/c459d20a3af8fc149a118101b255b41e.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/c4/c459d20a3af8fc149a118101b255b41e.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/c9/c94d2031ae1744c498909db277f8a9e2.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/c9/c94d2031ae1744c498909db277f8a9e2.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/c9/c9634f1b6f22aa84dacf19d55afb1c88.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/c9/c9634f1b6f22aa84dacf19d55afb1c88.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/cc/cc3a402ba8984f34fbe196f8f107664f.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/cc/cc3a402ba8984f34fbe196f8f107664f.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/cc/ccd6aa097a6b97647a1c6267259e0557.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/cc/ccd6aa097a6b97647a1c6267259e0557.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/d7/d7f8b496adee38e4a9edc877d5939f5b.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/d7/d7f8b496adee38e4a9edc877d5939f5b.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/d9/d90645ee765de8f4c820c35b4d2ecc73.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/d9/d90645ee765de8f4c820c35b4d2ecc73.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/d9/d96568979260d43f7a10b0c9f38a1005" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/d9/d96568979260d43f7a10b0c9f38a1005" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/d9/d96568979260d43f7a10b0c9f38a1005.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/d9/d96568979260d43f7a10b0c9f38a1005.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/dd/dd206864430014ed8bf3be024ad7398e.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/dd/dd206864430014ed8bf3be024ad7398e.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/f1/f1586302632024255b1a00d2fa5a0204.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/f1/f1586302632024255b1a00d2fa5a0204.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/f7/f7e29aa8ee4734abd83fcb00c04f9339" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/f7/f7e29aa8ee4734abd83fcb00c04f9339" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/f7/f7e29aa8ee4734abd83fcb00c04f9339.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/f7/f7e29aa8ee4734abd83fcb00c04f9339.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/f9/f993b29f4cc364a4eaf7bbf9086de313.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/f9/f993b29f4cc364a4eaf7bbf9086de313.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/fa/fac54abaae7f8412a8f16b6937adeb21" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/fa/fac54abaae7f8412a8f16b6937adeb21" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/fa/fac54abaae7f8412a8f16b6937adeb21.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/fa/fac54abaae7f8412a8f16b6937adeb21.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/fd/fd16f10d80b00074388e68e24fd31a9b.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/fd/fd16f10d80b00074388e68e24fd31a9b.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/metadata/fd/fd48f778524b1406dbf91cc1031566a2.info" beforeDir="false" afterPath="$PROJECT_DIR$/Library/metadata/fd/fd48f778524b1406dbf91cc1031566a2.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache" afterDir="false" />
     </list>
@@ -30,32 +157,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="RTSObject.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/RTSObject.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-              <folding>
-                <marker date="1576549786617" expanded="false" signature="6:18" ph="..." />
-                <marker date="1576549786617" expanded="true" signature="36:58" ph="{...}" />
-                <marker date="1576549786617" expanded="true" signature="82:153" ph="{...}" />
-                <marker date="1576549786617" expanded="true" signature="549:555" ph="{...}" />
-                <marker date="1576549786617" expanded="true" signature="549:668" ph="{...}" />
-                <marker date="1576549786617" expanded="true" signature="618:666" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GhostBuilding.cs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/GhostBuilding.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="974">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Harvester.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/Harvester.cs">
           <provider selected="true" editor-type-id="text-editor">
@@ -135,6 +236,36 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
               <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MaterialUpgrader.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@5.7.2/Editor/MaterialUpgrader.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3450">
+              <caret line="230" selection-start-line="230" selection-end-line="230" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Building.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1155">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExtensionMethods.cs" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/ExtensionMethods.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <marker date="1576632122988" expanded="true" signature="36:221" ph="{...}" />
+                <marker date="1576632122988" expanded="true" signature="134:218" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -220,9 +351,12 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Mouse.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Resource.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/LaserTank.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ExtensionMethods.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/GhostBuilding.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/MechUnit.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Scripts/HyperbitProjectileScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@5.7.2/Editor/MaterialUpgrader.cs" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -261,13 +395,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
               <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="Loading solution..." type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Unity RTS (2 projects)" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
@@ -275,6 +408,7 @@
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
       <pane id="UnityExplorer">
         <subPane>
           <expand>
@@ -358,11 +492,15 @@
       <workItem from="1576521154981" duration="9000" />
       <workItem from="1576537875320" duration="2000" />
       <workItem from="1576555687626" duration="2000" />
+      <workItem from="1576603726119" duration="2000" />
+      <workItem from="1576604703808" duration="10000" />
+      <workItem from="1576631377640" duration="2000" />
+      <workItem from="1576632121291" duration="12000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70056000" />
+    <option name="totallyTimeSpent" value="70082000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -384,15 +522,15 @@
       <window_info anchor="bottom" id="Version Control" order="13" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="11" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2405619" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25812116" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unity" order="9" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="NuGet" order="12" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Unity" order="9" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
@@ -414,18 +552,355 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/Galaxy.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <marker date="1576468938242" expanded="true" signature="52:434" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="149:278" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="425:432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Scripts/HyperbitProjectileScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+          <folding>
+            <marker date="1576468938223" expanded="false" signature="6:44" ph="..." />
+            <marker date="1576468938223" expanded="true" signature="628:1046" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="835:1040" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1093:2747" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1141:2741" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1241:2731" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1289:2717" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1722:1988" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2377:2699" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2773:2945" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2857:2939" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/MechUnit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding>
+            <marker date="1568776041045" expanded="false" signature="6:78" ph="..." />
+            <marker date="1568776041045" expanded="true" signature="108:337" ph="{...}" />
+            <marker date="1568776041045" expanded="true" signature="292:325" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@5.7.2/Editor/MaterialUpgrader.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3450">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RTSObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/GhostBuilding.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/Harvester.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+          <folding>
+            <marker date="1569301682136" expanded="false" signature="6:100" ph="..." />
+            <marker date="1569301682136" expanded="true" signature="131:7274" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="1225:1882" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="1325:1610" ph="/* Adds all the supply buildings into the list of resource collectors ... */" />
+            <marker date="1569301682136" expanded="true" signature="1920:4615" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2044:2092" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2102:2148" ph="/* Manual Behavior ... */" />
+            <marker date="1569301682136" expanded="true" signature="2184:3407" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2336:2393" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2488:2551" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2645:3396" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2803:2914" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3066:3323" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3141:3305" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3448:4612" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3726:4602" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3907:4588" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3982:4105" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4264:4494" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4621:4773" ph="/* This function makes the harvester wait a bit to collect each resource ... */" />
+            <marker date="1569301682136" expanded="true" signature="4807:5061" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4888:5055" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5064:5181" ph="/* This function makes the harvester turn in what it has and adds ... */" />
+            <marker date="1569301682136" expanded="true" signature="5211:5349" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5352:5439" ph="/* This function looks at all the resources on map and picks closest one ... */" />
+            <marker date="1569301682136" expanded="true" signature="5467:5970" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5564:5885" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5607:5874" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5781:5860" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5923:5964" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5976:6296" ph="/* Tells the harvester where to go based on if it is selected and if ... */" />
+            <marker date="1569301682136" expanded="true" signature="6324:6779" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6390:6773" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6454:6674" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6682:6769" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6828:7272" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6949:7266" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="7059:7256" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/LaserTank.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="68" column="27" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
+          <folding>
+            <marker date="1576468938243" expanded="true" signature="1003:1163" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1195:1223" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1254:1459" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1283:1331" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1344:1453" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1495:1891" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1686:1885" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="4928:5716" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="4928:5722" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5011:5107" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5124:5208" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5755:5870" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5913:6034" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="6103:6209" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/FlyingUnit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+          <folding>
+            <marker date="1576468938241" expanded="true" signature="50:926" ph="{...}" />
+            <marker date="1576468938241" expanded="true" signature="108:326" ph="{...}" />
+            <marker date="1576468938241" expanded="true" signature="918:924" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/Galaxy.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <marker date="1576468938242" expanded="true" signature="52:434" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="149:278" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="425:432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Scripts/HyperbitProjectileScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+          <folding>
+            <marker date="1576468938223" expanded="false" signature="6:44" ph="..." />
+            <marker date="1576468938223" expanded="true" signature="628:1046" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="835:1040" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1093:2747" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1141:2741" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1241:2731" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1289:2717" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1722:1988" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2377:2699" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2773:2945" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2857:2939" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/MechUnit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding>
+            <marker date="1568776041045" expanded="false" signature="6:78" ph="..." />
+            <marker date="1568776041045" expanded="true" signature="108:337" ph="{...}" />
+            <marker date="1568776041045" expanded="true" signature="292:325" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Materials/Shaders/GhostBuilding.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/RTSObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/Harvester.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="62" column="8" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+          <folding>
+            <marker date="1569301682136" expanded="false" signature="6:100" ph="..." />
+            <marker date="1569301682136" expanded="true" signature="131:7274" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="1225:1882" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="1325:1610" ph="/* Adds all the supply buildings into the list of resource collectors ... */" />
+            <marker date="1569301682136" expanded="true" signature="1920:4615" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2044:2092" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2102:2148" ph="/* Manual Behavior ... */" />
+            <marker date="1569301682136" expanded="true" signature="2184:3407" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2336:2393" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2488:2551" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2645:3396" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="2803:2914" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3066:3323" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3141:3305" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3448:4612" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3726:4602" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3907:4588" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="3982:4105" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4264:4494" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4621:4773" ph="/* This function makes the harvester wait a bit to collect each resource ... */" />
+            <marker date="1569301682136" expanded="true" signature="4807:5061" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="4888:5055" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5064:5181" ph="/* This function makes the harvester turn in what it has and adds ... */" />
+            <marker date="1569301682136" expanded="true" signature="5211:5349" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5352:5439" ph="/* This function looks at all the resources on map and picks closest one ... */" />
+            <marker date="1569301682136" expanded="true" signature="5467:5970" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5564:5885" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5607:5874" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5781:5860" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5923:5964" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="5976:6296" ph="/* Tells the harvester where to go based on if it is selected and if ... */" />
+            <marker date="1569301682136" expanded="true" signature="6324:6779" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6390:6773" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6454:6674" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6682:6769" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6828:7272" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="6949:7266" ph="{...}" />
+            <marker date="1569301682136" expanded="true" signature="7059:7256" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/LaserTank.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="68" column="27" selection-start-line="68" selection-start-column="27" selection-end-line="68" selection-end-column="27" />
+          <folding>
+            <marker date="1576468938243" expanded="true" signature="1003:1163" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1195:1223" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1254:1459" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1283:1331" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1344:1453" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1495:1891" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="1686:1885" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="4928:5716" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="4928:5722" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5011:5107" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5124:5208" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5755:5870" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="5913:6034" ph="{...}" />
+            <marker date="1576468938243" expanded="true" signature="6103:6209" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Materials/Shaders/GhostBuilding.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/FlyingUnit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+          <folding>
+            <marker date="1576468938241" expanded="true" signature="50:926" ph="{...}" />
+            <marker date="1576468938241" expanded="true" signature="108:326" ph="{...}" />
+            <marker date="1576468938241" expanded="true" signature="918:924" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/Galaxy.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+          <folding>
+            <marker date="1576468938242" expanded="true" signature="52:434" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="149:278" ph="{...}" />
+            <marker date="1576468938242" expanded="true" signature="425:432" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Hyperbit Arsenal/Demo/Scripts/HyperbitProjectileScript.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+          <folding>
+            <marker date="1576468938223" expanded="false" signature="6:44" ph="..." />
+            <marker date="1576468938223" expanded="true" signature="628:1046" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="835:1040" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1093:2747" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1141:2741" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1241:2731" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1289:2717" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="1722:1988" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2377:2699" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2773:2945" ph="{...}" />
+            <marker date="1576468938223" expanded="true" signature="2857:2939" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/GroundUnits/MechUnit.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding>
+            <marker date="1568776041045" expanded="false" signature="6:78" ph="..." />
+            <marker date="1568776041045" expanded="true" signature="108:337" ph="{...}" />
+            <marker date="1568776041045" expanded="true" signature="292:325" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/GhostBuilding.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1005">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/RTSObject.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-          <folding>
-            <marker date="1576549786617" expanded="false" signature="6:18" ph="..." />
-            <marker date="1576549786617" expanded="true" signature="36:58" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="82:153" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:555" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:668" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="618:666" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -573,14 +1048,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
-          <folding>
-            <marker date="1576549786617" expanded="false" signature="6:18" ph="..." />
-            <marker date="1576549786617" expanded="true" signature="36:58" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="82:153" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:555" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:668" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="618:666" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -719,7 +1186,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/GhostBuilding.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="974">
+        <state relative-caret-position="1005">
           <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
@@ -728,14 +1195,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
           <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-          <folding>
-            <marker date="1576549786617" expanded="false" signature="6:18" ph="..." />
-            <marker date="1576549786617" expanded="true" signature="36:58" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="82:153" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:555" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="549:668" ph="{...}" />
-            <marker date="1576549786617" expanded="true" signature="618:666" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -809,13 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Materials/Shaders/GhostBuilding.shader">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Units/FlyingUnits/FlyingUnit.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -868,6 +1320,37 @@
             <marker date="1568776041045" expanded="false" signature="6:78" ph="..." />
             <marker date="1568776041045" expanded="true" signature="108:337" ph="{...}" />
             <marker date="1568776041045" expanded="true" signature="292:325" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Materials/Shaders/GhostBuilding.shader">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="44" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@5.7.2/Editor/MaterialUpgrader.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3450">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Buildings/Building.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ExtensionMethods.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1576632122988" expanded="true" signature="36:221" ph="{...}" />
+            <marker date="1576632122988" expanded="true" signature="134:218" ph="{...}" />
           </folding>
         </state>
       </provider>

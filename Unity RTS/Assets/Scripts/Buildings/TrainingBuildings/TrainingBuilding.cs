@@ -9,6 +9,8 @@ public class TrainingBuilding : Building
     public List<Unit> producableUnits;
     public List<Unit> unitProductionList; //List acting like a queue (we can remove from anywhere in other RTS games)
 
+    public Transform rallyPoint;
+
     public bool isProducingUnits;
 
     private void Update()
@@ -51,9 +53,15 @@ public class TrainingBuilding : Building
 
     }
 
-    protected void AnimateBuildingDuringProduction() {}
+    protected virtual void AnimateBuildingDuringProduction()
+    {
+        Debug.Log("Animate me!");
+    }
 
-    protected void AnimateBuildingInProductionFinish() {}
+    protected virtual void AnimateBuildingInProductionFinish()
+    {
+        Debug.Log("Animate me!");
+    }
 
 
 
