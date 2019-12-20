@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Factory : TrainingBuilding
 {
-    public Animation leftDoorAnimation;
-    public Animation rightDoorAnimation;
+    public Animator[] animators;
 
-    private void Update()
+    protected override void Start()
     {
+        base.Start();
+
+        animators = GetComponentsInChildren<Animator>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
         if(Input.GetKeyDown(KeyCode.F1))
         {
             AnimateBuildingInProductionFinish();
+            Debug.Log("Playing animation");
         }
     }
 
@@ -22,6 +31,7 @@ public class Factory : TrainingBuilding
 
     protected override void AnimateBuildingInProductionFinish()
     {
-        
+        foreach (Animator animator in animators)
+            animator.SetTrigger("finishedProduction");
     }
 }

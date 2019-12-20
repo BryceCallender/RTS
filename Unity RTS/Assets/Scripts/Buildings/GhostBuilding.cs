@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GhostBuilding: MonoBehaviour
 {
@@ -29,6 +27,11 @@ public class GhostBuilding: MonoBehaviour
     private void Update()
     {
         MoveToMousePosition();
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            Rotate();
+        }
 
         //Make the ghost building red and dont allow it to be placed!
         if(!IsValidSpot())
@@ -75,5 +78,10 @@ public class GhostBuilding: MonoBehaviour
         {
             ghostBuildingTransform.position = new Vector3(hitInfo.point.x, 0, hitInfo.point.z);
         }
+    }
+
+    private void Rotate()
+    {
+        ghostBuildingTransform.Rotate(Vector3.up, 90);
     }
 }

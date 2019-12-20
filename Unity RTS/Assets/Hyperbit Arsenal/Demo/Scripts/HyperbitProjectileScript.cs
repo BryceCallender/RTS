@@ -13,6 +13,7 @@ public class HyperbitProjectileScript : MonoBehaviour
     [HideInInspector]
     public string owner;
     public Team team;
+    public UnitDamageStrength unitDamageStrength;
     public int speed = 250;
     [HideInInspector]
     public int damage;
@@ -24,11 +25,11 @@ public class HyperbitProjectileScript : MonoBehaviour
 
     void Start()
     {
-        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation) as GameObject;
+        projectileParticle = Instantiate(projectileParticle, transform.position, transform.rotation);
         projectileParticle.transform.parent = transform;
         if (muzzleParticle)
         {
-            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation) as GameObject;
+            muzzleParticle = Instantiate(muzzleParticle, transform.position, transform.rotation);
             Destroy(muzzleParticle, 1.5f); // Lifetime of muzzle effect.
         }
     }
@@ -41,10 +42,12 @@ public class HyperbitProjectileScript : MonoBehaviour
             {
                 if (!hasCollided)
                 {
+                    RTSObject otherObject = hit.gameObject.GetComponent<RTSObject>();
+
                     hasCollided = true;
                     impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
                     
-                    hit.gameObject.GetComponent<Health>().TakeDamage(damage);
+                    hit.gameObject.GetComponent<Health>().TakeDamage(damage * RTSObject.GetDamageModifier(otherObject.armorClass, unitDamageStrength));
                     
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)

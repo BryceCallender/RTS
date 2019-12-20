@@ -12,17 +12,22 @@ public enum UnitsAttackable
 
 public enum UnitDamageStrength
 {
-    Ground,
+    LightArmor,
+    NormalArmor,
+    HeavyArmor,
     Air,
     Bio,
     None
 }
 
 [RequireComponent(typeof(UnitSelected))]
-public class Unit : RTSObject
+public class Unit : RTSObject, ISelectable
 {
     public GameObject projectile;
     public int damage;
+
+    [SerializeField]
+    protected float turnSpeed = 5;
 
     public float fireRate;
     public float cooldown;
@@ -50,7 +55,7 @@ public class Unit : RTSObject
     protected NavMeshAgent agent;
     private RaycastHit hitAgentInfo;
 
-    protected void Start()
+    protected virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         unitSelected = GetComponent<UnitSelected>();
@@ -149,9 +154,9 @@ public class Unit : RTSObject
                         hyperProjScript.owner = gameObject.name;
                         hyperProjScript.team = team;
                         hyperProjScript.damage = damage;
+                        hyperProjScript.unitDamageStrength = unitsUnitIsStrongAgainst;
 
                         //laser.GetComponent<Rigidbody>().velocity = direction * hyperProjScript.speed;
-                        Debug.Log(direction);
                         laser.GetComponent<Rigidbody>().AddForce(direction * hyperProjScript.speed);
                     }   
                 }
@@ -171,7 +176,7 @@ public class Unit : RTSObject
             foreach (Transform turretTransform in turrets)
             {
                 //Make each turret point towards the enemy target
-                turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), Time.time);
+                turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), Time.deltaTime * turnSpeed);
             }
         }
         else
@@ -186,6 +191,7 @@ public class Unit : RTSObject
         {
             //Make each turret point towards the enemy target
             turretTransform.localRotation = Quaternion.identity;
+            //turretTransform.localRotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.identity, Time.deltaTime * turnSpeed);
         }
     }
 }

@@ -9,16 +9,39 @@ public class TrainingBuilding : Building
     public List<Unit> producableUnits;
     public List<Unit> unitProductionList; //List acting like a queue (we can remove from anywhere in other RTS games)
 
-    public Transform rallyPoint;
+    public Vector3 rallyPoint;
+    private Camera camera;
+    private RaycastHit hitInfo;
 
     public bool isProducingUnits;
 
-    private void Update()
+    protected override void Start()
     {
+        base.Start();
+
+        camera = Camera.main;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
         //Theres units to be produced!
-        if(unitProductionList.Count > 0)
+        if (unitProductionList.Count > 0)
         {
             ProduceUnit();
+        }
+
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        {
+            if(Input.GetMouseButtonDown(1))
+            {
+                if (hitInfo.collider.name.Equals("RTSTerrain") || hitInfo.collider.gameObject.layer == 8 || hitInfo.collider.gameObject.layer == 9)
+                {
+                    SetRallyPoint(hitInfo.point);
+                }
+            }
         }
     }
 
@@ -63,6 +86,13 @@ public class TrainingBuilding : Building
         Debug.Log("Animate me!");
     }
 
+
+    public void SetRallyPoint(Vector3 location)
+    {
+        Debug.Log($"Rally point set at {location}");
+        location.y = 0;
+        rallyPoint = location;
+    }
 
 
 }

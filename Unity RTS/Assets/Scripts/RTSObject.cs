@@ -40,4 +40,11 @@ public class RTSObject : MonoBehaviour
     {
         return myTeam != otherTeam;
     }
+
+    public static float GetDamageModifier(ArmorClass armorClass, UnitDamageStrength unitDamageStrength)
+    {
+        float damageModifier = 1.0f;
+
+        return damageModifier;
+    }
 }

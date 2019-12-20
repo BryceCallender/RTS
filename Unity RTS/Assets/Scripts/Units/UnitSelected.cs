@@ -12,11 +12,13 @@ public class UnitSelected : MonoBehaviour
 
     private GameObject selectionIndicator;
     private RaycastHit hitInfo;
+    private Camera camera;
 
     private void Start()
     {
         selectionIndicator = transform.Find("SelectionIndicator").gameObject;
         mouse = FindObjectOfType<Mouse>();
+        camera = Camera.main;
     }
 
     private void Update()
@@ -69,10 +71,10 @@ public class UnitSelected : MonoBehaviour
 
         if(Mouse.ShiftKeyDown() && Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
             {
-                if (hitInfo.collider.gameObject.CompareTag("Selectable"))
+                if(hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
                 {
                     Debug.Log("Removed one");
                     mouse.DeselectShiftedUnit(hitInfo.transform.gameObject);

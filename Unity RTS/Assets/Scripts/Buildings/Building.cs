@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : RTSObject
+public class Building : RTSObject, ISelectable
 {
     public RequirementStructures requiredBuildingsToConstruct;
 
@@ -10,9 +10,13 @@ public class Building : RTSObject
     private float progress = 0.0f;
     [SerializeField]
     private bool isBuilding;
+    [SerializeField]
+    private bool alreadyPlaced;
 
     public Material constructionMaterial, finishedMaterial;
+    [SerializeField]
     private MeshRenderer[] meshRenderers;
+    private MaterialPropertyBlock propBlock;
 
     public readonly string buildProgressShaderName = "Vector1_79B66B06"; // weird naming thing unity chose
 
@@ -22,7 +26,7 @@ public class Building : RTSObject
     private Coroutine buildingCoroutine;
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
         //Buildings cant move and cant shoot with their own armor class defaulted
         //incase the values arent correctly set
@@ -33,12 +37,14 @@ public class Building : RTSObject
         //function normally
         buildingCoroutine = StartCoroutine(BuildBuilding());
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
+
+        propBlock = new MaterialPropertyBlock();
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
-        if(CompletedBuilding)
+        if(CompletedBuilding || alreadyPlaced)
         { 
             foreach (MeshRenderer renderer in meshRenderers)
             {
@@ -76,7 +82,14 @@ public class Building : RTSObject
         while(isBuilding)
         {
             progress += Time.deltaTime;
-            constructionMaterial.SetFloat(buildProgressShaderName, progress.Remap(0, productionDuration, 0.3f, 0.85f));
+            foreach(MeshRenderer renderer in meshRenderers)
+            {
+                //Property blocks ensures that the material changed isnt messing with the only reference to the material otherwise
+                //everything would be loading with the same "progress" visually but not numerically :)
+                renderer.GetPropertyBlock(propBlock);
+                propBlock.SetFloat(buildProgressShaderName, progress.Remap(0, productionDuration, 0.3f, 0.85f));
+                renderer.SetPropertyBlock(propBlock);
+            }
             yield return null;
         }
     }

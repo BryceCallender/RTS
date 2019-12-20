@@ -31,7 +31,7 @@ public class LaserTank : Unit
     private float chargeTime = 0;
     private float timeToCharge = 4.0f;
 
-    private void Start()
+    protected void Start()
     {
         base.Start();
         chargeEffect = chargeArea.GetComponentInChildren<ParticleSystem>();
@@ -114,24 +114,6 @@ public class LaserTank : Unit
             {
                 DestroyLaser();
             }
-        }
-    }
-
-    protected override void AimTurrets()
-    {
-        if (enemyDirection != Vector3.zero)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(enemyDirection);
-            turrets[0].rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
-        }
-    }
-
-    protected override void ResetTurrets()
-    {
-        if (nearestEnemy == null || enemyDirection.sqrMagnitude > range * range)
-        {
-            turrets[0].rotation = Quaternion.Lerp(Quaternion.Euler(enemyDirection), gameObject.transform.rotation, 1.0f);
-            chargeEffect.gameObject.SetActive(false);
         }
     }
 

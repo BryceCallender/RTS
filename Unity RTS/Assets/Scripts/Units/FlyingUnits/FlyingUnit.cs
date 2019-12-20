@@ -4,18 +4,18 @@ public class FlyingUnit : Unit
 {
     public float flyHeight;
 
-    protected void Start()
+    protected override void Start()
     {
         base.Start();
         
-        unitsUnitIsStrongAgainst = UnitDamageStrength.Ground;
+        unitsUnitIsStrongAgainst = UnitDamageStrength.NormalArmor;
 
         //Make the unit on start be at the respective height to be flying
         agent.baseOffset = flyHeight;
     }
 
     //Define how to fly and how to move heights when going over height disturbances
-    protected virtual void Update()
+    protected override void Update()
     {
         base.Update();
         

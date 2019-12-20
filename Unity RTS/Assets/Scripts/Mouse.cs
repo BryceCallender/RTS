@@ -18,7 +18,6 @@ public class Mouse : MonoBehaviour
 	private Vector2 boxStart;
 	private Vector2 boxFinish;
 
-
     private float timeToMakeDragBox = 1f;
     private float timeLeftBeforeDragBox;
 
@@ -26,15 +25,18 @@ public class Mouse : MonoBehaviour
     public static bool IsClickedAway = false;
 	public bool isFirst = false;
 
+    private Camera camera;
+
     private void Awake()
     {
         currentMousePosition = Vector3.zero;
         mouseDownPosition = Vector3.zero;
+        camera = Camera.main;
     }
 
     private void Update()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
 
         if(Physics.Raycast(ray,out hitInfo,Mathf.Infinity))
         {
@@ -65,8 +67,8 @@ public class Mouse : MonoBehaviour
 
     private void OnGUI()
 	{
-        float boxWidth = Camera.main.WorldToScreenPoint(mouseDownPosition).x - Camera.main.WorldToScreenPoint(currentMousePosition).x;
-        float boxHeight = Camera.main.WorldToScreenPoint(mouseDownPosition).y - Camera.main.WorldToScreenPoint(currentMousePosition).y;
+        float boxWidth = camera.WorldToScreenPoint(mouseDownPosition).x - camera.WorldToScreenPoint(currentMousePosition).x;
+        float boxHeight = camera.WorldToScreenPoint(mouseDownPosition).y - camera.WorldToScreenPoint(currentMousePosition).y;
         float boxLeft, boxTop;
 
         boxTop = (Screen.height - Input.mousePosition.y) - boxHeight;
