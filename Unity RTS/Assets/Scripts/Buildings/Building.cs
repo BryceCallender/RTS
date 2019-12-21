@@ -5,6 +5,8 @@ using UnityEngine;
 public class Building : RTSObject, ISelectable
 {
     public RequirementStructures requiredBuildingsToConstruct;
+    protected UnitSelected unitSelected;
+    protected bool UnitIsSelected => unitSelected.selected;
 
     [SerializeField]
     private float progress = 0.0f;
@@ -14,7 +16,6 @@ public class Building : RTSObject, ISelectable
     private bool alreadyPlaced;
 
     public Material constructionMaterial, finishedMaterial;
-    [SerializeField]
     private MeshRenderer[] meshRenderers;
     private MaterialPropertyBlock propBlock;
 
@@ -37,6 +38,8 @@ public class Building : RTSObject, ISelectable
         //function normally
         buildingCoroutine = StartCoroutine(BuildBuilding());
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        unitSelected = GetComponent<UnitSelected>();
+        unitSelected.enabled = false; //Dont enable selection until the building is available to the user
 
         propBlock = new MaterialPropertyBlock();
     }
@@ -44,8 +47,9 @@ public class Building : RTSObject, ISelectable
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(CompletedBuilding || alreadyPlaced)
-        { 
+        if(IsBuildingAvailableToUse())
+        {
+            unitSelected.enabled = true;
             foreach (MeshRenderer renderer in meshRenderers)
             {
                 renderer.material = finishedMaterial;
@@ -92,5 +96,10 @@ public class Building : RTSObject, ISelectable
             }
             yield return null;
         }
+    }
+
+    protected bool IsBuildingAvailableToUse()
+    {
+        return CompletedBuilding || alreadyPlaced;
     }
 }

@@ -12,11 +12,6 @@ public class GhostBuilding: MonoBehaviour
     
     private BuildingPlacementValidity placementOfBuildingValidity;
 
-    public void CreateGhostBuilding()
-    {
-        ghostBuildingTransform = Instantiate(ghostBuilding).transform;
-    }
-
     private void Start()
     {
         placementOfBuildingValidity = GetComponent<BuildingPlacementValidity>();
@@ -50,6 +45,11 @@ public class GhostBuilding: MonoBehaviour
                 PlaceBuilding();
             }
         }
+    }
+
+    public void CreateGhostBuilding()
+    {
+        ghostBuildingTransform = Instantiate(ghostBuilding).transform;
     }
 
     private void PlaceBuilding()

@@ -118,7 +118,7 @@ public class Mouse : MonoBehaviour
         {
             for (int i = 0; i < unitsOnScreen.Count; i++)
             {
-                GameObject unit = unitsOnScreen[i] as GameObject;
+                GameObject unit = unitsOnScreen[i];
                 UnitSelected unitSelectedScript = unit.GetComponent<UnitSelected>();
                 if(UnitInDragBox(unitSelectedScript.ScreenPos)
                    && unitSelectedScript.selected 
@@ -162,7 +162,7 @@ public class Mouse : MonoBehaviour
     {
 		for (int i = 0; i < selectedObjects.Count; i++)
 		{
-		    GameObject unit = selectedObjects[i] as GameObject;
+		    GameObject unit = selectedObjects[i];
             UnitSelected unitSelectedScript = unit.GetComponent<UnitSelected>();
 		    if (obj == unit)
 		    {
@@ -185,7 +185,7 @@ public class Mouse : MonoBehaviour
     {
         for (int i = 0; i < selectedObjects.Count; i++)
         {
-            GameObject unit = selectedObjects[i] as GameObject;
+            GameObject unit = selectedObjects[i];
             if(obj == unit)
             {
                 return true;
@@ -196,14 +196,7 @@ public class Mouse : MonoBehaviour
 
     public static bool ShiftKeyDown()
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
     }
 
     public void DeselectShiftedUnit(GameObject obj)

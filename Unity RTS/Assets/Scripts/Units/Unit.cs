@@ -52,12 +52,17 @@ public class Unit : RTSObject, ISelectable
     
     //Pathfinding variables
     public Vector3 targetPosition;
-    protected NavMeshAgent agent;
+    public NavMeshAgent agent;
     private RaycastHit hitAgentInfo;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     protected virtual void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        
         unitSelected = GetComponent<UnitSelected>();
     }
 

@@ -10,22 +10,29 @@ public class UnitSelected : MonoBehaviour
 	public bool isFirst;
     public Mouse mouse;
 
-    private GameObject selectionIndicator;
+    public GameObject selectionIndicator;
     private RaycastHit hitInfo;
     private Camera camera;
 
-    private void Start()
+    public float indicatorResizing = 1.25f;
+
+    private void Awake()
     {
-        selectionIndicator = transform.Find("SelectionIndicator").gameObject;
         mouse = FindObjectOfType<Mouse>();
         camera = Camera.main;
     }
 
+    private void Start()
+    {
+        selectionIndicator = transform.Find("SelectionIndicator").gameObject;
+    }
+
     private void Update()
     {
-        ScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        ScreenPos = camera.WorldToScreenPoint(transform.position);
         if (mouse.UnitInsideScreen(ScreenPos))
         {
+            //Responsible for adding units on a mouse drag
             if (mouse.UnitInDragBox(ScreenPos) && !added && !selected && Mouse.IsDragging)
             {
                 mouse.unitsOnScreen.Add(gameObject);
@@ -35,38 +42,41 @@ public class UnitSelected : MonoBehaviour
 
 				// This "diameter" only works correctly for relatively circular or square objects
 				float diameter = bigBounds.size.z;
-				diameter *= 1.10f;
+				diameter *= indicatorResizing;
 
                 selectionIndicator.SetActive(true);
 
                 selectionIndicator.transform.position = new Vector3(bigBounds.center.x, 0.06f, bigBounds.center.z);
                 selectionIndicator.transform.localScale = new Vector3(bigBounds.size.x + (diameter / 2.0f), bigBounds.size.y, bigBounds.size.z + (diameter / 2.0f));
 			}
-            //If we click a unit
-//            else if (Input.GetMouseButtonDown(0) && !added && !selected && !Mouse.IsDragging)
-//            {
-//                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-//                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
-//                {
-//                    if (hitInfo.collider.gameObject.CompareTag("Selectable"))
-//                    {
-//                        mouse.unitsOnScreen.Add(hitInfo.collider.gameObject);
-//                        selected = true;
-//                        added = true;
-//                        Bounds bigBounds = gameObject.GetComponentInChildren<Renderer>().bounds;
-//
-//                        // This "diameter" only works correctly for relatively circular or square objects
-//                        float diameter = bigBounds.size.z;
-//                        diameter *= 1.10f;
-//
-//                        selectionIndicator.SetActive(true);
-//
-//                        selectionIndicator.transform.position = new Vector3(bigBounds.center.x, 0.06f, bigBounds.center.z);
-//                        selectionIndicator.transform.localScale = new Vector3(bigBounds.size.x + (diameter / 2.0f), bigBounds.size.y, bigBounds.size.z + (diameter / 2.0f));
-//
-//                    }
-//                }
-//            }
+            //Responsible for adding a single unit based on who we click!
+            else if (Input.GetMouseButtonDown(0) && !added && !selected && !Mouse.IsDragging)
+            {
+                Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+                {
+                    //Make sure that we pick the object we hit and not everything since every object has this script on them
+                    //Also ensure that the object we hit has the Selectable interface
+                    if (hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
+                    {
+                        mouse.DeselectAllUnits();
+                        mouse.unitsOnScreen.Add(hitInfo.collider.gameObject);
+                        selected = true;
+                        added = true;
+                        Bounds bigBounds = gameObject.GetComponentInChildren<Renderer>().bounds;
+
+                        // This "diameter" only works correctly for relatively circular or square objects
+                        float diameter = bigBounds.size.z;
+                        diameter *= indicatorResizing;
+
+                        selectionIndicator.SetActive(true);
+
+                        selectionIndicator.transform.position = new Vector3(bigBounds.center.x, 0.06f, bigBounds.center.z);
+                        selectionIndicator.transform.localScale = new Vector3(bigBounds.size.x + (diameter / 2.0f), bigBounds.size.y, bigBounds.size.z + (diameter / 2.0f));
+
+                    }
+                }
+            }
         }
 
         if(Mouse.ShiftKeyDown() && Input.GetMouseButtonDown(0))
@@ -74,6 +84,7 @@ public class UnitSelected : MonoBehaviour
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
             {
+                //If object implements ISelectable then remove it from the list
                 if(hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
                 {
                     Debug.Log("Removed one");

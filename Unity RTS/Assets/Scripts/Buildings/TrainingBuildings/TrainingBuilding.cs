@@ -8,6 +8,7 @@ public class TrainingBuilding : Building
 
     public List<Unit> producableUnits;
     public List<Unit> unitProductionList; //List acting like a queue (we can remove from anywhere in other RTS games)
+    public Transform spawnPosition;
 
     public Vector3 rallyPoint;
     private Camera camera;
@@ -15,10 +16,15 @@ public class TrainingBuilding : Building
 
     public bool isProducingUnits;
 
+    private float unitProductionTimer = 0.0f;
+    [SerializeField]
+    private Unit currentUnit;
+
+    private static int number = 1;
+
     protected override void Start()
     {
         base.Start();
-
         camera = Camera.main;
     }
 
@@ -26,20 +32,33 @@ public class TrainingBuilding : Building
     {
         base.Update();
 
-        //Theres units to be produced!
-        if (unitProductionList.Count > 0)
-        {
-            ProduceUnit();
-        }
-
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
-        {
-            if(Input.GetMouseButtonDown(1))
+        if(IsBuildingAvailableToUse())
+        { 
+            if (Input.GetKeyDown(KeyCode.F5))
             {
-                if (hitInfo.collider.name.Equals("RTSTerrain") || hitInfo.collider.gameObject.layer == 8 || hitInfo.collider.gameObject.layer == 9)
+                unitProductionList.Add(producableUnits[Random.Range(0, producableUnits.Count)]);
+            }
+
+            //Theres units to be produced!
+            if (unitProductionList.Count > 0)
+            {
+                currentUnit = unitProductionList[0];
+                ProduceUnit();
+            }
+            else
+            {
+                isProducingUnits = false;
+            }
+
+            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+            {
+                if (Input.GetMouseButtonDown(1) && UnitIsSelected)
                 {
-                    SetRallyPoint(hitInfo.point);
+                    if (hitInfo.collider.name.Equals("RTSTerrain") || hitInfo.collider.gameObject.layer == 8 || hitInfo.collider.gameObject.layer == 9)
+                    {
+                        SetRallyPoint(hitInfo.point);
+                    }
                 }
             }
         }
@@ -65,15 +84,52 @@ public class TrainingBuilding : Building
     {
         if (unitProductionList.Count > 0)
         {
-            unitProductionList.RemoveAt(position);
+            //Now that the current unit has been dismissed reset the timer
+            //other positions will not affect the timer at any point other 
+            //than removing the currently worked one.
+            if(position == 0 && unitProductionTimer >= currentUnit.productionDuration)
+            {
+                GameObject newUnit = Instantiate(UnitManager.GetGameObjectFromUnit(currentUnit), spawnPosition.position, spawnPosition.rotation);
 
-            //Refund something back to the player
+                //TODO::Fix numbering system
+                newUnit.name = currentUnit.gameObject.name + "_" + number;
+                number++;
+
+                //Zero means rally point has not been defined
+                if (rallyPoint == Vector3.zero)
+                {
+                    newUnit.GetComponent<Unit>().agent.destination = spawnPosition.position + new Vector3(0, 0, 2);
+                }
+                else
+                {
+                    newUnit.GetComponent<Unit>().agent.destination = rallyPoint;
+                }
+
+                unitProductionTimer = 0;
+            }
+            else
+            {
+                //Refund something back to the player
+            }
+
+            unitProductionList.RemoveAt(position);
         }
     }
 
     protected void ProduceUnit()
     {
+        if(unitProductionTimer >= currentUnit.productionDuration)
+        {
+            AnimateBuildingInProductionFinish();
+            RemoveUnitFromQueue(0);
+        }
+        isProducingUnits = true;
+        unitProductionTimer += Time.deltaTime;
+    }
 
+    protected virtual void DisplayUIElements()
+    {
+        Debug.Log("Tell me how to interact with the UI!");
     }
 
     protected virtual void AnimateBuildingDuringProduction()

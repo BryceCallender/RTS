@@ -4,6 +4,8 @@ public class FlyingUnit : Unit
 {
     public float flyHeight;
 
+    private GameObject selectionIndicator;
+
     protected override void Start()
     {
         base.Start();
@@ -12,6 +14,12 @@ public class FlyingUnit : Unit
 
         //Make the unit on start be at the respective height to be flying
         agent.baseOffset = flyHeight;
+
+        selectionIndicator = GetComponent<UnitSelected>().selectionIndicator;
+
+        selectionIndicator.transform.position = new Vector3(selectionIndicator.transform.position.x, 
+                                                            selectionIndicator.transform.position.y + flyHeight, 
+                                                            selectionIndicator.transform.position.z);
     }
 
     //Define how to fly and how to move heights when going over height disturbances
