@@ -16,14 +16,12 @@ public class UnitSelected : MonoBehaviour
 
     public float indicatorResizing = 1.25f;
 
+    //The selection indicator is not going to be enabled so we have to use awake since itll run regardless of the script being
+    //enabled or not unlike Start
     private void Awake()
     {
         mouse = FindObjectOfType<Mouse>();
         camera = Camera.main;
-    }
-
-    private void Start()
-    {
         selectionIndicator = transform.Find("SelectionIndicator").gameObject;
     }
 
@@ -55,6 +53,7 @@ public class UnitSelected : MonoBehaviour
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
                 {
+                    Debug.Log(hitInfo.collider.gameObject.name);
                     //Make sure that we pick the object we hit and not everything since every object has this script on them
                     //Also ensure that the object we hit has the Selectable interface
                     if (hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)

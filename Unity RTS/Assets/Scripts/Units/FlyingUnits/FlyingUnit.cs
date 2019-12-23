@@ -7,9 +7,7 @@ public class FlyingUnit : Unit
     private GameObject selectionIndicator;
 
     protected override void Start()
-    {
-        base.Start();
-        
+    {    
         unitsUnitIsStrongAgainst = UnitDamageStrength.NormalArmor;
 
         //Make the unit on start be at the respective height to be flying
@@ -17,6 +15,7 @@ public class FlyingUnit : Unit
 
         selectionIndicator = GetComponent<UnitSelected>().selectionIndicator;
 
+        //Make selection indicator go into the sky with the unit
         selectionIndicator.transform.position = new Vector3(selectionIndicator.transform.position.x, 
                                                             selectionIndicator.transform.position.y + flyHeight, 
                                                             selectionIndicator.transform.position.z);
@@ -28,7 +27,7 @@ public class FlyingUnit : Unit
         base.Update();
         
         //Raycast down to see how high we are
-        //If we are not flyHeight distance from the group lerp until we are :)
+        //If we are not flyHeight distance from the group lerp until we are
         //Update the baseOffset too?
     }
 

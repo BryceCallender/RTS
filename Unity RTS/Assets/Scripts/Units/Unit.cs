@@ -52,19 +52,17 @@ public class Unit : RTSObject, ISelectable
     
     //Pathfinding variables
     public Vector3 targetPosition;
+    [HideInInspector]
     public NavMeshAgent agent;
     private RaycastHit hitAgentInfo;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-    }
-
-    protected virtual void Start()
-    {
-        
         unitSelected = GetComponent<UnitSelected>();
     }
+
+    protected virtual void Start() { }
 
     //TODO: Fog of war is what dictates if a unit will follow after their enemy
     //TODO: If the enemy is locked on and is leaving once out of range reset the turret!

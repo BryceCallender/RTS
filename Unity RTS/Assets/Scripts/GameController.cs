@@ -7,7 +7,6 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-	public int currency;
     public Text resourcePanel;
     public TextMeshProUGUI timeText;
 
@@ -32,27 +31,13 @@ public class GameController : MonoBehaviour
 	[SerializeField]
 	private GameObject[] players;
 
-	private Timer time;
+    private Timer time;
 
-    public const int MAX_CAPACITY = 100;
-
-    public static int LASER_DAMAGE = 5;
-    public static int CLUSTER_BOMB_DAMAGE = 10;
-    public static int MISSILE_DAMAGE = 5;
-
-    private static GameController instance;
-
-    public static GameController Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
+    public static GameController Instance { get; private set; }
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     private void Start()
@@ -79,7 +64,7 @@ public class GameController : MonoBehaviour
 		}
 
 		timeText.SetText(time.DisplayTime());
-        resourcePanel.text = "Resource:" + currency;
+        //resourcePanel.text = "Resource:" + currency;
 
         if(mineralErrorText.gameObject.activeSelf)
         {
@@ -87,7 +72,7 @@ public class GameController : MonoBehaviour
         }
         if(IsZeroAlpha(mineralErrorColor))
         {
-            SetAlphaBack(ref mineralErrorText,ref mineralErrorColor);
+            SetAlphaBack(ref mineralErrorText, ref mineralErrorColor);
         }
 
         if(buildingErrorText.gameObject.activeSelf)
@@ -117,10 +102,10 @@ public class GameController : MonoBehaviour
 
     public bool IsZeroAlpha(Color errorColor)
     {
-        return errorColor.a.Equals(0);
+        return errorColor.a == 0;
     }
 
-    public void SetAlphaBack(ref Text errorText,ref Color errorColor)
+    public void SetAlphaBack(ref Text errorText, ref Color errorColor)
     {
         errorColor.a = 1.0f;
         errorText.gameObject.SetActive(false);
@@ -155,7 +140,7 @@ public class GameController : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
-	public GameObject grabPlayer(String identifier)
+	public GameObject grabPlayer(string identifier)
 	{
 		for (int i = 0; i < players.Length; i++)
 		{

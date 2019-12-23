@@ -16,6 +16,7 @@ public class Building : RTSObject, ISelectable
     private bool alreadyPlaced;
 
     public Material constructionMaterial, finishedMaterial;
+    [SerializeField]
     private MeshRenderer[] meshRenderers;
     private MaterialPropertyBlock propBlock;
 
@@ -35,13 +36,14 @@ public class Building : RTSObject, ISelectable
         range = 0;
         armorClass = ArmorClass.Building;
 
-        //function normally
-        buildingCoroutine = StartCoroutine(BuildBuilding());
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         unitSelected = GetComponent<UnitSelected>();
         unitSelected.enabled = false; //Dont enable selection until the building is available to the user
 
         propBlock = new MaterialPropertyBlock();
+
+        //function normally
+        buildingCoroutine = StartCoroutine(BuildBuilding());
     }
 
     // Update is called once per frame
@@ -83,7 +85,13 @@ public class Building : RTSObject, ISelectable
     private IEnumerator BuildBuilding()
     {
         isBuilding = true;
-        while(isBuilding)
+
+        foreach (MeshRenderer renderer in meshRenderers)
+        {
+            renderer.material = constructionMaterial;
+        }
+
+        while (isBuilding)
         {
             progress += Time.deltaTime;
             foreach(MeshRenderer renderer in meshRenderers)

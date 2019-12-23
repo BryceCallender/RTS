@@ -6,8 +6,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public int currency;
-    public int capacityMax;
     public int currentCapacity;
+    public readonly int MAX_CAPACITY = 100;
 
     public HashSet<Unit> availableUnits;
     public HashSet<Building> availableBuildings;
@@ -17,9 +17,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        capacityMax = 50;
         currentCapacity = 0;
-        capacityText.SetText(currentCapacity + "/" + capacityMax);
+        capacityText.SetText(currentCapacity + "/" + MAX_CAPACITY);
 
         availableUnits = new HashSet<Unit>();
         availableBuildings = new HashSet<Building>();
