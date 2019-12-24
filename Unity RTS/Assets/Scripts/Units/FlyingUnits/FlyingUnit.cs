@@ -8,8 +8,6 @@ public class FlyingUnit : Unit
 
     protected override void Start()
     {    
-        unitsUnitIsStrongAgainst = UnitDamageStrength.NormalArmor;
-
         //Make the unit on start be at the respective height to be flying
         agent.baseOffset = flyHeight;
 

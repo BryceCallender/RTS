@@ -12,14 +12,17 @@ public class HyperbitProjectileScript : MonoBehaviour
     
     [HideInInspector]
     public string owner;
+    [HideInInspector]
     public Team team;
-    public UnitDamageStrength unitDamageStrength;
+    [HideInInspector]
+    public ArmorClass unitDamageStrength;
     public int speed = 250;
     [HideInInspector]
     public int damage;
     
     private bool hasCollided = false;
 
+    [SerializeField]
     private float timeToKill = 5.0f;
     private float timerToKill = 0;
 
@@ -38,7 +41,7 @@ public class HyperbitProjectileScript : MonoBehaviour
     {
         if (owner != hit.gameObject.name)
         {
-            if (RTSObject.CanDamage(team, hit.gameObject.GetComponent<RTSObject>().team))
+            if (DamageHelper.CanDamage(team, hit.gameObject.GetComponent<RTSObject>().team))
             {
                 if (!hasCollided)
                 {
@@ -47,7 +50,7 @@ public class HyperbitProjectileScript : MonoBehaviour
                     hasCollided = true;
                     impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
                     
-                    hit.gameObject.GetComponent<Health>().TakeDamage(damage * RTSObject.GetDamageModifier(otherObject.armorClass, unitDamageStrength));
+                    hit.gameObject.GetComponent<Health>().TakeDamage(damage * DamageHelper.GetDamageModifier(otherObject.armorClass, unitDamageStrength));
                     
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)

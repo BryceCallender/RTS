@@ -9,6 +9,27 @@ public static class ExtensionMethods
     }
 
 
+    public static void Populate<T>(this T[] arr, T value)
+    {
+        for (int i = 0; i < arr.Length; i++)
+        {
+            arr[i] = value;
+        }
+    }
+
+    public static bool AllMatchValue<T>(this T[] arr, T value)
+    {
+        bool match = true;
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (!arr[i].Equals(value))
+                return false;
+        }
+
+        return match;
+    }
+
+
     ///
     /// ALL FUNCTIONS BELOW COME FROM https://forum.unity.com/threads/how-to-get-all-components-on-an-object-that-implement-an-interface.101028/
     ///

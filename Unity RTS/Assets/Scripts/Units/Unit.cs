@@ -10,16 +10,6 @@ public enum UnitsAttackable
     All
 }
 
-public enum UnitDamageStrength
-{
-    LightArmor,
-    NormalArmor,
-    HeavyArmor,
-    Air,
-    Bio,
-    None
-}
-
 [RequireComponent(typeof(UnitSelected))]
 public class Unit : RTSObject, ISelectable
 {
@@ -30,6 +20,7 @@ public class Unit : RTSObject, ISelectable
     protected float turnSpeed = 5;
 
     public float fireRate;
+    [HideInInspector]
     public float cooldown;
 
     public Transform[] turrets;
@@ -38,13 +29,13 @@ public class Unit : RTSObject, ISelectable
     [SerializeField]
     private readonly bool canAttackAndRunAway;
 
-    public UnitsAttackable unitsUnitCanAttack;
-    public UnitDamageStrength unitsUnitIsStrongAgainst;
+    public UnitsAttackable unitType = UnitsAttackable.Ground;
+    public UnitsAttackable unitsUnitCanAttack = UnitsAttackable.All;
     
     public GameObject nearestEnemy;
     
     protected RaycastHit hitInfo;
-    private Vector3 direction;
+    protected Vector3 direction;
     protected UnitSelected unitSelected;
 
     protected bool UnitIsSelected => unitSelected.selected;
@@ -140,7 +131,7 @@ public class Unit : RTSObject, ISelectable
         {
             LockOn();
             enemyHasBeenSelected = true;
-            if(nearestEnemy != null)
+            if(nearestEnemy != null && IsUnitAbleToAttack(nearestEnemy))
             {
                 cooldown -= Time.deltaTime;
                 direction = (nearestEnemy.transform.position - turretEnd.position).normalized;
@@ -157,7 +148,7 @@ public class Unit : RTSObject, ISelectable
                         hyperProjScript.owner = gameObject.name;
                         hyperProjScript.team = team;
                         hyperProjScript.damage = damage;
-                        hyperProjScript.unitDamageStrength = unitsUnitIsStrongAgainst;
+                        hyperProjScript.unitDamageStrength = armorClass;
 
                         //laser.GetComponent<Rigidbody>().velocity = direction * hyperProjScript.speed;
                         laser.GetComponent<Rigidbody>().AddForce(direction * hyperProjScript.speed);
@@ -196,5 +187,15 @@ public class Unit : RTSObject, ISelectable
             turretTransform.localRotation = Quaternion.identity;
             //turretTransform.localRotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.identity, Time.deltaTime * turnSpeed);
         }
+    }
+
+    protected bool IsUnitAbleToAttack(GameObject enemy)
+    {
+        //Can attack anything
+        if (unitsUnitCanAttack == UnitsAttackable.All)
+            return true;
+
+        return true;
+        //return unitsUnitCanAttack == enemy.GetComponent<Unit>().unitType;
     }
 }

@@ -12,7 +12,7 @@ public enum ArmorClass
     Normal,
     Heavy,
     Bio,
-    Flyer,
+    Air,
     Building
 }
 
@@ -34,17 +34,5 @@ public class RTSObject : MonoBehaviour
     private void Start()
     {
         health = GetComponent<Health>();
-    }
-
-    public static bool CanDamage(Team myTeam, Team otherTeam)
-    {
-        return myTeam != otherTeam;
-    }
-
-    public static float GetDamageModifier(ArmorClass armorClass, UnitDamageStrength unitDamageStrength)
-    {
-        float damageModifier = 1.0f;
-
-        return damageModifier;
     }
 }
