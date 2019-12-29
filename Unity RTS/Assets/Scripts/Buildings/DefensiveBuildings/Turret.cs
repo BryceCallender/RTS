@@ -128,9 +128,10 @@ public class Turret : Building
 
         hitInfo = Physics.OverlapSphere(transform.position, range, layerMask);
 
-        for (int i = 0; i < hitInfo.Length; i++)
+        foreach(Collider collider in hitInfo)
         {
-            targets.Add(hitInfo[i].gameObject);
+            Debug.Log(collider.gameObject.name);
+            targets.Add(collider.gameObject);
         }
     }
 
@@ -173,8 +174,8 @@ public class Turret : Building
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, range);
+        Gizmos.color = new Color(0,0,1, 0.35f);
+        Gizmos.DrawSphere(transform.position, range);
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Vector3.up * 5);
     }

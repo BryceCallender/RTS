@@ -9,24 +9,28 @@ public static class ExtensionMethods
     }
 
 
-    public static void Populate<T>(this T[] arr, T value)
+    public static Color FadeAlpha(this Color color, float fadeAmount)
     {
-        for (int i = 0; i < arr.Length; i++)
+        if (color.a >= 0)
         {
-            arr[i] = value;
+            color.a -= fadeAmount;
         }
+        else
+        {
+            color.a = 0;
+        }
+
+        return color;
     }
 
-    public static bool AllMatchValue<T>(this T[] arr, T value)
+    public static bool IsZeroAlpha(this Color color)
     {
-        bool match = true;
-        for (int i = 0; i < arr.Length; i++)
-        {
-            if (!arr[i].Equals(value))
-                return false;
-        }
+        return color.a == 0;
+    }
 
-        return match;
+    public static Color ResetAlpha(this Color color)
+    {
+        return new Color(color.r, color.g, color.b, 1.0f);
     }
 
 
