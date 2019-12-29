@@ -10,6 +10,8 @@ public class UnitSelected : MonoBehaviour
 	public bool isFirst;
     public Mouse mouse;
 
+    public bool disable;
+
     public GameObject selectionIndicator;
     private RaycastHit hitInfo;
     private Camera camera;
@@ -27,6 +29,12 @@ public class UnitSelected : MonoBehaviour
 
     private void Update()
     {
+        if (disable)
+        {
+            enabled = false;
+            return;
+        }
+
         ScreenPos = camera.WorldToScreenPoint(transform.position);
         if (mouse.UnitInsideScreen(ScreenPos))
         {
@@ -53,7 +61,6 @@ public class UnitSelected : MonoBehaviour
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
                 {
-                    Debug.Log(hitInfo.collider.gameObject.name);
                     //Make sure that we pick the object we hit and not everything since every object has this script on them
                     //Also ensure that the object we hit has the Selectable interface
                     if (hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)

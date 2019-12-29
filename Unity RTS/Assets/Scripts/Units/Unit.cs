@@ -11,6 +11,9 @@ public enum UnitsAttackable
 }
 
 [RequireComponent(typeof(UnitSelected))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AttackInfo))]
 public class Unit : RTSObject, ISelectable
 {
     public GameObject projectile;
@@ -29,9 +32,9 @@ public class Unit : RTSObject, ISelectable
     [SerializeField]
     private readonly bool canAttackAndRunAway;
 
-    public UnitsAttackable unitType = UnitsAttackable.Ground;
-    public UnitsAttackable unitsUnitCanAttack = UnitsAttackable.All;
+    private AttackInfo attackInfo;
     
+    [HideInInspector]
     public GameObject nearestEnemy;
     
     protected RaycastHit hitInfo;
@@ -42,15 +45,20 @@ public class Unit : RTSObject, ISelectable
     protected bool enemyHasBeenSelected;
     
     //Pathfinding variables
+    [HideInInspector]
     public Vector3 targetPosition;
     [HideInInspector]
     public NavMeshAgent agent;
     private RaycastHit hitAgentInfo;
 
+    private float lerpTime;
+    public bool DoneAiming => lerpTime > 1.0f;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         unitSelected = GetComponent<UnitSelected>();
+        attackInfo = GetComponent<AttackInfo>();
     }
 
     protected virtual void Start() { }
@@ -131,12 +139,13 @@ public class Unit : RTSObject, ISelectable
         {
             LockOn();
             enemyHasBeenSelected = true;
-            if(nearestEnemy != null && IsUnitAbleToAttack(nearestEnemy))
+            if(nearestEnemy != null && DamageHelper.IsUnitAbleToAttack(gameObject, nearestEnemy))
             {
                 cooldown -= Time.deltaTime;
                 direction = (nearestEnemy.transform.position - turretEnd.position).normalized;
-                Debug.DrawRay(turretEnd.transform.position, direction, Color.yellow, 1.0f);
-                if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
+                direction.y += 0.05f; //Aim higher ???
+                Debug.DrawRay(turretEnd.transform.position, direction * 10, Color.yellow, 1.0f);
+                if (cooldown <= 0 && DoneAiming && direction.sqrMagnitude <= range * range)
                 {
                     if (projectile != null)
                     {
@@ -167,10 +176,11 @@ public class Unit : RTSObject, ISelectable
         if(nearestEnemy != null)
         {
             Vector3 aimDirection = nearestEnemy.transform.position - transform.position;
+            lerpTime += Time.deltaTime * turnSpeed;
             foreach (Transform turretTransform in turrets)
             {
                 //Make each turret point towards the enemy target
-                turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), Time.deltaTime * turnSpeed);
+                turretTransform.rotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.LookRotation(aimDirection), lerpTime);
             }
         }
         else
@@ -181,21 +191,12 @@ public class Unit : RTSObject, ISelectable
 
     protected virtual void ResetTurrets()
     {
+        lerpTime = 0f;
         foreach (Transform turretTransform in turrets)
         {
             //Make each turret point towards the enemy target
             turretTransform.localRotation = Quaternion.identity;
             //turretTransform.localRotation = Quaternion.Lerp(turretTransform.rotation, Quaternion.identity, Time.deltaTime * turnSpeed);
         }
-    }
-
-    protected bool IsUnitAbleToAttack(GameObject enemy)
-    {
-        //Can attack anything
-        if (unitsUnitCanAttack == UnitsAttackable.All)
-            return true;
-
-        return true;
-        //return unitsUnitCanAttack == enemy.GetComponent<Unit>().unitType;
     }
 }

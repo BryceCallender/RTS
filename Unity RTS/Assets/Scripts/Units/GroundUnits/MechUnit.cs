@@ -4,18 +4,39 @@ using UnityEngine;
 
 public class MechUnit : Unit
 {
-    [SerializeField]
-    private Animator animator;
+    protected Animator animator;
 
-    private bool isMoving;
-    private bool isAttacking;
-    private bool isPatrol;
-    
-    
-    protected override void Fire()
+    public bool isMoving;
+    public bool isAttacking;
+
+    protected override void Start()
     {
-        base.Fire();
+        base.Start();
+
+        animator = GetComponent<Animator>();
     }
-    
-    
+
+    protected override void Update()
+    {
+        base.Update();
+
+        if(agent.velocity != Vector3.zero)
+        {
+            isMoving = true;
+            isAttacking = false;
+        }
+        else
+        {
+            isMoving = false;
+            isAttacking = nearestEnemy != null; //if we have an enemy selected
+        }
+
+        if (isAttacking)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * turnSpeed);
+        }
+
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isAttacking", isAttacking);
+    }
 }

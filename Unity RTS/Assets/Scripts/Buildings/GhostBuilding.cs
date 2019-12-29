@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BuildingPlacementValidity))]
 public class GhostBuilding: MonoBehaviour
 {
     public GameObject ghostBuilding; //For building placement

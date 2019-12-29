@@ -39,7 +39,7 @@ public class HyperbitProjectileScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider hit)
     {
-        if (owner != hit.gameObject.name)
+        if (owner != hit.gameObject.name && !hit.gameObject.name.Equals("RTSTerrain"))
         {
             if (DamageHelper.CanDamage(team, hit.gameObject.GetComponent<RTSObject>().team))
             {

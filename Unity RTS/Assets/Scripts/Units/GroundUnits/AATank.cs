@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct MissileLauncher
+{
+    public GameObject missileHead;
+    public bool isAvailable;
+}
+
 public class AATank : Unit
 {
+    [HideInInspector]
     public float missileReloadTime;
-
     private const int MISSILE_COUNT = 3;
-    public bool[] missileAvailability = new bool[MISSILE_COUNT];
+
+    public MissileLauncher[] missiles = new MissileLauncher[MISSILE_COUNT];
 
     protected override void Start()
     {
         base.Start();
-        missileAvailability.Populate(true);
+        missileReloadTime = fireRate + 0.5f;
     }
 
     protected int FindAvailableMissileToLaunch()
@@ -20,17 +28,17 @@ public class AATank : Unit
         bool available = false;
         int missileIndex = 0;
 
-        if (missileAvailability.AllMatchValue(false))
+        if (!AreMissilesAvailable())
             return -1;
 
         //Loop until a missile is available
         while (!available)
         {
-            missileIndex = Random.Range(0, turrets.Length);
-            available = missileAvailability[missileIndex];
+            missileIndex = Random.Range(0, MISSILE_COUNT);
+            available = missiles[missileIndex].isAvailable;
         }
 
-        turretEnd = turrets[missileIndex];
+        turretEnd = missiles[missileIndex].missileHead.transform;
         return missileIndex;
     }
 
@@ -40,7 +48,7 @@ public class AATank : Unit
         {
             LockOn();
             enemyHasBeenSelected = true;
-            if (nearestEnemy != null && IsUnitAbleToAttack(nearestEnemy))
+            if (nearestEnemy != null && DamageHelper.IsUnitAbleToAttack(gameObject, nearestEnemy))
             {
                 cooldown -= Time.deltaTime;
                 int missileIndex = FindAvailableMissileToLaunch();
@@ -51,12 +59,12 @@ public class AATank : Unit
 
                 direction = (nearestEnemy.transform.position - turretEnd.position).normalized;
 
-                if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
+                if (cooldown <= 0 && DoneAiming && direction.sqrMagnitude <= range * range)
                 {
                     if (projectile != null)
                     {
-                        //Make the missile be shot!
-                        missileAvailability[missileIndex] = false;
+                        EnableMissile(missileIndex, false);
+                        StartCoroutine(ReloadMissileHead(missileIndex));
 
                         var laser = Instantiate(projectile, turretEnd.transform.position, turretEnd.transform.rotation);
                         var hyperProjScript = laser.GetComponent<HyperbitProjectileScript>();
@@ -78,5 +86,34 @@ public class AATank : Unit
                 enemyHasBeenSelected = false;
             }
         }
+    }
+
+    private bool AreMissilesAvailable()
+    {
+        int unavailableMissiles = 0; 
+
+        for(int i = 0; i < MISSILE_COUNT; i++)
+        {
+            if(!missiles[i].isAvailable)
+            {
+                unavailableMissiles++;
+            }
+        }
+
+        //Missiles are available if the number of unavilable are less than missile count
+        return unavailableMissiles < MISSILE_COUNT;
+    }
+
+    private void EnableMissile(int missileIndex, bool enabled)
+    {
+        //Make the missile be shot!
+        missiles[missileIndex].isAvailable = enabled;
+        missiles[missileIndex].missileHead.SetActive(enabled);
+    }
+
+    private IEnumerator ReloadMissileHead(int missileIndex)
+    {
+        yield return new WaitForSeconds(missileReloadTime);
+        EnableMissile(missileIndex, true);
     }
 }

@@ -1,6 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
+[RequireComponent(typeof(UnitSelected))]
+[RequireComponent(typeof(NavMeshObstacle))]
+[RequireComponent(typeof(BoxCollider))]
 
 public class Building : RTSObject, ISelectable
 {

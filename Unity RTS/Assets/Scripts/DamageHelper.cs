@@ -15,4 +15,14 @@ public static class DamageHelper
 
         return damageModifier;
     }
+
+    public static bool IsUnitAbleToAttack(GameObject unit, GameObject enemy)
+    {
+        //Can attack anything
+        if (unit.GetComponent<AttackInfo>().unitsUnitCanAttack == UnitsAttackable.All)
+            return true;
+
+        return true;
+        //return unitsUnitCanAttack == enemy.GetComponent<Unit>().unitType;
+    }
 }

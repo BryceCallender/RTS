@@ -20,6 +20,8 @@ public class RepairConstruct : TrainingBuilding
     private bool isRepairing;
     private Health repairingUnitHealth;
 
+    private bool rotatedCrane = false;
+
     protected override void Start()
     {
         base.Start();
@@ -58,21 +60,23 @@ public class RepairConstruct : TrainingBuilding
                             }
 
                             repairingUnitHealth = unit.GetComponent<Health>();
+                            rotatedCrane = false;
                             isRepairing = true;
                         }
                     }
                 }
+            }
 
-                if (isRepairing)
-                {
+            if (isRepairing)
+            {
+                if(!rotatedCrane)
                     AimCraneTowardsRepairingUnit();
-                    RepairUnit();
-                }
-                else
-                {
-                    repairingUnitHealth = null;
-                    sparks.Stop();
-                }
+                RepairUnit();
+            }
+            else
+            {
+                repairingUnitHealth = null;
+                sparks.Stop();
             }
         }
     }
@@ -102,10 +106,9 @@ public class RepairConstruct : TrainingBuilding
 
     private void AimCraneTowardsRepairingUnit()
     {
-        Vector3 direction = repairingUnitHealth.gameObject.transform.position - constructCrane.position;
-        Debug.DrawRay(constructCrane.position, direction, Color.cyan, 1.0f);
-        direction.z = 0;
-        constructCrane.rotation = Quaternion.Lerp(constructCrane.rotation, Quaternion.LookRotation(direction), Time.deltaTime);
+        rotatedCrane = true;
+        Debug.Log(Vector3.SignedAngle(constructCrane.right, repairingUnitHealth.gameObject.transform.position, Vector3.up));
+        constructCrane.rotation = Quaternion.AngleAxis(Vector3.SignedAngle(constructCrane.right, repairingUnitHealth.gameObject.transform.position, Vector3.up), Vector3.up);
     }
 
     private void OnTriggerEnter(Collider other)
