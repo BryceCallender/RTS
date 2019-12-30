@@ -35,12 +35,6 @@ public class Building : RTSObject, ISelectable
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        //Buildings cant move and cant shoot with their own armor class defaulted
-        //incase the values arent correctly set
-        speed = 0;
-        range = 0;
-        armorClass = ArmorClass.Building;
-
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         unitSelected = GetComponent<UnitSelected>();
         unitSelected.enabled = false; //Dont enable selection until the building is available to the user

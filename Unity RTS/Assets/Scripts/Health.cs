@@ -7,6 +7,25 @@ public class Health : MonoBehaviour
 
     public bool isRepairable; //TODO::figure out if I want to do an IRepairable which defines how to repair
 
+    private bool hasTakenDamage;
+    private float timeToRestartRegens = 2.0f;
+    private float restartRegenSystemsTimer = 0f;
+
+    private void Update()
+    {
+        if(hasTakenDamage)
+        {
+            restartRegenSystemsTimer += Time.deltaTime;
+
+            if(restartRegenSystemsTimer >= timeToRestartRegens)
+            {
+                restartRegenSystemsTimer = 0f;
+                hasTakenDamage = false;
+            }
+        }
+        
+    }
+
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -15,6 +34,7 @@ public class Health : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        hasTakenDamage = true;
 
         if (currentHealth <= 0)
         {

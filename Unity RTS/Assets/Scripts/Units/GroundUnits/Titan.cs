@@ -2,8 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EnergySystem))]
 public class Titan : MechUnit
 {
+    private EnergySystem energySystem;
+
+    protected override void Start()
+    {
+        base.Start();
+        energySystem = GetComponent<EnergySystem>();
+    }
+
+
     protected override void Fire()
     {
         if (UnitIsSelected || enemyHasBeenSelected)

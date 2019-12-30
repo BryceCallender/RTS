@@ -54,7 +54,7 @@ public class Turret : Building
         SearchForEnemies();
 
         //If no enemies have been found after the search
-        if(targets.Count == 0)
+        if (targets.Count == 0)
         {
             currentIdleTime += Time.deltaTime;
 
@@ -114,23 +114,21 @@ public class Turret : Building
     private void SearchForEnemies()
     {
         targets.Clear();
-        Collider[] hitInfo;
         int layerMask;
 
         if(team == Team.Blue)
         {
-            layerMask = 1 << 9; //Only collide with enemy units
+            layerMask = 1 << LayerMask.NameToLayer("Enemy"); //Only collide with enemy units
         }
         else
         {
-            layerMask = 1 << 8; //Only collide with player units
+            layerMask = 1 << LayerMask.NameToLayer("Unit"); //Only collide with player units
         }
 
-        hitInfo = Physics.OverlapSphere(transform.position, range, layerMask);
+        Collider[] hitInfo = Physics.OverlapSphere(transform.position, range, layerMask);
 
         foreach(Collider collider in hitInfo)
         {
-            Debug.Log(collider.gameObject.name);
             targets.Add(collider.gameObject);
         }
     }
@@ -142,7 +140,6 @@ public class Turret : Building
 
         if (targetedEnemy != null && DamageHelper.IsUnitAbleToAttack(gameObject, targetedEnemy))
         {
-            Debug.DrawRay(turretEnd.transform.position, direction * 10, Color.yellow, 1.0f);
             if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
             {
                 if (projectile != null)
@@ -174,9 +171,11 @@ public class Turret : Building
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0,0,1, 0.35f);
+        Gizmos.color = new Color(0, 0, 1, 0.35f);
         Gizmos.DrawSphere(transform.position, range);
         Gizmos.color = Color.red;
         Gizmos.DrawRay(transform.position, Vector3.up * 5);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, transform.right * 5);
     }
 }
