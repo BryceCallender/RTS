@@ -22,7 +22,6 @@ public static class DamageHelper
         if (unit.GetComponent<AttackInfo>().unitsUnitCanAttack == UnitsAttackable.All)
             return true;
 
-        return true;
-        //return unitsUnitCanAttack == enemy.GetComponent<Unit>().unitType;
+        return unit.GetComponent<AttackInfo>().unitsUnitCanAttack == enemy.GetComponent<AttackInfo>().unitType;
     }
 }

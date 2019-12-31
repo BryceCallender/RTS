@@ -36,9 +36,9 @@ public class Turret : Building
     protected float xRotationCorrectionTime;
 
     private bool directionPicked = false;
-    private Vector3 direction;
+    protected Vector3 direction;
     [SerializeField]
-    private GameObject targetedEnemy;
+    protected GameObject targetedEnemy;
 
     protected override void Start()
     {
@@ -51,37 +51,40 @@ public class Turret : Building
     {
         base.Update();
 
-        SearchForEnemies();
-
-        //If no enemies have been found after the search
-        if (targets.Count == 0)
+        if(IsBuildingAvailableToUse())
         {
-            currentIdleTime += Time.deltaTime;
+            SearchForEnemies();
 
-            if(currentIdleTime >= idleWaitTime)
+            //If no enemies have been found after the search
+            if (targets.Count == 0)
             {
-                if (!directionPicked)
+                currentIdleTime += Time.deltaTime;
+
+                if (currentIdleTime >= idleWaitTime)
                 {
-                    rotationDirection = Random.value * 2 - 1;
-                    directionPicked = true;
+                    if (!directionPicked)
+                    {
+                        rotationDirection = Random.value * 2 - 1;
+                        directionPicked = true;
+                    }
+                    RotateTurretPivot();
                 }
-                RotateTurretPivot();
-            }
-        }
-        else
-        {
-            currentIdleTime = 0.0f;
-            directionPicked = false;
-
-            if (targetedEnemy == null)
-            {
-                targetedEnemy = targets[0]; //First enemy to have been spotted
             }
             else
             {
-                Fire();
+                currentIdleTime = 0.0f;
+                directionPicked = false;
+
+                if (targetedEnemy == null)
+                {
+                    targetedEnemy = targets[0]; //First enemy to have been spotted
+                }
+                else
+                {
+                    Fire();
+                }
             }
-        }
+        } 
     }
 
     private void RotateTurretPivot()
@@ -129,16 +132,19 @@ public class Turret : Building
 
         foreach(Collider collider in hitInfo)
         {
-            targets.Add(collider.gameObject);
+            if(DamageHelper.IsUnitAbleToAttack(gameObject, collider.gameObject))
+            {
+                targets.Add(collider.gameObject);
+            }
         }
     }
 
-    protected void Fire()
+    protected virtual void Fire()
     {
         LockOn();
         cooldown -= Time.deltaTime;
 
-        if (targetedEnemy != null && DamageHelper.IsUnitAbleToAttack(gameObject, targetedEnemy))
+        if (targetedEnemy != null)
         {
             if (cooldown <= 0 && direction.sqrMagnitude <= range * range)
             {
@@ -161,21 +167,11 @@ public class Turret : Building
         }
     }
 
-    private void LockOn()
+    protected virtual void LockOn()
     {
-        direction = (targetedEnemy.transform.position - turretEnd.position).normalized;
-        direction.y += 0.05f; //Aim higher ???
+        direction = (targetedEnemy.transform.position - turretPivot.position).normalized;
+        //adirection.y += 0.05f; //Aim higher ???
 
         turretPivot.rotation = Quaternion.LookRotation(direction);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(0, 0, 1, 0.35f);
-        Gizmos.DrawSphere(transform.position, range);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, Vector3.up * 5);
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, transform.right * 5);
     }
 }
