@@ -18,6 +18,7 @@ public class Unit : RTSObject, ISelectable
 {
     public GameObject projectile;
     public int damage;
+    public int loadSize;
 
     [SerializeField]
     protected float turnSpeed = 5;
@@ -34,7 +35,7 @@ public class Unit : RTSObject, ISelectable
 
     private AttackInfo attackInfo;
     
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject nearestEnemy;
     
     protected RaycastHit hitInfo;

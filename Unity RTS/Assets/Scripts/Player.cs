@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     public int currentCapacity;
     public readonly int MAX_CAPACITY = 100;
 
+    public List<Unit> units;
+    public List<Building> buildings;
+
     public HashSet<Unit> availableUnits;
     public HashSet<Building> availableBuildings;
 
@@ -22,6 +25,9 @@ public class Player : MonoBehaviour
 
         availableUnits = new HashSet<Unit>();
         availableBuildings = new HashSet<Building>();
+
+        units = new List<Unit>();
+        buildings = new List<Building>();
     }
 
     public bool CheckIfPlayerCanBuildStructure(Building building)
@@ -29,14 +35,10 @@ public class Player : MonoBehaviour
         //Go through all the buildings required in the building passed in
         foreach(Building buildingToCheck in building.requiredBuildingsToConstruct.requiredBuildings)
         {
-            //Go through our current buildings available to use
-            foreach(Building buildingAvailable in availableBuildings)
+            //If we dont have it then return false indicating building is to be blocked still
+            if(!availableBuildings.Contains(buildingToCheck))
             {
-                //If we dont have it then return false indicating building is to be blocked still
-                if(!availableBuildings.Contains(buildingToCheck))
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -48,4 +50,35 @@ public class Player : MonoBehaviour
     {
         return true;
     }
+
+    public void AddUnit(Unit unit)
+    {
+        units.Add(unit);
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        units.Remove(unit);
+    }
+
+    public void AddBuilding(Building building)
+    {
+        buildings.Add(building);
+    }
+
+    public void RemoveBuilding(Building building)
+    {
+        buildings.Remove(building);
+    }
+
+    public void ChangeCapacity(int capacityChange)
+    {
+        currentCapacity += capacityChange;
+
+        if(currentCapacity >= MAX_CAPACITY)
+        {
+            currentCapacity = MAX_CAPACITY;
+        }
+    }
+
 }

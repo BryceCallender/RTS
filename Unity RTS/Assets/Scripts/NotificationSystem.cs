@@ -5,22 +5,30 @@ using UnityEngine;
 
 public class NotificationSystem : MonoBehaviour
 {
-    public static TextMeshProUGUI text;
-    public static Color textColor;
+    //Just so we can set an instance in the editor
+    public TextMeshProUGUI UIText; 
+    public Color colorOfText = Color.red;
 
-    public float colorFadeTime = 0.5f;
-    private static float currentColorFadeTime;
+    //Actual members that will be affected
+    public static TextMeshProUGUI text;
+    public static Color textColor = Color.red;
+
+    public static float fadeIncrement = 0.015f;  //Random number i found to look nice
 
     // Start is called before the first frame update
     void Start()
     {
-        currentColorFadeTime = colorFadeTime;
+        //Give static variables references to the items exposed to the editor
+        text = UIText;
+        textColor = colorOfText;
     }
 
-    public static void Notify(string message, Color messageColor)
+    public static void Notify(string message, Color? messageColor = null)
     {
+        text.gameObject.SetActive(true);
+
         text.SetText(message);
-        text.color = messageColor;
+        text.color = messageColor ?? Color.red; //Is message color specified? Go red otherwise
 
         text.StartCoroutine(FadeText());
     }
@@ -29,8 +37,7 @@ public class NotificationSystem : MonoBehaviour
     {
         while(!text.color.IsZeroAlpha())
         {
-            currentColorFadeTime -= Time.deltaTime;
-            text.color = text.color.FadeAlpha(0.02f);
+            text.color = text.color.FadeAlpha(fadeIncrement);
             yield return null;
         }
     }

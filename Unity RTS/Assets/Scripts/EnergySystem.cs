@@ -7,7 +7,10 @@ public class EnergySystem : MonoBehaviour
     public float energy;
     public float maxEnergy;
 
+    public bool isShield;
+
     private float energyRegenTimer = 0f;
+    public bool HasEnergy => energy > 0;
 
     private void Start()
     {
@@ -17,6 +20,11 @@ public class EnergySystem : MonoBehaviour
     private void Update()
     {
         RegenEnergy();
+
+        if(energy <= 0)
+        {
+            energy = 0;
+        }
     }
 
     private void RegenEnergy()
@@ -37,7 +45,7 @@ public class EnergySystem : MonoBehaviour
         }
     }
 
-    private void ConsumeEnergy(float amount)
+    public void ConsumeEnergy(float amount)
     {
         energy -= amount;
     }

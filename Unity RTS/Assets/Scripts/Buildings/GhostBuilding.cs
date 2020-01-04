@@ -36,6 +36,11 @@ public class GhostBuilding: MonoBehaviour
         {
             foreach(MeshRenderer meshRenderer in meshRenderers)
                 meshRenderer.material = invalidMaterial;
+
+            if(Input.GetMouseButtonDown(0))
+            {
+                NotificationSystem.Notify("You cannot place a building there!");
+            }
         }
         else
         {

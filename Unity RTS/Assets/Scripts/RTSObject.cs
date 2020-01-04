@@ -22,6 +22,9 @@ public class RTSObject : MonoBehaviour
     public string name;
     public Sprite uiSprite;
 
+    [TextArea]
+    public string unitDescription;
+
     [HideInInspector]
     public Health health;
     public int cost;
@@ -31,6 +34,8 @@ public class RTSObject : MonoBehaviour
     public ArmorClass armorClass = ArmorClass.Normal;
     public float productionDuration;
     public Team team;
+
+    private int playerIndex;
 
     private void Start()
     {

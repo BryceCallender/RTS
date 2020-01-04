@@ -5,15 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(EnergySystem))]
 public class Titan : MechUnit
 {
-    private EnergySystem energySystem;
+    public GameObject shield;
+    private EnergySystem shieldSystem;
 
     protected override void Start()
     {
         base.Start();
-        energySystem = GetComponent<EnergySystem>();
+        shieldSystem = GetComponent<EnergySystem>();
+    }
+
+    protected void Update()
+    {
+        base.Update();
+
+        shield.SetActive(shieldSystem.HasEnergy);
     }
 
 
+    //Need this function here to get rid of the specifics of the unit fire since it involves 
+    //having a turret with a turretEnd transform however the Titan uses its FIST
     protected override void Fire()
     {
         if (UnitIsSelected || enemyHasBeenSelected)
@@ -22,14 +32,9 @@ public class Titan : MechUnit
             enemyHasBeenSelected = true;
             if (nearestEnemy != null && DamageHelper.IsUnitAbleToAttack(gameObject, nearestEnemy))
             {
-                cooldown -= Time.deltaTime;
-                direction = (nearestEnemy.transform.position - turretEnd.position).normalized;
+                direction = (nearestEnemy.transform.position - transform.position).normalized;
                 direction.y += 0.05f; //Aim higher ???
-                Debug.DrawRay(turretEnd.transform.position, direction * 10, Color.yellow, 1.0f);
-                if (cooldown <= 0 && DoneAiming && direction.sqrMagnitude <= range * range)
-                {
-
-                }
+                //Do nothing rooVV cuz animation is going to be punching
             }
             else
             {

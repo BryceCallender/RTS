@@ -34,7 +34,7 @@ public class TrainingBuilding : Building
 
         if(IsBuildingAvailableToUse())
         { 
-            if (Input.GetKeyDown(KeyCode.F5))
+            if (UnitIsSelected && Input.GetKeyDown(KeyCode.F5))
             {
                 unitProductionList.Add(producableUnits[Random.Range(0, producableUnits.Count)]);
             }

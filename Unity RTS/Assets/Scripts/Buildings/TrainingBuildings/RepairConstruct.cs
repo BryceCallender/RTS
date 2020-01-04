@@ -11,7 +11,7 @@ public class RepairConstruct : TrainingBuilding
 
     public List<Unit> unitsWithinConstructArea = new List<Unit>();
 
-    private Camera camera;
+    private Camera mainCamera;
     private RaycastHit hitInfo;
 
     [SerializeField]
@@ -26,7 +26,7 @@ public class RepairConstruct : TrainingBuilding
     {
         base.Start();
 
-        camera = Camera.main;
+        mainCamera = Camera.main;
         sparks.Stop();
     }
 
@@ -46,7 +46,7 @@ public class RepairConstruct : TrainingBuilding
 
                 if (repairMode && Input.GetMouseButtonDown(1))
                 {
-                    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
                     int unitLayerMask = 1 << 8;
                     if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, unitLayerMask, QueryTriggerInteraction.Ignore))
                     {
@@ -107,8 +107,14 @@ public class RepairConstruct : TrainingBuilding
     private void AimCraneTowardsRepairingUnit()
     {
         rotatedCrane = true;
-        Debug.Log(Vector3.SignedAngle(constructCrane.right, repairingUnitHealth.gameObject.transform.position, Vector3.up));
-        constructCrane.rotation = Quaternion.AngleAxis(Vector3.SignedAngle(constructCrane.right, repairingUnitHealth.gameObject.transform.position, Vector3.up), Vector3.up);
+
+        Vector3 repairingUnitDirection = repairingUnitHealth.transform.position - constructCrane.position;
+        repairingUnitDirection.y = 0;
+
+        //Determines angle based on dot product mathematics
+        float theta = Mathf.Acos(Vector3.Dot(Vector3.right, repairingUnitDirection) / (Vector3.right.magnitude * repairingUnitDirection.magnitude));
+
+        constructCrane.rotation = Quaternion.AngleAxis(Mathf.Rad2Deg * theta, Vector3.up);
     }
 
     private void OnTriggerEnter(Collider other)

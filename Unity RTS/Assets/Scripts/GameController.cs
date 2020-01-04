@@ -10,18 +10,6 @@ public class GameController : MonoBehaviour
     public Text resourcePanel;
     public TextMeshProUGUI timeText;
 
-    //Minerals
-    public Text mineralErrorText;
-    public Color mineralErrorColor;
-   
-    //Gas
-    public Text gasErrorText;
-    public Color gasErrorColor;
-
-    //Building
-    public Text buildingErrorText;
-    public Color buildingErrorColor;
-
     public float colorFadeTime = 0.5f;
 
 	public static bool hitEscape;
@@ -29,7 +17,7 @@ public class GameController : MonoBehaviour
 	public GameObject pauseMenuUI;
 
 	[SerializeField]
-	private GameObject[] players;
+	private Player[] players;
 
     private Timer time;
 
@@ -42,9 +30,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        mineralErrorColor = mineralErrorText.color;
-        gasErrorColor = mineralErrorColor;
-        buildingErrorColor = mineralErrorColor;
         timeText = timeText.GetComponent<TextMeshProUGUI>();
 		time = GetComponent<Timer>();
     }
@@ -65,39 +50,13 @@ public class GameController : MonoBehaviour
 
 		timeText.SetText(time.DisplayTime());
         //resourcePanel.text = "Resource:" + currency;
-
-        //if(mineralErrorText.gameObject.activeSelf)
-        //{
-        //    FadeAlpha(colorFadeTime, ref mineralErrorText, ref mineralErrorColor);
-        //}
-        //if(IsZeroAlpha(mineralErrorColor))
-        //{
-        //    SetAlphaBack(ref mineralErrorText, ref mineralErrorColor);
-        //}
-
-        //if(buildingErrorText.gameObject.activeSelf)
-        //{
-        //    FadeAlpha(colorFadeTime, ref buildingErrorText, ref buildingErrorColor);
-        //}
-        //if(IsZeroAlpha(buildingErrorColor))
-        //{
-        //    SetAlphaBack(ref buildingErrorText, ref buildingErrorColor);
-        //}
-
     }
 
     
 
 	public bool PressedEscape()
 	{
-		if(Input.GetKeyDown(KeyCode.Escape))
-		{
-			hitEscape = true;
-		}
-		else
-		{
-			hitEscape = false;
-		}
+		hitEscape = Input.GetKeyDown(KeyCode.Escape);
 		return hitEscape;
 	}
 
@@ -115,15 +74,8 @@ public class GameController : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
-	public GameObject grabPlayer(string identifier)
+	public Player GetPlayer(int player)
 	{
-		for (int i = 0; i < players.Length; i++)
-		{
-			if (players[i].name.Equals(identifier))
-			{
-				return players[i];
-			}
-		}
-		return null;
+		return players[player];
 	}
 }

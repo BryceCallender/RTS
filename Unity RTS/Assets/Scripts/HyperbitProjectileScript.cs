@@ -49,8 +49,18 @@ public class HyperbitProjectileScript : MonoBehaviour
 
                     hasCollided = true;
                     impactParticle = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, impactNormal));
-                    
-                    hit.gameObject.GetComponent<Health>().TakeDamage(damage * DamageHelper.GetDamageModifier(otherObject.armorClass, unitDamageStrength));
+
+                    EnergySystem energySystem = hit.gameObject.GetComponent<EnergySystem>();
+
+                    //If we hit a unit with a shield and they have energy left do damage to the energy system otherwise directly to health
+                    if(energySystem != null && energySystem.isShield && energySystem.HasEnergy)
+                    {
+                        energySystem.ConsumeEnergy(damage);
+                    }
+                    else
+                    {
+                        hit.gameObject.GetComponent<Health>().TakeDamage(damage * DamageHelper.GetDamageModifier(otherObject.armorClass, unitDamageStrength));
+                    }
                     
                     //yield WaitForSeconds (0.05);
                     foreach (GameObject trail in trailParticles)
