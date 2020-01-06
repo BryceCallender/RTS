@@ -27,7 +27,10 @@ public class RTSObject : MonoBehaviour
 
     [HideInInspector]
     public Health health;
-    public int cost;
+
+    public int mineralCost;
+    public int gasCount;
+
     public float speed;
     public float range;
 
@@ -35,10 +38,8 @@ public class RTSObject : MonoBehaviour
     public float productionDuration;
     public Team team;
 
-    private int playerIndex;
-
     private void Start()
     {
         health = GetComponent<Health>();
-    }
+    } 
 }

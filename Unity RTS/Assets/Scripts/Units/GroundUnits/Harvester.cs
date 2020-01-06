@@ -162,7 +162,7 @@ public class Harvester : Unit
      */
 	public void TurnInResource()
     {
-        //gameController.currency += resourceAmount;
+        closestResourceCollector.GetComponent<SupplyBuilding>().CollectFromHarvester(resourceAmount);
         resourceAmount = 0;
         crystal.gameObject.SetActive(false);
     }

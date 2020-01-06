@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public int currency;
+    public int mineralCount;
+    public int gasCount; 
+
     public int currentCapacity;
     public readonly int MAX_CAPACITY = 100;
 
@@ -78,6 +80,39 @@ public class Player : MonoBehaviour
         if(currentCapacity >= MAX_CAPACITY)
         {
             currentCapacity = MAX_CAPACITY;
+        }
+    }
+
+    public void ChangeMineralCurrency(int mineralChange)
+    {
+        if(mineralCount - mineralChange >= 0)
+        {
+            mineralCount -= mineralChange;
+        }
+        else
+        {
+            NotificationSystem.Notify("You do not have enough minerals!");
+        }
+    }
+
+    public void ChangeGasCurrency(int gasChange)
+    {
+        if (gasCount - gasChange >= 0)
+        {
+            gasCount -= gasChange;
+        }
+        else
+        {
+            NotificationSystem.Notify("You do not have enough gas!");
+        }
+    }
+
+    public void ChangeMineralAndGas(int changeAmount)
+    {
+        if(mineralCount >= changeAmount && gasCount >= changeAmount)
+        {
+            ChangeMineralCurrency(changeAmount);
+            ChangeGasCurrency(changeAmount);
         }
     }
 

@@ -10,14 +10,13 @@ public class GameController : MonoBehaviour
     public Text resourcePanel;
     public TextMeshProUGUI timeText;
 
-    public float colorFadeTime = 0.5f;
-
 	public static bool hitEscape;
 	public bool isPaused;
 	public GameObject pauseMenuUI;
 
 	[SerializeField]
-	private Player[] players;
+	//private Player[] players;
+	private Player player;
 
     private Timer time;
 
@@ -74,8 +73,13 @@ public class GameController : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
-	public Player GetPlayer(int player)
+	//public Player GetPlayer(int player)
+	//{
+	//	return players[player];
+	//}
+
+	public Player GetPlayer()
 	{
-		return players[player];
+		return player;
 	}
 }

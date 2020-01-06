@@ -25,7 +25,6 @@ public class RepairConstruct : TrainingBuilding
     protected override void Start()
     {
         base.Start();
-
         mainCamera = Camera.main;
         sparks.Stop();
     }
@@ -42,6 +41,15 @@ public class RepairConstruct : TrainingBuilding
                 if(Input.GetKeyDown(KeyCode.R))
                 {
                     repairMode = !repairMode;
+                }
+
+                if (repairMode)
+                {
+                    unitSelected.mouse.ChangeCursor("repair");
+                }
+                else
+                {
+                    unitSelected.mouse.ChangeCursor("normal");
                 }
 
                 if (repairMode && Input.GetMouseButtonDown(1))
@@ -62,9 +70,14 @@ public class RepairConstruct : TrainingBuilding
                             repairingUnitHealth = unit.GetComponent<Health>();
                             rotatedCrane = false;
                             isRepairing = true;
+                            Mouse.InstantiateRTSEffect("repairIndicator", hitInfo.point);
                         }
                     }
                 }
+            }
+            else
+            {
+                repairMode = false;
             }
 
             if (isRepairing)

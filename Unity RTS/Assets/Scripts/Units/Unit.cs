@@ -77,8 +77,7 @@ public class Unit : RTSObject, ISelectable
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitAgentInfo, Mathf.Infinity))
             {
-                //Layer 9 is enemy
-                if (Input.GetMouseButtonDown(1) && !Mouse.IsDragging && hitAgentInfo.collider.gameObject.layer != 9)
+                if (Input.GetMouseButtonDown(1) && !Mouse.IsDragging && hitAgentInfo.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
                 {
                     targetPosition = hitAgentInfo.point;
                     agent.destination = targetPosition;

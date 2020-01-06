@@ -33,4 +33,9 @@ public class SupplyBuilding : Building
         leftMineralResource.SetActive(enabled);
         rightMineralResource.SetActive(enabled);
     }
+
+    public void CollectFromHarvester(int amount)
+    {
+        mineralCount += amount;
+    }
 }

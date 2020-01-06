@@ -32,6 +32,8 @@ public class Building : RTSObject, ISelectable
     // keep a copy of the executing script
     private Coroutine buildingCoroutine;
 
+    private GameObject constructionEffect;
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
@@ -43,6 +45,11 @@ public class Building : RTSObject, ISelectable
 
         //function normally
         buildingCoroutine = StartCoroutine(BuildBuilding());
+
+        if(!alreadyPlaced)
+        {
+            ShowConstructionEffect();
+        }
     }
 
     // Update is called once per frame
@@ -51,6 +58,7 @@ public class Building : RTSObject, ISelectable
         if(IsBuildingAvailableToUse())
         {
             unitSelected.enabled = true;
+            Destroy(constructionEffect);
             foreach (MeshRenderer renderer in meshRenderers)
             {
                 renderer.material = finishedMaterial;
@@ -108,5 +116,16 @@ public class Building : RTSObject, ISelectable
     protected bool IsBuildingAvailableToUse()
     {
         return CompletedBuilding || alreadyPlaced;
+    }
+
+    private void ShowConstructionEffect()
+    {
+        Bounds bounds = meshRenderers[0].bounds; //Should contain the biggest object to render for the buildings or the whole building itself
+        float diameter = bounds.extents.magnitude;
+
+        int scaleValue = Mathf.CeilToInt(diameter);
+
+        constructionEffect = Mouse.InstantiateRTSEffect("construction", transform.position, transform);
+        constructionEffect.transform.localScale = new Vector3(scaleValue,scaleValue,scaleValue);
     }
 }

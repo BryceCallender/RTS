@@ -40,6 +40,9 @@ public class Turret : Building
     [SerializeField]
     protected GameObject targetedEnemy;
 
+    private const int MAX_TARGETS = 5;
+    private Collider[] hitInfo = new Collider[MAX_TARGETS];
+
     protected override void Start()
     {
         base.Start();
@@ -128,13 +131,14 @@ public class Turret : Building
             layerMask = 1 << LayerMask.NameToLayer("Unit"); //Only collide with player units
         }
 
-        Collider[] hitInfo = Physics.OverlapSphere(transform.position, range, layerMask);
+        //Doesnt allocate arrays everytime and just fills the supplied array named hitInfo in this case
+        int numberEnemies = Physics.OverlapSphereNonAlloc(transform.position, range, hitInfo, layerMask);
 
-        foreach(Collider collider in hitInfo)
+        for(int i = 0; i < numberEnemies; i++)
         {
-            if(DamageHelper.IsUnitAbleToAttack(gameObject, collider.gameObject))
+            if(DamageHelper.IsUnitAbleToAttack(gameObject, hitInfo[i].gameObject))
             {
-                targets.Add(collider.gameObject);
+                targets.Add(hitInfo[i].gameObject);
             }
         }
     }
