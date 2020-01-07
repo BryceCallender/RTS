@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(RTSLineRenderer))]
 public class TrainingBuilding : Building
 {
     public const int MAX_UNITS = 5;
@@ -11,6 +12,8 @@ public class TrainingBuilding : Building
     public Transform spawnPosition;
 
     public Vector3 rallyPoint;
+    private RTSLineRenderer rtsLineRenderer;
+
     private Camera camera;
     private RaycastHit hitInfo;
 
@@ -26,6 +29,9 @@ public class TrainingBuilding : Building
     {
         base.Start();
         camera = Camera.main;
+        rtsLineRenderer = GetComponent<RTSLineRenderer>();
+
+        rtsLineRenderer.AddLinePoint(transform.position); //Home point!
     }
 
     protected override void Update()
@@ -148,6 +154,15 @@ public class TrainingBuilding : Building
         Debug.Log($"Rally point set at {location}");
         location.y = 0;
         rallyPoint = location;
+
+        if(rtsLineRenderer.GetPointCount() < 2)
+        {
+            rtsLineRenderer.AddLinePoint(location);
+        }
+        else
+        {
+            rtsLineRenderer.UpdatePointPosition(1, location);
+        }
     }
 
 

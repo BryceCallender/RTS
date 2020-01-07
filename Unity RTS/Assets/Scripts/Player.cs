@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         currentCapacity = 0;
-        capacityText.SetText(currentCapacity + "/" + MAX_CAPACITY);
+        //capacityText.SetText(currentCapacity + "/" + MAX_CAPACITY);
 
         availableUnits = new HashSet<Unit>();
         availableBuildings = new HashSet<Building>();

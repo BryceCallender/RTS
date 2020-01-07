@@ -87,7 +87,7 @@ public class UnitSelected : MonoBehaviour
                 else 
                 {
                     Debug.Log("Removed all");
-                    mouse.DeselectAllUnits(gameObject);
+                    mouse.DeselectAllUnits();
                     selected = false;
                     added = false;
                     selectionIndicator.SetActive(false);
