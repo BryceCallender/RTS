@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            NotificationSystem.Notify("You do not have enough minerals!");
+            NotificationSystem.NotifyMessage("You do not have enough minerals!");
         }
     }
 
@@ -103,7 +103,7 @@ public class Player : MonoBehaviour
         }
         else
         {
-            NotificationSystem.Notify("You do not have enough gas!");
+            NotificationSystem.NotifyMessage("You do not have enough gas!");
         }
     }
 

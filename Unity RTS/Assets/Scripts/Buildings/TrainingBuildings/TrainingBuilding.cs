@@ -39,7 +39,17 @@ public class TrainingBuilding : Building
         base.Update();
 
         if(IsBuildingAvailableToUse())
-        { 
+        {
+            if(UnitIsSelected)
+            {
+                rtsLineRenderer.Show();
+            }
+            else
+            {
+                rtsLineRenderer.Hide();
+            }
+            
+
             if (UnitIsSelected && Input.GetKeyDown(KeyCode.F5))
             {
                 unitProductionList.Add(producableUnits[Random.Range(0, producableUnits.Count)]);

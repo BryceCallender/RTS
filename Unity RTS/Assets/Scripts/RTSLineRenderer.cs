@@ -18,6 +18,7 @@ public class RTSLineRenderer : MonoBehaviour
 
     [SerializeField]
     private List<Vector3> pointPositions;
+    private List<GameObject> locationMarkers;
 
     private int pointCount;
 
@@ -25,6 +26,7 @@ public class RTSLineRenderer : MonoBehaviour
     {
         pointCount = 0;
         pointPositions = new List<Vector3>();
+        locationMarkers = new List<GameObject>();
         lineRenderer = GetLineRendererFromLineMode();
     }
 
@@ -41,6 +43,12 @@ public class RTSLineRenderer : MonoBehaviour
 
         pointPositions.Add(newPointPosition);
         lineRenderer.SetPosition(pointCount - 1, newPointPosition);
+
+        if(pointCount > 1)
+        {
+            locationMarkers.Add(CreateLocationMarker(newPointPosition));
+        }
+
     }
 
     public void ChangeLineMode(LineMode newLineMode)
@@ -53,6 +61,13 @@ public class RTSLineRenderer : MonoBehaviour
     {
         lineRenderer.SetPosition(index, updatePosition);
         pointPositions[index] = updatePosition;
+
+        //If we even have a marker to update that can corelate to the updating index
+        //The origin is itself which should not have a marker
+        if(locationMarkers.Count > index - 1)
+        {
+            locationMarkers[index - 1].transform.position = updatePosition;
+        }
     }
 
     public void RemovePoint(int index)
@@ -91,6 +106,41 @@ public class RTSLineRenderer : MonoBehaviour
                 return Mouse.InstantiateRTSEffect("patrolLine", Vector3.zero, transform).GetComponent<LineRenderer>();
             default: 
                 return null;
+        }
+    }
+
+    private GameObject CreateLocationMarker(Vector3 location)
+    {
+        switch (lineMode)
+        {
+            case LineMode.Attack:
+                return Mouse.InstantiateRTSEffect("attackWaypoint", location);
+            case LineMode.Move:
+                return Mouse.InstantiateRTSEffect("movementWaypoint", location);
+            case LineMode.Patrol:
+                return Mouse.InstantiateRTSEffect("patrolWaypoint", location);
+            default:
+                return null;
+        }
+    }
+
+    public void Show()
+    {
+        lineRenderer.gameObject.SetActive(true);
+
+        foreach(GameObject marker in locationMarkers)
+        {
+            marker.SetActive(true);
+        }
+    }
+
+    public void Hide()
+    {
+        lineRenderer.gameObject.SetActive(false);
+
+        foreach (GameObject marker in locationMarkers)
+        {
+            marker.SetActive(false);
         }
     }
 

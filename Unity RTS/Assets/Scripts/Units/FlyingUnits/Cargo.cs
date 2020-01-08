@@ -70,7 +70,7 @@ public class Cargo : FlyingUnit
     {
         foreach(GameObject gameObject in loadedObjects)
         {
-            unloadPosition = transform.position + Random.insideUnitSphere * Mathf.Sqrt(Random.Range(0.0f, 2.0f));
+            unloadPosition = transform.position + Random.insideUnitSphere * Mathf.Sqrt(Random.Range(0.0f, 3.0f));
             unloadPosition.y = 0;
 
             //Place the gameobject at the respective position
@@ -78,14 +78,14 @@ public class Cargo : FlyingUnit
 
             //Reveal the gameobject so that it has truly been unloaded
             gameObject.SetActive(true);
-
-            loadedObjects.Remove(gameObject);
         }
+
+        loadedObjects.Clear();
     }
 
     public void UnloadMode()
     {
-
+        UnloadAll();
     }
 
     private int GetCurrentLoad()

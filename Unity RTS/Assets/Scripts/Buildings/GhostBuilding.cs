@@ -39,7 +39,7 @@ public class GhostBuilding: MonoBehaviour
 
             if(Input.GetMouseButtonDown(0))
             {
-                NotificationSystem.Notify("You cannot place a building there!");
+                NotificationSystem.NotifyMessage("You cannot place a building there!");
             }
         }
         else

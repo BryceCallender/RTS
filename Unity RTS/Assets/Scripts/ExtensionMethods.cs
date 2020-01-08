@@ -34,6 +34,12 @@ public static class ExtensionMethods
     }
 
 
+    public static Vector3 Flatten(this Vector3 position)
+    {
+        return new Vector3(position.x, 0, position.z);
+    }
+
+
     ///
     /// ALL FUNCTIONS BELOW COME FROM https://forum.unity.com/threads/how-to-get-all-components-on-an-object-that-implement-an-interface.101028/
     ///

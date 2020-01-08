@@ -258,7 +258,7 @@ public class Mouse : MonoBehaviour
 
     public static GameObject InstantiateRTSEffect(string effectName, Vector3 position, Transform parent = null)
     {
-        return Instantiate(rtsVisualEffects[effectName], position + offset, Quaternion.identity, parent);
+        return Instantiate(rtsVisualEffects[effectName], position.Flatten() + offset, Quaternion.identity, parent);
     }
 
     public void ChangeCursor(string cursorName)

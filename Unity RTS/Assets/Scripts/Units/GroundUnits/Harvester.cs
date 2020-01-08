@@ -59,6 +59,8 @@ public class Harvester : Unit
 
     protected override void Update()
     {
+        base.Update();
+
         resources.RemoveAll(resource => resource == null);
         
         //Automatic Behavior
@@ -231,4 +233,6 @@ public class Harvester : Unit
             }
         }
     }
+
+    protected override void Fire() {}
 }

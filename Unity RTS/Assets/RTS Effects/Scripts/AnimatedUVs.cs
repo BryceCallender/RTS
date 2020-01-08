@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class AnimatedUVs : MonoBehaviour {
-	public float scrollSpeed = 0.5F;
+	public float scrollSpeed = -0.5F;
 	public Renderer rend;
 	void Start()
 	{
@@ -11,6 +11,6 @@ public class AnimatedUVs : MonoBehaviour {
 	void Update()
 	{
 		float offset = Time.time * scrollSpeed;
-		rend.material.SetTextureOffset("_MainTex", new Vector2(offset, 0));
+		rend.material.SetTextureOffset("_BaseMap", new Vector2(offset, 0));
 	}
 }

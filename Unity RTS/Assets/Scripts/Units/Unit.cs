@@ -55,6 +55,9 @@ public class Unit : RTSObject, ISelectable
     private float lerpTime;
     public bool DoneAiming => lerpTime > 1.0f;
 
+    private bool isCargoBound = false;
+    private Cargo cargo;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -82,8 +85,27 @@ public class Unit : RTSObject, ISelectable
                     targetPosition = hitAgentInfo.point;
                     agent.destination = targetPosition;
                     agent.stoppingDistance = 0;
+
+                    if (cargo = hitAgentInfo.collider.gameObject.GetComponent<Cargo>())
+                    {
+                        isCargoBound = true;
+                    }
+                    else
+                    {
+                        isCargoBound = false;
+                    }
                 }
             }            
+        }
+
+        if(isCargoBound)
+        {
+            if(agent.remainingDistance < 1f)
+            {
+                cargo.Load(gameObject);
+                //So they dont reload when released
+                cargo = null;
+            }
         }
         
         Fire();

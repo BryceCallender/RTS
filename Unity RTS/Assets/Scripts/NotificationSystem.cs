@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public enum RTSEvent
+{
+    RallyPointSet,
+    BuildingCompleted,
+    UnitCompleted,
+    UpgradeCompleted,
+    AbilityActivated,
+    AbilityDeactivated
+}
+
 public class NotificationSystem : MonoBehaviour
 {
     //Just so we can set an instance in the editor
@@ -23,7 +33,7 @@ public class NotificationSystem : MonoBehaviour
         textColor = colorOfText;
     }
 
-    public static void Notify(string message, Color? messageColor = null)
+    public static void NotifyMessage(string message, Color? messageColor = null)
     {
         text.gameObject.SetActive(true);
 
@@ -31,6 +41,11 @@ public class NotificationSystem : MonoBehaviour
         text.color = messageColor ?? Color.red; //Is message color specified? Go red otherwise
 
         text.StartCoroutine(FadeText());
+    }
+
+    public static void NotifyEvent(RTSEvent rtsEvent)
+    {
+
     }
 
     private static IEnumerator FadeText()
