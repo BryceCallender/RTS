@@ -18,28 +18,54 @@ public class RTSLineRenderer : MonoBehaviour
 
     [SerializeField]
     private List<Vector3> pointPositions;
+    [SerializeField]
     private List<GameObject> locationMarkers;
 
-    private int pointCount;
+    private int pointCount
+    {
+        get
+        {
+            return lineRenderer.positionCount;
+        }
+    }
 
     private void Start()
     {
-        pointCount = 0;
         pointPositions = new List<Vector3>();
         locationMarkers = new List<GameObject>();
         lineRenderer = GetLineRendererFromLineMode();
+        AddLinePoint(transform.position); //Home point
+    }
+
+    //Use for updating the very first point in the renderer constantly :)
+    private void Update()
+    {
+        if(lineRenderer.gameObject.activeSelf && pointCount > 0)
+        {
+            UpdatePointPosition(0, transform.position);
+        }
     }
 
     public void SetPointCount(int pointCount)
     {
-        this.pointCount = pointCount;
         lineRenderer.positionCount = pointCount;
+    }
+
+    public void AddLinePointToFront(Vector3 position)
+    {
+        lineRenderer.positionCount++;
+
+        pointPositions.Insert(1, position);
+
+        for(int i = 0; i < pointCount; i++)
+        {
+            lineRenderer.SetPosition(i, pointPositions[i]);
+        }
     }
 
     public void AddLinePoint(Vector3 newPointPosition)
     {
-        pointCount++;
-        lineRenderer.positionCount = pointCount;
+        lineRenderer.positionCount++;
 
         pointPositions.Add(newPointPosition);
         lineRenderer.SetPosition(pointCount - 1, newPointPosition);
@@ -55,6 +81,7 @@ public class RTSLineRenderer : MonoBehaviour
     {
         lineMode = newLineMode;
         lineRenderer = GetLineRendererFromLineMode();
+        AddLinePoint(transform.position); //Home point
     }
 
     public void UpdatePointPosition(int index, Vector3 updatePosition)
@@ -64,7 +91,7 @@ public class RTSLineRenderer : MonoBehaviour
 
         //If we even have a marker to update that can corelate to the updating index
         //The origin is itself which should not have a marker
-        if(locationMarkers.Count > index - 1)
+        if(index > 0)
         {
             locationMarkers[index - 1].transform.position = updatePosition;
         }
@@ -72,14 +99,15 @@ public class RTSLineRenderer : MonoBehaviour
 
     public void RemovePoint(int index)
     {
-        //If i want to delete the 0th point im really thinking of the first point i have made,
-        //however that is not the point that is really at that index, 0 is reserved for the home position of the object
-        pointPositions.RemoveAt(index + 1);
+        pointPositions.RemoveAt(index);
+
+        Destroy(locationMarkers[index]);
+        locationMarkers.RemoveAt(index);
 
         //Redraw based on the point position removed
         lineRenderer.positionCount = pointPositions.Count;
-        pointCount = pointPositions.Count;
-        for(int i = 0; i < pointPositions.Count; i++)
+
+        for(int i = 0; i < pointCount; i++)
         {
             lineRenderer.SetPosition(i, pointPositions[i]);
         }
@@ -126,6 +154,10 @@ public class RTSLineRenderer : MonoBehaviour
 
     public void Show()
     {
+        //If already shown no work is to be done :)
+        if (lineRenderer.gameObject.activeSelf)
+            return; 
+
         lineRenderer.gameObject.SetActive(true);
 
         foreach(GameObject marker in locationMarkers)
@@ -136,12 +168,31 @@ public class RTSLineRenderer : MonoBehaviour
 
     public void Hide()
     {
+        //If already hidden no work is to be done :)
+        if (!lineRenderer.gameObject.activeSelf)
+            return;
+
         lineRenderer.gameObject.SetActive(false);
 
         foreach (GameObject marker in locationMarkers)
         {
             marker.SetActive(false);
         }
+    }
+
+    public void ClearLineRenderer()
+    {
+        pointPositions.Clear();
+        lineRenderer.positionCount = 0;
+
+        foreach(GameObject marker in locationMarkers)
+        {
+            Destroy(marker);
+        }
+
+        locationMarkers.Clear();
+
+        AddLinePoint(transform.position); //Home point readded
     }
 
 }

@@ -101,13 +101,12 @@ public class Mouse : MonoBehaviour
                     if(hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
                     {
                         InstantiateRTSEffect("attackIndicator", hitInfo.point);
-                        //InstantiateRTSEffect("targetLocked", hitInfo.point);
+                        //InstantiateRTSEffect("targetLocked", hitInfo.point, hitInfo.collider.transform);
                     }
-                    else //Just telling the unit to move elsewhere
+                    else if(SelectedObjectsAreUnitsOnly()) //Just telling the unit to move elsewhere
                     {
-                        InstantiateRTSEffect("moveIndicator", hitInfo.point);
-                    }
-                    
+                        InstantiateRTSEffect("moveIndicator", hitInfo.point.Flatten());
+                    }  
                 }
             }
         }
@@ -258,11 +257,24 @@ public class Mouse : MonoBehaviour
 
     public static GameObject InstantiateRTSEffect(string effectName, Vector3 position, Transform parent = null)
     {
-        return Instantiate(rtsVisualEffects[effectName], position.Flatten() + offset, Quaternion.identity, parent);
+        return Instantiate(rtsVisualEffects[effectName], position + offset, rtsVisualEffects[effectName].transform.rotation, parent);
     }
 
     public void ChangeCursor(string cursorName)
     {
         Cursor.SetCursor(rtsCursorEffects[cursorName], Vector2.zero, CursorMode.Auto);
+    }
+
+    private bool SelectedObjectsAreUnitsOnly()
+    {
+        foreach(GameObject selectedObject in selectedObjects)
+        {
+            if(selectedObject.GetComponent<Unit>() == null)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

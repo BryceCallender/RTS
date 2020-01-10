@@ -40,16 +40,17 @@ public class Cargo : FlyingUnit
     }
 
 
-    public void Load(GameObject gameObject)
+    public bool Load(GameObject gameObject)
     {
         int unitLoadSize = gameObject.GetComponent<Unit>().loadSize;
 
         //If our current load cant take this unit then dont load it
         if (GetCurrentLoad() + unitLoadSize > MAX_LOAD_SIZE)
-            return;
+            return false;
 
         gameObject.SetActive(false); //Get rid of them in the space
         loadedObjects.Add(gameObject); //Add a reference to this unit into the Cargo ship list
+        return true;
     }
 
     public void Unload(GameObject gameObject)

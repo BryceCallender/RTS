@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     {
         timeText = timeText.GetComponent<TextMeshProUGUI>();
 		time = GetComponent<Timer>();
+		timeText.gameObject.SetActive(true);
     }
 
     private void Update()

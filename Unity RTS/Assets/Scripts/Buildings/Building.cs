@@ -14,8 +14,6 @@ public class Building : RTSObject, ISelectable
     protected bool UnitIsSelected => unitSelected.selected;
 
     [SerializeField]
-    private float progress = 0.0f;
-    [SerializeField]
     private bool isBuilding;
     [SerializeField]
     private bool alreadyPlaced;
@@ -27,7 +25,7 @@ public class Building : RTSObject, ISelectable
 
     public readonly string buildProgressShaderName = "Vector1_79B66B06"; // weird naming thing unity chose
 
-    private bool CompletedBuilding => progress >= productionDuration;
+    private bool CompletedBuilding => health.currentHealth >= health.maxHealth;
 
     // keep a copy of the executing script
     private Coroutine buildingCoroutine;
@@ -48,7 +46,12 @@ public class Building : RTSObject, ISelectable
 
         if(!alreadyPlaced)
         {
+            health.currentHealth = 0;
             ShowConstructionEffect();
+        }
+        else
+        {
+            health.currentHealth = health.maxHealth;
         }
     }
 
@@ -70,7 +73,7 @@ public class Building : RTSObject, ISelectable
     private void CancelBuilding()
     {
         isBuilding = false;
-        progress = 0.0f;
+        health.currentHealth = 0;
 
         //Delete the building prefab
         Destroy(gameObject);
@@ -100,13 +103,13 @@ public class Building : RTSObject, ISelectable
 
         while (isBuilding)
         {
-            progress += Time.deltaTime;
+            health.currentHealth += Time.deltaTime * 10;
             foreach(MeshRenderer renderer in meshRenderers)
             {
                 //Property blocks ensures that the material changed isnt messing with the only reference to the material otherwise
                 //everything would be loading with the same "progress" visually but not numerically :)
                 renderer.GetPropertyBlock(propBlock);
-                propBlock.SetFloat(buildProgressShaderName, progress.Remap(0, productionDuration, 0.3f, 0.85f));
+                propBlock.SetFloat(buildProgressShaderName, health.currentHealth.Remap(0, health.maxHealth, 0.3f, 0.85f));
                 renderer.SetPropertyBlock(propBlock);
             }
             yield return null;

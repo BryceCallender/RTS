@@ -38,7 +38,7 @@ public class RTSObject : MonoBehaviour
     public float productionDuration;
     public Team team;
 
-    private void Start()
+    protected virtual void Awake()
     {
         health = GetComponent<Health>();
     } 

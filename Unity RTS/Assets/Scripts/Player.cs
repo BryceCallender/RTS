@@ -116,4 +116,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ConsumeMineralAndGas(int mineralAmount, int gasAmount)
+    {
+
+    }
+
 }

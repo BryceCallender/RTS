@@ -30,8 +30,6 @@ public class TrainingBuilding : Building
         base.Start();
         camera = Camera.main;
         rtsLineRenderer = GetComponent<RTSLineRenderer>();
-
-        rtsLineRenderer.AddLinePoint(transform.position); //Home point!
     }
 
     protected override void Update()

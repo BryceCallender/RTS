@@ -43,7 +43,7 @@ public class NotificationSystem : MonoBehaviour
         text.StartCoroutine(FadeText());
     }
 
-    public static void NotifyEvent(RTSEvent rtsEvent)
+    public static void NotifyEvent(RTSEvent rtsEvent, Color? eventColor = null)
     {
 
     }

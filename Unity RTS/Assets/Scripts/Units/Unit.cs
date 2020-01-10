@@ -14,6 +14,7 @@ public enum UnitsAttackable
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(AttackInfo))]
+[RequireComponent(typeof(RTSLineRenderer))]
 public class Unit : RTSObject, ISelectable
 {
     public GameObject projectile;
@@ -58,11 +59,17 @@ public class Unit : RTSObject, ISelectable
     private bool isCargoBound = false;
     private Cargo cargo;
 
+    private Queue<Vector3> queuedPositions;
+    private RTSLineRenderer rtsLineRenderer;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         unitSelected = GetComponent<UnitSelected>();
         attackInfo = GetComponent<AttackInfo>();
+
+        queuedPositions = new Queue<Vector3>();
+        rtsLineRenderer = GetComponent<RTSLineRenderer>();
     }
 
     protected virtual void Start() { }
@@ -82,17 +89,39 @@ public class Unit : RTSObject, ISelectable
             {
                 if (Input.GetMouseButtonDown(1) && !Mouse.IsDragging && hitAgentInfo.collider.gameObject.layer != LayerMask.NameToLayer("Enemy"))
                 {
-                    targetPosition = hitAgentInfo.point;
-                    agent.destination = targetPosition;
-                    agent.stoppingDistance = 0;
-
-                    if (cargo = hitAgentInfo.collider.gameObject.GetComponent<Cargo>())
+                    Debug.Log($"Clicked at {hitAgentInfo.point}");
+                    if(Mouse.ShiftKeyDown())
                     {
-                        isCargoBound = true;
+                        rtsLineRenderer.Show();
+
+                        if (queuedPositions.Count == 0 && agent.hasPath)
+                        {
+                            rtsLineRenderer.AddLinePointToFront(agent.destination.Flatten());
+                        }
+
+                        rtsLineRenderer.AddLinePoint(hitAgentInfo.point.Flatten());
+                        queuedPositions.Enqueue(hitAgentInfo.point);
+
+                        Debug.Log(rtsLineRenderer.GetPointCount());
                     }
                     else
                     {
-                        isCargoBound = false;
+                        queuedPositions.Clear(); //Clear anything in queue since it was changed!
+                        rtsLineRenderer.ClearLineRenderer();
+                        rtsLineRenderer.Hide();
+
+                        targetPosition = hitAgentInfo.point;
+                        agent.destination = targetPosition;
+                        agent.stoppingDistance = 0;
+
+                        if (cargo = hitAgentInfo.collider.gameObject.GetComponent<Cargo>())
+                        {
+                            isCargoBound = true;
+                        }
+                        else
+                        {
+                            isCargoBound = false;
+                        }
                     }
                 }
             }            
@@ -102,12 +131,34 @@ public class Unit : RTSObject, ISelectable
         {
             if(agent.remainingDistance < 1f)
             {
-                cargo.Load(gameObject);
+                //Loading failed which means cargo ship was full or didnt have enough space to accomodate unit
+                if(!cargo.Load(gameObject))
+                {
+                    isCargoBound = false;
+                    agent.destination = transform.position; //Cant load so just stop moving aka set destination to where i currently am :)
+                }
                 //So they dont reload when released
                 cargo = null;
             }
         }
-        
+
+        //Has only queued positions
+        if(!agent.hasPath && queuedPositions.Count > 0)
+        {
+            agent.destination = queuedPositions.Dequeue();
+        }
+
+        //Was marked to go somewhere then queued more positions after that
+        //Will also eventually come from the above scenario when it reaches a destination point 
+        if (agent.hasPath && queuedPositions.Count > 0)
+        {
+            if (agent.remainingDistance <= 0.5f)
+            {
+                rtsLineRenderer.RemovePoint(0);
+                agent.destination = queuedPositions.Dequeue();
+            }
+        }
+
         Fire();
     }
 
