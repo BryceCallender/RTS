@@ -37,5 +37,6 @@ public class SupplyBuilding : Building
     public void CollectFromHarvester(int amount)
     {
         mineralCount += amount;
+        GameController.Instance.GetPlayer().ChangeMineralCurrency(-amount);
     }
 }

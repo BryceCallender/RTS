@@ -49,10 +49,8 @@ public class Timer : MonoBehaviour
             time += hour.ToString() + ":";
         }
 
-        if(minutes > 0)
-        {
-            time += minutes.ToString() + ":";
-        }
+
+        time += minutes.ToString() + ":";
 
         time += seconds.ToString();
 

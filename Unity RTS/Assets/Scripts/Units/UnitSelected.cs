@@ -108,7 +108,7 @@ public class UnitSelected : MonoBehaviour
 
         selectionIndicator.SetActive(true);
 
-        selectionIndicator.transform.position = new Vector3(bigBounds.center.x, 0.06f, bigBounds.center.z);
+        selectionIndicator.transform.position = new Vector3(bigBounds.center.x, 0f, bigBounds.center.z);
         selectionIndicator.transform.localScale = new Vector3(bigBounds.size.x + (diameter / 2.0f), bigBounds.size.y, bigBounds.size.z + (diameter / 2.0f));
     }
 }

@@ -65,4 +65,21 @@ public class Health : MonoBehaviour
         maxHealth = newMaxHealth;
     }
 
+    public Color HealthToColor()
+    {
+        float percentage = currentHealth / maxHealth;
+        if(percentage >= 0.90)
+        {
+            return Color.green;
+        }
+        else if(percentage < 0.90 && percentage > 0.10)
+        {
+            return Color.yellow;
+        }
+        else
+        {
+            return Color.red;
+        }
+    }
+
 }

@@ -62,8 +62,10 @@ public class Unit : RTSObject, ISelectable
     private Queue<Vector3> queuedPositions;
     private RTSLineRenderer rtsLineRenderer;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
         unitSelected = GetComponent<UnitSelected>();
         attackInfo = GetComponent<AttackInfo>();
