@@ -31,6 +31,7 @@ public class Building : RTSObject, ISelectable
     private Coroutine buildingCoroutine;
 
     private GameObject constructionEffect;
+    private bool performedBuildingFinishes;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -58,7 +59,7 @@ public class Building : RTSObject, ISelectable
     // Update is called once per frame
     protected virtual void Update()
     {
-        if(IsBuildingAvailableToUse())
+        if(IsBuildingAvailableToUse() && !performedBuildingFinishes)
         {
             unitSelected.enabled = true;
             Destroy(constructionEffect);
@@ -67,6 +68,7 @@ public class Building : RTSObject, ISelectable
                 renderer.material = finishedMaterial;
             }
             StopBuilding();
+            performedBuildingFinishes = true;
         }
     }
 

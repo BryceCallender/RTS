@@ -25,7 +25,7 @@ public class GhostBuilding: MonoBehaviour
     private void Update()
     {
         MoveToMousePosition();
-
+       
         if(Input.GetKeyDown(KeyCode.R))
         {
             Rotate();
@@ -74,7 +74,14 @@ public class GhostBuilding: MonoBehaviour
     
     private bool IsValidSpot()
     {
-        return placementOfBuildingValidity.collisions.Count == 0;
+        if(placementOfBuildingValidity.RequiredStructureToBePlacedOn == null)
+        {
+            return placementOfBuildingValidity.collisions.Count == 0;
+        }
+        else
+        {
+            return placementOfBuildingValidity.IsAboveRequiredStructure() && placementOfBuildingValidity.collisions.Count == 1;
+        }
     }
 
     private void MoveToMousePosition()
@@ -82,9 +89,20 @@ public class GhostBuilding: MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo))
+        int layersToHit = ~LayerMask.GetMask("GhostBuilding"); //Dont need to check for collisions of a ghostbuilding since itll proc everytime if it did
+
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layersToHit))
         {
-            ghostBuildingTransform.position = new Vector3(hitInfo.point.x, 0, hitInfo.point.z);
+            if(placementOfBuildingValidity.RequiredStructureToBePlacedOn != null && 
+                hitInfo.collider.gameObject.name.Equals(placementOfBuildingValidity.RequiredStructureToBePlacedOn.name))
+            {
+                ghostBuildingTransform.position = hitInfo.collider.gameObject.transform.position;
+            }
+            else
+            {
+                ghostBuildingTransform.position = new Vector3(hitInfo.point.x, 0, hitInfo.point.z);
+            }
+            
         }
     }
 
