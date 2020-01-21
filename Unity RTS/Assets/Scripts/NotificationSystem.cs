@@ -40,6 +40,10 @@ public class NotificationSystem : MonoBehaviour
         text.SetText(message);
         text.color = messageColor ?? Color.red; //Is message color specified? Go red otherwise
 
+        text.color = new Color(text.color.r, text.color.g, text.color.b, 1.0f);
+
+        text.StopAllCoroutines();
+
         text.StartCoroutine(FadeText());
     }
 
@@ -53,7 +57,12 @@ public class NotificationSystem : MonoBehaviour
         while(!text.color.IsZeroAlpha())
         {
             text.color = text.color.FadeAlpha(fadeIncrement);
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public static void NotifyUserUnderAttack()
+    {
+        //Play audio clip
     }
 }

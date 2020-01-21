@@ -78,7 +78,7 @@ public class TrainingBuilding : Building
         }
     }
 
-    protected void AddUnitToQueue(Unit unit)
+    public void AddUnitToQueue(Unit unit)
     {
         if (!producableUnits.Contains(unit))
         {
@@ -94,7 +94,7 @@ public class TrainingBuilding : Building
         }
     }
 
-    protected void RemoveUnitFromQueue(int position)
+    public void RemoveUnitFromQueue(int position)
     {
         if (unitProductionList.Count > 0)
         {

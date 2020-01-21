@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Upgrade", menuName = "Upgrades", order = 1)]
-public class Upgrade : ScriptableObject
+public class Upgrade : MonoBehaviour
 {
-    public List<GameObject> unitsToApply;
+    public UpgradeData upgrade;
 
-    public int mineralRequirement;
-    public int gasRequirement;
-
-    public float researchTime;
-
+    private void Start()
+    {
+        //Apply the upgrade to the unit
+        gameObject.GetComponent<RTSObject>().ApplyUpgrade(upgrade);
+    }
 }

@@ -12,7 +12,6 @@ public class Turret : Building
     public Transform turretPivot;
     public Transform turretEnd;
     public float turnSpeed;
-    public int damage;
 
     public float fireRate;
     [HideInInspector]

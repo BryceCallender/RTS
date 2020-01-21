@@ -25,7 +25,7 @@ public class Building : RTSObject, ISelectable
 
     public readonly string buildProgressShaderName = "Vector1_79B66B06"; // weird naming thing unity chose
 
-    private bool CompletedBuilding => health.currentHealth >= health.maxHealth;
+    public bool CompletedBuilding => health.currentHealth >= health.maxHealth;
 
     // keep a copy of the executing script
     private Coroutine buildingCoroutine;
@@ -38,7 +38,7 @@ public class Building : RTSObject, ISelectable
     {
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         unitSelected = GetComponent<UnitSelected>();
-        unitSelected.enabled = false; //Dont enable selection until the building is available to the user
+        //unitSelected.enabled = false; //Dont enable selection until the building is available to the user
 
         propBlock = new MaterialPropertyBlock();
 
@@ -61,6 +61,7 @@ public class Building : RTSObject, ISelectable
     {
         if(IsBuildingAvailableToUse() && !performedBuildingFinishes)
         {
+            health.currentHealth = health.maxHealth;
             unitSelected.enabled = true;
             Destroy(constructionEffect);
             foreach (MeshRenderer renderer in meshRenderers)

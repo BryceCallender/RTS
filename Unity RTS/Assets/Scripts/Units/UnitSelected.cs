@@ -48,7 +48,7 @@ public class UnitSelected : MonoBehaviour
                 CalculateBounds();
             }
             //Responsible for adding a single unit based on who we click!
-            else if (Input.GetMouseButtonDown(0) && !added && !selected && !Mouse.IsDragging)
+            else if (Input.GetMouseButtonDown(0) && !added && !selected && !Mouse.IsDragging && !Mouse.ShiftKeyDown())
             {
                 Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
@@ -75,23 +75,41 @@ public class UnitSelected : MonoBehaviour
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
             {
                 //If object implements ISelectable then remove it from the list
-                if(hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
+                if(hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
                 {
-                    Debug.Log("Removed one");
-                    mouse.DeselectShiftedUnit(hitInfo.transform.gameObject);
-                    UnitSelected unitHit = hitInfo.transform.gameObject.GetComponent<UnitSelected>();
-                    unitHit.selected = false;
-                    unitHit.added = false;
-                    unitHit.selectionIndicator.SetActive(false);
+                    UnitSelected unitHit = hitInfo.collider.gameObject.GetComponent<UnitSelected>();
+
+                    Debug.Log($"You dun did a shift click on : {hitInfo.collider.gameObject}");
+
+                    if (unitHit.selected)
+                    {
+                        Debug.Log("Removed one");
+                        mouse.DeselectShiftedUnit(hitInfo.collider.gameObject);
+                    }
+                    else
+                    {
+                        Debug.Log("Added one");
+                        mouse.AddShiftedUnit(hitInfo.collider.gameObject);
+                    }
+
+                    unitHit.selected = !unitHit.selected;
+                    unitHit.added = !unitHit.added;
+                    unitHit.selectionIndicator.SetActive(!unitHit.selectionIndicator.activeSelf);
+
+                    if(unitHit.selectionIndicator.activeSelf)
+                    {
+                        CalculateBounds();
+                    }
+                    
                 }
-                else 
-                {
-                    Debug.Log("Removed all");
-                    mouse.DeselectAllUnits();
-                    selected = false;
-                    added = false;
-                    selectionIndicator.SetActive(false);
-                }
+                //else 
+                //{
+                //    Debug.Log("Removed all");
+                //    mouse.DeselectAllUnits();
+                //    selected = false;
+                //    added = false;
+                //    selectionIndicator.SetActive(false);
+                //}
             }	
         }
 

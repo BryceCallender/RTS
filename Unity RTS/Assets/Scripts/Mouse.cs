@@ -71,7 +71,11 @@ public class Mouse : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 ChangeCursor("normal");
-                DeselectAllUnits();
+                //If we hit the ground when trying to select yeet everything away
+                if (hitInfo.collider.gameObject.name == "RTSTerrain")
+                {
+                    DeselectAllUnits();
+                }
                 mouseDownPosition = hitInfo.point;
                 timeLeftBeforeDragBox = timeToMakeDragBox;
                 if(!IsDragging)
@@ -109,6 +113,11 @@ public class Mouse : MonoBehaviour
                     }  
                 }
             }
+        }
+
+        if(selectedObjects.Count > 0)
+        {
+            UIManager.Instance.SetSingleSelectionPanel(selectedObjects[0].GetComponent<RTSObject>());
         }
     }
 
@@ -233,6 +242,12 @@ public class Mouse : MonoBehaviour
     {
         selectedObjects.Remove(obj);
         unitsOnScreen.Clear();
+    }
+
+    public void AddShiftedUnit(GameObject obj)
+    {
+        selectedObjects.Add(obj);
+        unitsOnScreen.Add(obj);
     }
 
     public bool IsFirstInList(GameObject unitName)

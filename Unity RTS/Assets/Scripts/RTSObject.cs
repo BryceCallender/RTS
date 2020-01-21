@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public enum Team
 {
@@ -19,7 +20,7 @@ public enum ArmorClass
 [RequireComponent(typeof(Health))]
 public class RTSObject : MonoBehaviour
 {
-    public string name;
+    public new string name;
     public Sprite uiSprite;
 
     [TextArea]
@@ -31,6 +32,7 @@ public class RTSObject : MonoBehaviour
     public int mineralCost;
     public int gasCount;
 
+    public int damage;
     public float speed;
     public float range;
 
@@ -38,8 +40,20 @@ public class RTSObject : MonoBehaviour
     public float productionDuration;
     public Team team;
 
+    public List<UpgradeData> upgrades;
+
     protected virtual void Awake()
     {
         health = GetComponent<Health>();
-    } 
+    }
+
+    public void ApplyUpgrade(UpgradeData upgrade)
+    {
+        damage += upgrade.damageIncrease;
+        range += upgrade.rangeIncrease;
+        speed += upgrade.speedIncrease;
+        armorClass += upgrade.armorIncrease;
+
+        upgrades.Add(upgrade);
+    }
 }

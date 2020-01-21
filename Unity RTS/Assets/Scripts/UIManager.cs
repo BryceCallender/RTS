@@ -1,107 +1,160 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System;
+
+[Serializable]
+public struct PanelInfo
+{
+    public string name;
+    public GameObject panel;
+}
 
 public class UIManager : MonoBehaviour
 {
-	public GameObject[] panels;
-	public GameObject selectedObjectPanel;
-	public List<Sprite> images = new List<Sprite>();
+    [Header("Money And Supply Variables")]
+    #region MoneyAndSupplyVariables
+    public TextMeshProUGUI mineralText;
+    public TextMeshProUGUI gasText;
+    public TextMeshProUGUI supplyText;
+    #endregion  
 
-	private Sprite spriteToShow;
-	private Image image;
-	private static UIManager instance;
+    [Header("Single Unit Panel Variables")]
+    #region SingleUnitPanelVariables
+    public Image unitImage;
+    public TextMeshProUGUI hpText;
 
-	public static UIManager Instance
-	{
-		get
-		{
-			return instance;
-		}
-	}
+    public TextMeshProUGUI unitNameText;
 
-	private void Awake()
-	{
-		instance = this;
-		image = selectedObjectPanel.GetComponent<Image>();
-	}
+    public Image armorUpgradeImage;
+    public Image weaponUpgradeImage;
 
-	public void SetPhoto(string name)
-	{
-		spriteToShow = FindSprite(name);
-		image.sprite = spriteToShow;
-	}
+    public TextMeshProUGUI armorClassAndAttackTypeText;
+    #endregion
 
-	public Sprite FindSprite(string name)
-	{
-		string[] nameSplit = name.Split('_');
-		//Gets the thing between the _ like in Unit_Tank_Blue
-		string actualTargetedName = nameSplit[1];
-		Sprite foundSprite = null;
+    [Header("Panel Objects")]
+    #region panels
+    public Dictionary<string, GameObject> UIPanels;
+    public List<PanelInfo> panels;
+    #endregion
 
-		for (int i = 0; i < images.Count; i++)
-		{
-			if(actualTargetedName.Equals(images[i].name))
-			{
-				foundSprite = images[i];
-			}
-		}
+    [Header("Grid Buttons")]
+    public List<Button> gridButtons;
+    [SerializeField]
+    private List<Image> gridButtonImages;
 
-		return foundSprite;
-	}
+    public static UIManager Instance { get; private set; }
 
-	public void SetAllPanelsOff()
-	{
-		foreach(GameObject panel in panels)
-		{
-			panel.gameObject.SetActive(false);
-		}
-	}
+    private void Awake()
+    {
+        Instance = this;
+    }
 
-	public void SetAllOffBut(GameObject panel)
-	{
-		for (int i = 0; i < panels.Length; i++)
-		{
-			if(!panels[i].Equals(panel))
-			{
-				panels[i].gameObject.SetActive(false);
-			}
-		}
-	}
+    private void Start()
+    {
+        gridButtonImages = new List<Image>();
 
-	public void SetOnPanel(GameObject panel)
-	{
-		for (int i = 0; i < panels.Length; i++)
-		{
-			if (panels[i].Equals(panel))
-			{
-				panels[i].gameObject.SetActive(true);
-			}
-		}
-	}
+        foreach(Button button in gridButtons)
+        {
+            gridButtonImages.Add(button.GetComponentsInChildren<Image>()[1]);
+        }
 
-	public void SetOffPanel(GameObject panel)
-	{
-		for (int i = 0; i < panels.Length; i++)
-		{
-			if (panels[i].Equals(panel))
-			{
-				panels[i].gameObject.SetActive(false);
-			}
-		}
-	}
+        foreach(PanelInfo panelInfo in panels)
+        {
+            UIPanels.Add(panelInfo.name, panelInfo.panel);
+        }
 
-	public bool MoreThanOnePanel()
-	{
-		int count = 0;
-		for (int i = 0; i < panels.Length; i++)
-		{
-			if (panels[i].activeSelf)
-			{
-				count++;
-			}
-		}
+        Player player = GameController.Instance.GetPlayer();
 
-		return count == 1;
-	}
+        mineralText.SetText(player.mineralCount.ToString());
+        gasText.SetText(player.gasCount.ToString());
+        supplyText.SetText(player.currentCapacity.ToString());
+
+    }
+
+    public void SetSingleSelectionPanel(RTSObject rtsObject)
+    {
+        DisablePanels();
+
+        if (rtsObject is Building)
+        {
+            if(!rtsObject.GetComponent<Building>().CompletedBuilding)
+            {
+                SetBuildingProgressPanel();
+            }
+        }
+        else
+        {
+            UIPanels["single unit"].SetActive(true);
+
+            unitImage.sprite = rtsObject.uiSprite;
+            hpText.SetText($"{rtsObject.health.currentHealth}/{rtsObject.health.maxHealth}");
+
+            hpText.color = rtsObject.health.HealthToColor();
+
+            unitNameText.SetText(rtsObject.name);
+
+            //Upgrade stuff
+
+            armorClassAndAttackTypeText.SetText($"{Enum.GetName(typeof(ArmorClass), rtsObject.armorClass)}");
+
+            SetSingleSelectionPanelGrid(rtsObject);
+        }
+    }
+
+    private void SetSingleSelectionPanelGrid(RTSObject rtsObject)
+    {
+        ClearButtonListeners();
+
+        if(rtsObject is Unit)
+        {
+            //Define the default behavior for stuff
+        }
+        else if(rtsObject is Building)
+        {
+            if(rtsObject is TrainingBuilding)
+            {
+                TrainingBuilding trainingBuilding = rtsObject.GetComponent<TrainingBuilding>();
+                for (int i = 0; i < trainingBuilding.producableUnits.Count; i++)
+                {
+                    int unitIndex = i;
+                    gridButtonImages[i].sprite = trainingBuilding.producableUnits[i].uiSprite;
+                    gridButtons[i].onClick.AddListener(() => { trainingBuilding.AddUnitToQueue(trainingBuilding.producableUnits[unitIndex]); });
+                }
+            }
+        }
+    }
+
+    private void ClearButtonListeners()
+    {
+        foreach(Button button in gridButtons)
+        {
+            button.onClick.RemoveAllListeners();
+        }
+    }
+
+    public void UpdateResourcesText()
+    {
+        Player player = GameController.Instance.GetPlayer();
+
+        mineralText.SetText(player.mineralCount.ToString());
+        gasText.SetText(player.gasCount.ToString());
+        supplyText.SetText(player.currentCapacity.ToString());
+    }
+
+    public void SetBuildingProgressPanel()
+    {
+        UIPanels["building progress"].SetActive(true);
+
+        Debug.Log("Ya yeet");
+    }
+
+    public void DisablePanels()
+    { 
+        foreach(var panel in UIPanels)
+        {
+            panel.Value.SetActive(false);
+        }
+    }
 }
