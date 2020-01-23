@@ -33,6 +33,12 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI armorClassAndAttackTypeText;
     #endregion
 
+    public Slider progressSlider;
+
+    public TextMeshProUGUI buildingHp;
+    public Image unit;
+    public Image unitPicture;
+
     [Header("Panel Objects")]
     #region panels
     public Dictionary<string, GameObject> UIPanels;
@@ -54,6 +60,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         gridButtonImages = new List<Image>();
+        UIPanels = new Dictionary<string, GameObject>();
 
         foreach(Button button in gridButtons)
         {
@@ -79,25 +86,27 @@ public class UIManager : MonoBehaviour
 
         if (rtsObject is Building)
         {
-            if(!rtsObject.GetComponent<Building>().CompletedBuilding)
+            Building rtsBuilding = rtsObject.GetComponent<Building>();
+            if (!rtsBuilding.CompletedBuilding)
             {
-                SetBuildingProgressPanel();
+                UIPanels["buildingProgress"].SetActive(true);
+                unit.sprite = rtsObject.uiSprite;
+                unitPicture.sprite = rtsObject.uiSprite;
+
+                progressSlider.maxValue = rtsBuilding.health.maxHealth;
+                progressSlider.value = rtsBuilding.health.currentHealth;
+
+                buildingHp.SetText($"{(int)rtsObject.health.currentHealth}/{rtsObject.health.maxHealth}");
+                buildingHp.color = rtsObject.health.HealthToColor();
+            }
+            else
+            {
+                SetSinglePanelInfo(rtsObject);
             }
         }
         else
         {
-            UIPanels["single unit"].SetActive(true);
-
-            unitImage.sprite = rtsObject.uiSprite;
-            hpText.SetText($"{rtsObject.health.currentHealth}/{rtsObject.health.maxHealth}");
-
-            hpText.color = rtsObject.health.HealthToColor();
-
-            unitNameText.SetText(rtsObject.name);
-
-            //Upgrade stuff
-
-            armorClassAndAttackTypeText.SetText($"{Enum.GetName(typeof(ArmorClass), rtsObject.armorClass)}");
+            SetSinglePanelInfo(rtsObject);
 
             SetSingleSelectionPanelGrid(rtsObject);
         }
@@ -126,6 +135,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void SetSinglePanelInfo(RTSObject rtsObject)
+    {
+        UIPanels["singleUnit"].SetActive(true);
+
+        unitImage.sprite = rtsObject.uiSprite;
+        hpText.SetText($"{(int)rtsObject.health.currentHealth}/{rtsObject.health.maxHealth}");
+
+        hpText.color = rtsObject.health.HealthToColor();
+
+        unitNameText.SetText(rtsObject.name);
+
+        //Upgrade stuff
+
+        armorClassAndAttackTypeText.SetText($"{Enum.GetName(typeof(ArmorClass), rtsObject.armorClass)}");
+    }
+
     private void ClearButtonListeners()
     {
         foreach(Button button in gridButtons)
@@ -141,13 +166,6 @@ public class UIManager : MonoBehaviour
         mineralText.SetText(player.mineralCount.ToString());
         gasText.SetText(player.gasCount.ToString());
         supplyText.SetText(player.currentCapacity.ToString());
-    }
-
-    public void SetBuildingProgressPanel()
-    {
-        UIPanels["building progress"].SetActive(true);
-
-        Debug.Log("Ya yeet");
     }
 
     public void DisablePanels()
