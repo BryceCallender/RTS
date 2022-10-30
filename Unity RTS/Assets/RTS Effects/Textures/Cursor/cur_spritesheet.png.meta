@@ -1,42 +1,93 @@
 fileFormatVersion: 2
 guid: 802fbdef094b11345834d2eeb00ddc54
-timeCreated: 1574960593
-licenseType: Store
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: cursor_spritesheet_0
-    21300002: cursor_spritesheet_1
-    21300004: cursor_spritesheet_2
-    21300006: cursor_spritesheet_3
-    21300008: cursor_spritesheet_4
-    21300010: cursor_spritesheet_5
-    21300012: cursor_spritesheet_6
-    21300014: cursor_spritesheet_7
-    21300016: cursor_spritesheet_8
-    21300018: cursor_spritesheet_9
-    21300020: cursor_spritesheet_10
-    21300022: cursor_spritesheet_11
-    21300024: cursor_spritesheet_12
-    21300026: cursor_spritesheet_13
-    21300028: cursor_spritesheet_14
-    21300030: cursor_spritesheet_15
-    21300032: cursor_spritesheet_16
-    21300034: cursor_spritesheet_17
-    21300036: cursor_spritesheet_18
-    21300038: cursor_spritesheet_19
-    21300040: cursor_spritesheet_20
-    21300042: cursor_spritesheet_21
-    21300044: cursor_spritesheet_22
-    21300046: cursor_spritesheet_23
-    21300048: cursor_spritesheet_24
-  serializedVersion: 2
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: cursor_spritesheet_0
+  - first:
+      213: 21300002
+    second: cursor_spritesheet_1
+  - first:
+      213: 21300004
+    second: cursor_spritesheet_2
+  - first:
+      213: 21300006
+    second: cursor_spritesheet_3
+  - first:
+      213: 21300008
+    second: cursor_spritesheet_4
+  - first:
+      213: 21300010
+    second: cursor_spritesheet_5
+  - first:
+      213: 21300012
+    second: cursor_spritesheet_6
+  - first:
+      213: 21300014
+    second: cursor_spritesheet_7
+  - first:
+      213: 21300016
+    second: cursor_spritesheet_8
+  - first:
+      213: 21300018
+    second: cursor_spritesheet_9
+  - first:
+      213: 21300020
+    second: cursor_spritesheet_10
+  - first:
+      213: 21300022
+    second: cursor_spritesheet_11
+  - first:
+      213: 21300024
+    second: cursor_spritesheet_12
+  - first:
+      213: 21300026
+    second: cursor_spritesheet_13
+  - first:
+      213: 21300028
+    second: cursor_spritesheet_14
+  - first:
+      213: 21300030
+    second: cursor_spritesheet_15
+  - first:
+      213: 21300032
+    second: cursor_spritesheet_16
+  - first:
+      213: 21300034
+    second: cursor_spritesheet_17
+  - first:
+      213: 21300036
+    second: cursor_spritesheet_18
+  - first:
+      213: 21300038
+    second: cursor_spritesheet_19
+  - first:
+      213: 21300040
+    second: cursor_spritesheet_20
+  - first:
+      213: 21300042
+    second: cursor_spritesheet_21
+  - first:
+      213: 21300044
+    second: cursor_spritesheet_22
+  - first:
+      213: 21300046
+    second: cursor_spritesheet_23
+  - first:
+      213: 21300048
+    second: cursor_spritesheet_24
+  externalObjects: {}
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
+    sRGBTexture: 1
     linearTexture: 0
-    correctGamma: 0
     fadeOut: 0
     borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
@@ -45,37 +96,103 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
   isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
-  generateCubemap: 0
+  generateCubemap: 6
   cubemapConvolution: 0
-  cubemapConvolutionSteps: 7
-  cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
+    serializedVersion: 2
     filterMode: 0
     aniso: 16
-    mipBias: -1
-    wrapMode: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
-  rGBM: 0
   compressionQuality: 50
-  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
   alphaIsTransparency: 1
+  spriteTessellationDetail: -1
   textureType: 8
-  buildTargetSettings: []
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
+    serializedVersion: 2
     sprites:
-    - name: cursor_spritesheet_0
+    - serializedVersion: 2
+      name: cursor_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -85,14 +202,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -6, y: 16}
-        - {x: -16, y: 16}
-        - {x: -16, y: 4}
-        - {x: -10, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 4}
-    - name: cursor_spritesheet_1
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02305410000000000800000000000000
+      internalID: 21300000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -102,15 +223,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 13}
-        - {x: -16, y: -6}
-        - {x: -10, y: -12}
-        - {x: -4, y: -15}
-        - {x: 1, y: -15}
-        - {x: 16, y: 2}
-        - {x: 16, y: 13}
-    - name: cursor_spritesheet_2
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22305410000000000800000000000000
+      internalID: 21300002
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -120,12 +244,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_3
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42305410000000000800000000000000
+      internalID: 21300004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -135,14 +265,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 15}
-        - {x: -15, y: 14}
-        - {x: -15, y: -15}
-        - {x: 14, y: -15}
-        - {x: 15, y: -12}
-        - {x: 15, y: 15}
-    - name: cursor_spritesheet_4
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62305410000000000800000000000000
+      internalID: 21300006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_4
       rect:
         serializedVersion: 2
         x: 128
@@ -152,14 +286,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 15}
-        - {x: -15, y: 14}
-        - {x: -15, y: -15}
-        - {x: 14, y: -15}
-        - {x: 15, y: -12}
-        - {x: 15, y: 15}
-    - name: cursor_spritesheet_5
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82305410000000000800000000000000
+      internalID: 21300008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_5
       rect:
         serializedVersion: 2
         x: 0
@@ -169,12 +307,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_6
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2305410000000000800000000000000
+      internalID: 21300010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_6
       rect:
         serializedVersion: 2
         x: 32
@@ -184,12 +328,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_7
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2305410000000000800000000000000
+      internalID: 21300012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_7
       rect:
         serializedVersion: 2
         x: 64
@@ -199,12 +349,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_8
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2305410000000000800000000000000
+      internalID: 21300014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_8
       rect:
         serializedVersion: 2
         x: 96
@@ -214,16 +370,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 16}
-        - {x: -16, y: 8}
-        - {x: -16, y: -8}
-        - {x: -11, y: -16}
-        - {x: 7, y: -16}
-        - {x: 16, y: -12}
-        - {x: 16, y: 12}
-        - {x: 7, y: 16}
-    - name: cursor_spritesheet_9
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03305410000000000800000000000000
+      internalID: 21300016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_9
       rect:
         serializedVersion: 2
         x: 128
@@ -233,16 +391,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 16}
-        - {x: -16, y: 8}
-        - {x: -16, y: -8}
-        - {x: -11, y: -16}
-        - {x: 7, y: -16}
-        - {x: 16, y: -12}
-        - {x: 16, y: 12}
-        - {x: 7, y: 16}
-    - name: cursor_spritesheet_10
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23305410000000000800000000000000
+      internalID: 21300018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_10
       rect:
         serializedVersion: 2
         x: 0
@@ -252,16 +412,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -11, y: 16}
-        - {x: -16, y: 8}
-        - {x: -16, y: -8}
-        - {x: -11, y: -16}
-        - {x: 7, y: -16}
-        - {x: 16, y: -12}
-        - {x: 16, y: 12}
-        - {x: 7, y: 16}
-    - name: cursor_spritesheet_11
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43305410000000000800000000000000
+      internalID: 21300020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_11
       rect:
         serializedVersion: 2
         x: 32
@@ -271,14 +433,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -14}
-        - {x: -14, y: -16}
-        - {x: 13, y: -16}
-        - {x: 16, y: -11}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_12
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63305410000000000800000000000000
+      internalID: 21300022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_12
       rect:
         serializedVersion: 2
         x: 64
@@ -288,14 +454,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -14}
-        - {x: -14, y: -16}
-        - {x: 13, y: -16}
-        - {x: 16, y: -11}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_13
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83305410000000000800000000000000
+      internalID: 21300024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_13
       rect:
         serializedVersion: 2
         x: 96
@@ -305,14 +475,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: 16}
-        - {x: -16, y: -14}
-        - {x: -14, y: -16}
-        - {x: 13, y: -16}
-        - {x: 16, y: -11}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_14
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3305410000000000800000000000000
+      internalID: 21300026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_14
       rect:
         serializedVersion: 2
         x: 128
@@ -322,16 +496,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -8, y: 15}
-        - {x: -16, y: 12}
-        - {x: -16, y: -8}
-        - {x: -7, y: -15}
-        - {x: 8, y: -15}
-        - {x: 16, y: -7}
-        - {x: 16, y: 8}
-        - {x: 10, y: 15}
-    - name: cursor_spritesheet_15
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3305410000000000800000000000000
+      internalID: 21300028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_15
       rect:
         serializedVersion: 2
         x: 0
@@ -341,15 +517,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: -11}
-        - {x: -10, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 14}
-        - {x: 15, y: 16}
-        - {x: -14, y: 16}
-        - {x: -16, y: 11}
-    - name: cursor_spritesheet_16
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3305410000000000800000000000000
+      internalID: 21300030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_16
       rect:
         serializedVersion: 2
         x: 32
@@ -359,15 +538,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10, y: -16}
-        - {x: 9, y: -16}
-        - {x: 16, y: -12}
-        - {x: 16, y: 5}
-        - {x: 2, y: 16}
-        - {x: -16, y: 16}
-        - {x: -16, y: 4}
-    - name: cursor_spritesheet_17
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04305410000000000800000000000000
+      internalID: 21300032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_17
       rect:
         serializedVersion: 2
         x: 64
@@ -377,14 +559,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -6, y: 16}
-        - {x: -16, y: 16}
-        - {x: -16, y: 4}
-        - {x: -10, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 4}
-    - name: cursor_spritesheet_18
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24305410000000000800000000000000
+      internalID: 21300034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_18
       rect:
         serializedVersion: 2
         x: 96
@@ -394,16 +580,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 5, y: 16}
-        - {x: -10, y: 16}
-        - {x: -16, y: 9}
-        - {x: -16, y: -6}
-        - {x: -12, y: -16}
-        - {x: 9, y: -16}
-        - {x: 16, y: -9}
-        - {x: 16, y: 9}
-    - name: cursor_spritesheet_19
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44305410000000000800000000000000
+      internalID: 21300036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_19
       rect:
         serializedVersion: 2
         x: 128
@@ -413,17 +601,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -10, y: 16}
-        - {x: -14, y: 15}
-        - {x: -14, y: -14}
-        - {x: -13, y: -14}
-        - {x: -4, y: -16}
-        - {x: 8, y: -16}
-        - {x: 14, y: -12}
-        - {x: 14, y: 13}
-        - {x: 9, y: 16}
-    - name: cursor_spritesheet_20
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64305410000000000800000000000000
+      internalID: 21300038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_20
       rect:
         serializedVersion: 2
         x: 0
@@ -433,15 +622,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -8, y: 14}
-        - {x: -15, y: 8}
-        - {x: -15, y: -6}
-        - {x: -9, y: -14}
-        - {x: 13, y: -14}
-        - {x: 13, y: 12}
-        - {x: 11, y: 14}
-    - name: cursor_spritesheet_21
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84305410000000000800000000000000
+      internalID: 21300040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_21
       rect:
         serializedVersion: 2
         x: 32
@@ -451,16 +643,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -13, y: 16}
-        - {x: -16, y: 14}
-        - {x: -16, y: -11}
-        - {x: -13, y: -16}
-        - {x: 10, y: -16}
-        - {x: 16, y: -10}
-        - {x: 16, y: 7}
-        - {x: 13, y: 16}
-    - name: cursor_spritesheet_22
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4305410000000000800000000000000
+      internalID: 21300042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_22
       rect:
         serializedVersion: 2
         x: 64
@@ -470,12 +664,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -16, y: -7}
-        - {x: 16, y: -7}
-        - {x: 16, y: 7}
-        - {x: -16, y: 7}
-    - name: cursor_spritesheet_23
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4305410000000000800000000000000
+      internalID: 21300044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_23
       rect:
         serializedVersion: 2
         x: 96
@@ -485,14 +685,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -12, y: 16}
-        - {x: -16, y: 10}
-        - {x: -16, y: -10}
-        - {x: -10, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 16}
-    - name: cursor_spritesheet_24
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4305410000000000800000000000000
+      internalID: 21300046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: cursor_spritesheet_24
       rect:
         serializedVersion: 2
         x: 128
@@ -502,16 +706,55 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -13, y: 16}
-        - {x: -16, y: 13}
-        - {x: -16, y: -2}
-        - {x: 0, y: -16}
-        - {x: 16, y: -16}
-        - {x: 16, y: 1}
-        - {x: 3, y: 16}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05305410000000000800000000000000
+      internalID: 21300048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      cursor_spritesheet_18: 21300036
+      cursor_spritesheet_23: 21300046
+      cursor_spritesheet_9: 21300018
+      cursor_spritesheet_22: 21300044
+      cursor_spritesheet_24: 21300048
+      cursor_spritesheet_16: 21300032
+      cursor_spritesheet_11: 21300022
+      cursor_spritesheet_7: 21300014
+      cursor_spritesheet_19: 21300038
+      cursor_spritesheet_12: 21300024
+      cursor_spritesheet_4: 21300008
+      cursor_spritesheet_15: 21300030
+      cursor_spritesheet_8: 21300016
+      cursor_spritesheet_20: 21300040
+      cursor_spritesheet_14: 21300028
+      cursor_spritesheet_21: 21300042
+      cursor_spritesheet_6: 21300012
+      cursor_spritesheet_0: 21300000
+      cursor_spritesheet_17: 21300034
+      cursor_spritesheet_3: 21300006
+      cursor_spritesheet_2: 21300004
+      cursor_spritesheet_1: 21300002
+      cursor_spritesheet_5: 21300010
+      cursor_spritesheet_10: 21300020
+      cursor_spritesheet_13: 21300026
   spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

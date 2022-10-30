@@ -1,12 +1,20 @@
 ﻿<Properties StartupConfiguration="{C83EADB4-801E-292C-D613-07A4A4D4183E}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Unit.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Buildings/Building.cs">
     <Files>
-      <File FileName="Assets/Scripts/Unit.cs" Line="154" Column="46" />
-      <File FileName="Assets/Scripts/Units/FlyingUnits/Galaxy.cs" />
-      <File FileName="Assets/Scripts/Units/FlyingUnits/FlyingUnit.cs" />
+      <File FileName="Assets/Scripts/Units/FlyingUnits/Galaxy.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Units/FlyingUnits/FlyingUnit.cs" Line="14" Column="50" />
       <File FileName="Assets/Scripts/Units/GroundUnits/LaserTank.cs" />
-      <File FileName="Assets/Scripts/RTSObject.cs" />
+      <File FileName="Assets/Scripts/RTSObject.cs" Line="21" Column="14" />
       <File FileName="Assets/Scripts/Health.cs" />
+      <File FileName="Assets/Scripts/Buildings/TrainingBuildings/RepairConstruct.cs" />
+      <File FileName="Assets/Scripts/HyperbitProjectileScript.cs" Line="53" Column="33" />
+      <File FileName="Assets/Scripts/Buildings/BuildingPlacementValidity.cs" />
+      <File FileName="Assets/Scripts/Buildings/Building.cs" Line="14" Column="32" />
+      <File FileName="Library/PackageCache/com.unity.multiplayer-hlapi@1.0.2/Editor/Tools/Weaver/AssemblyInfo.cs" Line="22" Column="37" />
+      <File FileName="Assets/Hyperbit Arsenal/Demo/Scripts/HyperbitProjectileScript.cs" Line="85" Column="4" />
+      <File FileName="Assets/Scripts/Buildings/RequirementStructure.cs" Line="7" Column="15" />
+      <File FileName="Assets/Scripts/Mouse.cs" Line="255" Column="9" />
+      <File FileName="Assets/Scripts/Units/NewClass.cs" Line="17" Column="27" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,11 +27,10 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="Units" expanded="True">
-                  <Node name="FlyingUnits" expanded="True" />
-                  <Node name="GroundUnits" expanded="True" />
+                <Node name="Buildings" expanded="True">
+                  <Node name="Building.cs" selected="True" />
                 </Node>
-                <Node name="Unit.cs" selected="True" />
+                <Node name="Units" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -33,7 +40,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="225a0dd0-09f9-4180-af4c-55cce967aacf" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="05412755-c00c-411c-a57d-cd736b49a770" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

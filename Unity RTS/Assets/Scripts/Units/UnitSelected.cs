@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSelected : MonoBehaviour 
+public class UnitSelected : MonoBehaviour
 {
     public Vector2 ScreenPos;
     public bool selected;
     public bool added;
-	public bool isFirst;
+    public bool isFirst;
     public Mouse mouse;
 
     public bool disable;
@@ -69,13 +69,13 @@ public class UnitSelected : MonoBehaviour
             }
         }
 
-        if(Mouse.ShiftKeyDown() && Input.GetMouseButtonDown(0))
+        if (Mouse.ShiftKeyDown() && Input.GetMouseButtonDown(0))
         {
             Ray ray = camera.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
             {
                 //If object implements ISelectable then remove it from the list
-                if(hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
+                if (hitInfo.collider.gameObject.name.Equals(gameObject.name) && hitInfo.collider.gameObject.GetInterface<ISelectable>() != null)
                 {
                     UnitSelected unitHit = hitInfo.collider.gameObject.GetComponent<UnitSelected>();
 
@@ -96,11 +96,11 @@ public class UnitSelected : MonoBehaviour
                     unitHit.added = !unitHit.added;
                     unitHit.selectionIndicator.SetActive(!unitHit.selectionIndicator.activeSelf);
 
-                    if(unitHit.selectionIndicator.activeSelf)
+                    if (unitHit.selectionIndicator.activeSelf)
                     {
                         CalculateBounds();
                     }
-                    
+
                 }
                 //else 
                 //{
@@ -110,10 +110,10 @@ public class UnitSelected : MonoBehaviour
                 //    added = false;
                 //    selectionIndicator.SetActive(false);
                 //}
-            }	
+            }
         }
 
-		isFirst = mouse.IsFirstInList(gameObject);
+        isFirst = mouse.IsFirstInList(gameObject);
     }
 
     private void CalculateBounds()
